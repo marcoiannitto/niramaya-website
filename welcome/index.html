@@ -2,1173 +2,1016 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Welcome to AEVUM</title>
+<meta name="description" content="Your AEVUM program begins here. Everything you need to know, in one place.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Welcome to AEVUM">
+<meta property="og:description" content="31 days. One reset. A body that works the way it should.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23141311'/><text x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23d8b95e' text-anchor='middle'>A</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* === TOKENS === */
+/* ============================================================
+   AEVUM WELCOME PAGE v2.0.0
+   Premium cinematic build. Full dark. Gold inlay.
+   ============================================================ */
+
 :root {
-  --ink: #1A1A1A;
-  --ink-2: #111010;
-  --ink-soft: #4a463f;
-  --gold: #B08D2E;
+  --ink:       #141311;
+  --ink-2:     #0f0e0d;
+  --ink-3:     #1a1816;
+  --ink-soft:  #d3ccbe;
+  --gold:      #B08D2E;
   --gold-deep: #8f6f1f;
-  --gold-light: #d8b95e;
-  --paper: #FBFAF7;
-  --card: #ffffff;
-  --line: #EBE5D8;
-  --line-soft: #F2EDE2;
-  --muted: #938c7d;
-  --muted-dk: #9a9385;
+  --gold-light:#d8b95e;
+  --gold-glow: rgba(176,141,46,.12);
+  --paper:     #FBFAF7;
+  --muted:     #9a9385;
+  --muted-dk:  #7a7468;
+  --line:      rgba(255,255,255,.08);
+  --line-gold: rgba(216,185,94,.18);
 
-  --ff-brand: 'Cinzel Decorative', serif;
-  --ff-heading: 'Cinzel', serif;
-  --ff-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 3rem;
-  --space-xl: 5rem;
-  --space-2xl: 7rem;
+  --ff-brand:  'Cinzel Decorative', serif;
+  --ff-head:   'Cinzel', serif;
+  --ff-body:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --maxw:      640px;
+  --ease:      cubic-bezier(.22,.61,.36,1);
 }
 
 /* === RESET === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   font-family: var(--ff-body);
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--ink);
-  background: var(--paper);
+  color: var(--ink-soft);
+  background: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1,h2,h3 { font-family: var(--ff-head); font-weight: 500; line-height: 1.15; letter-spacing: -.01em; color: #fff; }
 
-/* === GRAIN OVERLAY === */
-body::after {
-  content: '';
+/* === PAGE ENTRANCE === */
+body { opacity: 0; animation: pageIn 1.2s var(--ease) .2s forwards; }
+@keyframes pageIn { to { opacity: 1; } }
+
+/* === SCROLL PROGRESS BAR === */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
+  z-index: 1000;
+  transition: width .1s linear;
+}
+
+/* === GRAIN === */
+.grain {
   position: fixed;
   inset: 0;
+  z-index: 900;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size: 200px;
+  opacity: .045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* === SECTION BASE === */
-.section {
-  padding: var(--space-xl) 16px;
-  position: relative;
-}
-.section-inner {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-/* Dark section */
-.section--dark {
-  background: var(--ink-2);
-  color: var(--paper);
-}
-.section--dark .section-subhead,
-.section--dark .muted-text {
-  color: var(--muted-dk);
-}
-
-/* Light section */
-.section--light {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-/* === TYPOGRAPHY === */
-.brand-name {
-  font-family: var(--ff-brand);
-  letter-spacing: 0.15em;
-}
-.section-headline {
-  font-family: var(--ff-heading);
-  font-weight: 600;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  line-height: 1.3;
-  margin-bottom: var(--space-md);
-}
-.section-subhead {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin-bottom: var(--space-lg);
-  line-height: 1.6;
-}
-.body-text {
-  font-size: 1rem;
-  line-height: 1.75;
-  margin-bottom: var(--space-sm);
-}
-.body-text:last-child { margin-bottom: 0; }
-
-.muted-text { color: var(--muted); }
-.gold-text { color: var(--gold); }
-
-/* === HERO (S0) === */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: var(--ink-2);
-  color: var(--paper);
-  padding: var(--space-xl) 16px;
+/* === LAYOUT === */
+.w { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.sec {
+  padding: clamp(48px, 10vw, 80px) 0;
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 40%, rgba(176,141,46,0.06) 0%, transparent 70%);
-}
-.hero-brand {
-  font-family: var(--ff-brand);
-  font-size: clamp(2.4rem, 8vw, 4.5rem);
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  margin-bottom: var(--space-md);
-  position: relative;
-  z-index: 1;
-}
-.hero-sub {
-  font-family: var(--ff-body);
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: var(--muted-dk);
-  max-width: 480px;
-  line-height: 1.7;
-  position: relative;
-  z-index: 1;
-}
-.hero-line {
-  width: 48px;
-  height: 1px;
-  background: var(--gold);
-  margin: var(--space-lg) auto;
-  position: relative;
-  z-index: 1;
+.sec + .sec {
+  border-top: 1px solid var(--line);
 }
 
-/* === PERSONAL WELCOME (S1) === */
+/* === SECTION BACKGROUNDS === */
+.sec--elevated { background: var(--ink-3); }
+.sec--deep { background: var(--ink-2); }
+
+/* Gold glow effect */
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.glow--hero {
+  background: radial-gradient(70% 55% at 50% 18%, rgba(176,141,46,.22), transparent 62%);
+}
+.glow--closing {
+  background: radial-gradient(60% 55% at 50% 30%, rgba(176,141,46,.16), transparent 58%);
+}
+.glow--soft {
+  background: radial-gradient(80% 60% at 50% 0%, rgba(176,141,46,.06), transparent 50%);
+}
+.sec > .w { position: relative; z-index: 1; }
+
+/* === EYEBROW LABEL === */
+.ey {
+  display: block;
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+}
+
+/* === REVEAL ANIMATION === */
+.rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .85s var(--ease), transform .85s var(--ease);
+}
+.rv.in { opacity: 1; transform: none; }
+.rv-d1 { transition-delay: .08s; }
+.rv-d2 { transition-delay: .16s; }
+.rv-d3 { transition-delay: .24s; }
+.rv-d4 { transition-delay: .32s; }
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+}
+
+/* === HERO === */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: clamp(80px, 18vw, 140px) 0 clamp(50px, 10vw, 80px);
+  background: var(--ink-2);
+  overflow: hidden;
+}
+.hero .w { position: relative; z-index: 1; }
+.hero-brand {
+  font-family: var(--ff-brand);
+  font-size: clamp(42px, 10vw, 72px);
+  font-weight: 400;
+  letter-spacing: .18em;
+  color: #fff;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: heroFadeUp 1.4s var(--ease) .6s forwards;
+}
+.hero-line {
+  width: 52px;
+  height: 1px;
+  margin: 28px auto;
+  background: var(--gold);
+  opacity: 0;
+  animation: heroFadeUp 1s var(--ease) 1s forwards, heroGlow 4s ease-in-out 2s infinite;
+  box-shadow: 0 0 20px rgba(176,141,46,.4);
+}
+@keyframes heroGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(176,141,46,.3); }
+  50% { box-shadow: 0 0 36px rgba(176,141,46,.6); }
+}
+.hero-sub {
+  font-size: clamp(16px, 2.5vw, 19px);
+  color: var(--muted);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0;
+  animation: heroFadeUp 1s var(--ease) 1.2s forwards;
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* === WELCOME CARD === */
 .welcome-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: var(--space-lg) var(--space-md);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--line-gold);
+  border-radius: 20px;
+  padding: clamp(28px, 5vw, 40px) clamp(24px, 4vw, 36px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .welcome-photo {
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: var(--ink-soft);
-  margin: 0 auto var(--space-md);
+  margin: 0 auto 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--ff-heading);
-  font-size: 1.5rem;
-  color: var(--gold);
-  border: 2px solid rgba(176,141,46,0.25);
+  font-family: var(--ff-head);
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  border: 2px solid rgba(216,185,94,.3);
+  background: rgba(176,141,46,.08);
 }
+.welcome-card p {
+  font-size: 16.5px;
+  margin-bottom: 16px;
+  max-width: 52ch;
+}
+.welcome-card p:last-of-type { margin-bottom: 0; }
 .welcome-sig {
-  margin-top: var(--space-md);
-  font-family: var(--ff-heading);
-  color: var(--gold);
-  font-size: 0.95rem;
+  margin-top: 24px;
+  font-family: var(--ff-head);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--gold-light);
 }
 
-/* === TIMELINE (S2) === */
+/* === TIMELINE === */
 .timeline-track {
   display: flex;
-  gap: 0;
-  margin: var(--space-lg) 0 var(--space-md);
   position: relative;
+  margin: 28px 0 16px;
+  gap: 0;
 }
 .timeline-track::before {
   content: '';
   position: absolute;
   top: 22px;
-  left: 0;
-  right: 0;
+  left: 6px;
+  right: 6px;
   height: 2px;
-  background: var(--line);
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light), var(--gold-deep));
+  opacity: .4;
+}
+.timeline-track::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 6px;
+  height: 6px;
+  width: 40%;
+  background: var(--gold);
+  border-radius: 3px;
+  box-shadow: 0 0 14px rgba(176,141,46,.5);
+  animation: trackPulse 3s ease-in-out infinite;
+}
+@keyframes trackPulse {
+  0%, 100% { opacity: .5; width: 40%; }
+  50% { opacity: .9; width: 42%; }
 }
 .timeline-phase {
   flex: 1;
   position: relative;
-  padding-top: 40px;
+  padding-top: 44px;
 }
 .timeline-phase::before {
   content: '';
   position: absolute;
   top: 16px;
-  left: 0;
+  left: 6px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background: var(--gold);
-  z-index: 1;
+  box-shadow: 0 0 12px rgba(176,141,46,.5);
+  z-index: 2;
 }
-.timeline-phase-label {
-  font-family: var(--ff-heading);
-  font-size: 0.85rem;
+.tl-label {
+  font-family: var(--ff-head);
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  color: #fff;
+  margin-bottom: 3px;
 }
-.timeline-phase-duration {
-  font-size: 0.8rem;
+.tl-days {
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.tl-desc {
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--muted);
-  margin-bottom: 6px;
+  padding-right: 12px;
 }
-.timeline-phase-desc {
-  font-size: 0.875rem;
-  line-height: 1.6;
+.tl-after {
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: rgba(176,141,46,.06);
+  border: 1px solid var(--line-gold);
+  border-radius: 12px;
+  font-size: 15px;
   color: var(--ink-soft);
 }
-.timeline-maintenance {
-  margin-top: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--line-soft);
-  border-radius: 10px;
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
+.tl-after strong { color: #fff; font-weight: 500; }
 
 /* Reset sub-stages */
-.stages {
-  margin-top: var(--space-lg);
-}
+.stages { margin-top: 32px; }
 .stages-title {
-  font-family: var(--ff-heading);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: .28em;
   text-transform: uppercase;
-  margin-bottom: var(--space-sm);
-  color: var(--ink-soft);
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 14px;
 }
 .stage-row {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--line-soft);
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
 }
 .stage-row:last-child { border-bottom: none; }
-.stage-marker {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
+.stage-chip {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
   border-radius: 10px;
-  background: var(--ink-2);
-  color: var(--gold);
-  font-family: var(--ff-heading);
-  font-size: 0.7rem;
+  background: rgba(176,141,46,.1);
+  border: 1px solid var(--line-gold);
+  color: var(--gold-light);
+  font-family: var(--ff-head);
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  line-height: 1.1;
 }
-.stage-info-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-.stage-info-days {
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-.stage-info-desc {
-  font-size: 0.875rem;
-  color: var(--ink-soft);
-  line-height: 1.5;
-}
+.stage-name { font-weight: 600; color: #fff; font-size: 15px; }
+.stage-days { font-size: 12px; color: var(--gold-light); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.stage-desc { font-size: 14.5px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
 
-/* === SCIENCE (S3) === */
-.fuel-tanks {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  margin: var(--space-md) 0;
-}
+/* === SCIENCE FUEL TANKS === */
+.fuel-tanks { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
 .fuel-tank {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
+  gap: 14px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  transition: border-color .3s, background .3s;
 }
-.fuel-icon {
-  font-size: 1.4rem;
-  min-width: 28px;
-  text-align: center;
-  padding-top: 2px;
+.fuel-tank:hover {
+  border-color: var(--line-gold);
+  background: rgba(176,141,46,.04);
 }
-.fuel-label {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-.fuel-desc {
-  font-size: 0.9rem;
-  color: var(--muted-dk);
-  line-height: 1.5;
-}
-.numbered-step {
+.fuel-icon { font-size: 1.3rem; min-width: 26px; text-align: center; padding-top: 1px; }
+.fuel-label { font-weight: 600; color: #fff; font-size: 15px; }
+.fuel-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+/* Numbered steps */
+.num-step {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  gap: 16px;
+  margin-bottom: 24px;
 }
-.step-num {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
+.num-dot {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
   border-radius: 50%;
   background: var(--gold);
   color: var(--ink-2);
-  font-family: var(--ff-heading);
+  font-family: var(--ff-head);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 16px rgba(176,141,46,.3);
 }
-.science-note {
-  margin-top: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  border-left: 2px solid var(--gold);
-  font-size: 0.85rem;
+.num-step h3 { font-size: 17px; margin-bottom: 4px; }
+.num-step p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+.sci-note {
+  padding: 12px 18px;
+  border-left: 2px solid rgba(216,185,94,.35);
+  font-size: 14px;
   color: var(--muted-dk);
   font-style: italic;
+  margin-top: 8px;
 }
-.callout-box {
-  margin-top: var(--space-lg);
-  padding: var(--space-md);
-  background: rgba(176,141,46,0.08);
-  border: 1px solid rgba(176,141,46,0.15);
-  border-radius: 12px;
+
+.callout {
+  margin-top: 28px;
+  padding: 24px;
+  background: rgba(176,141,46,.06);
+  border: 1px solid var(--line-gold);
+  border-radius: 14px;
   text-align: center;
 }
 .callout-big {
-  font-family: var(--ff-heading);
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-family: var(--ff-head);
+  font-size: clamp(20px, 4vw, 26px);
+  color: #fff;
+  margin-bottom: 6px;
 }
-.callout-desc {
-  font-size: 0.9rem;
-  color: var(--muted-dk);
-}
+.callout-sub { font-size: 15px; color: var(--muted); }
 
-/* === BULLET LIST (generic) === */
-.clean-list {
-  list-style: none;
-  padding: 0;
-}
-.clean-list li {
-  padding: var(--space-xs) 0;
-  padding-left: 1.5rem;
+/* === LISTS === */
+.gold-list { list-style: none; padding: 0; }
+.gold-list li {
+  padding: 8px 0 8px 22px;
   position: relative;
-  font-size: 0.95rem;
+  font-size: 16px;
   line-height: 1.6;
 }
-.clean-list li::before {
+.gold-list li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.75rem;
+  top: .7em;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--gold);
+  box-shadow: 0 0 6px rgba(176,141,46,.4);
 }
-.section--light .clean-list li::before {
-  background: var(--gold);
-}
+.gold-list li strong { color: #fff; font-weight: 500; }
 
-/* === ACCORDION / RULES (S5) === */
-.accordion-card {
+/* === ACCORDION === */
+.acc {
   border: 1px solid var(--line);
-  border-radius: 12px;
-  margin-bottom: var(--space-sm);
+  border-radius: 14px;
+  margin-bottom: 10px;
   overflow: hidden;
-  background: var(--card);
+  background: rgba(255,255,255,.02);
+  transition: border-color .3s, background .3s;
 }
-.accordion-header {
+.acc:hover { border-color: var(--line-gold); }
+.acc-head {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
+  gap: 12px;
+  padding: 14px 18px;
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
   font-weight: 600;
-  font-size: 0.95rem;
-  transition: background 0.2s;
+  font-size: 15px;
+  color: var(--ink-soft);
+  transition: color .2s;
 }
-.accordion-header:hover {
-  background: var(--line-soft);
-}
-.accordion-icon {
-  font-size: 1.1rem;
-  min-width: 24px;
-  text-align: center;
-}
-.accordion-arrow {
+.acc-head:hover { color: #fff; }
+.acc-icon { font-size: 1rem; min-width: 22px; text-align: center; }
+.acc-arrow {
   margin-left: auto;
-  transition: transform 0.3s;
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-size: 10px;
+  color: var(--muted-dk);
+  transition: transform .35s var(--ease), color .2s;
 }
-.accordion-card.open .accordion-arrow {
-  transform: rotate(180deg);
-}
-.accordion-body {
+.acc.open .acc-arrow { transform: rotate(180deg); color: var(--gold-light); }
+.acc.open { border-color: var(--line-gold); background: rgba(176,141,46,.03); }
+.acc-body {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.35s ease;
+  transition: max-height .4s var(--ease);
 }
-.accordion-body-inner {
-  padding: 0 var(--space-md) var(--space-md);
-}
-.accordion-body-inner ul {
-  list-style: none;
-  padding: 0;
-}
-.accordion-body-inner li {
-  padding: 4px 0;
-  padding-left: 1rem;
+.acc-body-inner { padding: 0 18px 18px; }
+.acc-body-inner ul { list-style: none; padding: 0; }
+.acc-body-inner li {
+  padding: 3px 0 3px 16px;
   position: relative;
-  font-size: 0.9rem;
+  font-size: 14.5px;
   line-height: 1.6;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
-.accordion-body-inner li::before {
+.acc-body-inner li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.6rem;
-  width: 5px;
-  height: 5px;
+  top: .6em;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--gold);
 }
-.accordion-body-inner .sub-label {
+.acc-body-inner .sub {
   font-weight: 600;
-  color: var(--ink);
-  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: var(--space-sm);
+  letter-spacing: .06em;
+  margin-top: 12px;
   margin-bottom: 4px;
 }
 
-/* === MISTAKES (S6) === */
-.mistake-item {
+/* === MISTAKES === */
+.mistake {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
 }
-.mistake-item:last-child { border-bottom: none; }
-.mistake-num {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
+.mistake:last-child { border-bottom: none; }
+.mistake-n {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
   border-radius: 50%;
-  background: rgba(176,141,46,0.12);
-  color: var(--gold);
-  font-family: var(--ff-heading);
+  background: rgba(176,141,46,.1);
+  border: 1px solid var(--line-gold);
+  color: var(--gold-light);
+  font-family: var(--ff-head);
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.mistake-text {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--paper);
-}
+.mistake p { font-size: 15.5px; line-height: 1.6; }
 
-/* === EXPECTATIONS TABLE (S7) === */
-.expect-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
+/* === EXPECT CARDS === */
+.expect-grid { display: flex; flex-direction: column; gap: 10px; }
 .expect-card {
-  background: var(--card);
+  background: rgba(255,255,255,.025);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: var(--space-md);
+  border-radius: 14px;
+  padding: 20px;
+  transition: border-color .3s, transform .3s var(--ease), background .3s;
+}
+.expect-card:hover {
+  border-color: var(--line-gold);
+  transform: translateY(-2px);
+  background: rgba(176,141,46,.03);
 }
 .expect-label {
-  font-family: var(--ff-heading);
-  font-size: 0.8rem;
+  font-family: var(--ff-head);
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gold);
+  letter-spacing: .12em;
+  color: var(--gold-light);
   margin-bottom: 6px;
 }
-.expect-desc {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--ink-soft);
-}
+.expect-desc { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
 
-/* === KIT (S9) === */
+/* === KIT === */
 .kit-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-sm);
+  gap: 10px;
 }
-@media (min-width: 480px) {
-  .kit-grid { grid-template-columns: 1fr 1fr; }
-}
+@media (min-width: 480px) { .kit-grid { grid-template-columns: 1fr 1fr; } }
 .kit-item {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: var(--space-md);
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  transition: border-color .3s, transform .3s var(--ease);
 }
-.kit-item-icon {
-  font-size: 1.6rem;
-  margin-bottom: var(--space-xs);
+.kit-item:hover {
+  border-color: var(--line-gold);
+  transform: translateY(-2px);
 }
-.kit-item-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-}
-.kit-item-desc {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--muted-dk);
-}
-.kit-app-features {
-  margin-top: var(--space-xs);
-  padding-left: 0;
-  list-style: none;
-}
-.kit-app-features li {
-  font-size: 0.8rem;
-  color: var(--muted-dk);
-  padding: 2px 0;
-  padding-left: 1rem;
+.kit-item-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.kit-item-title { font-weight: 600; color: #fff; font-size: 15px; margin-bottom: 6px; }
+.kit-item-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+.kit-features { list-style: none; padding: 0; margin-top: 8px; }
+.kit-features li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 2px 0 2px 18px;
   position: relative;
 }
-.kit-app-features li::before {
-  content: '✓';
+.kit-features li::before {
+  content: '\2713';
   position: absolute;
   left: 0;
-  color: var(--gold);
-  font-size: 0.7rem;
+  color: var(--gold-light);
+  font-size: 11px;
+}
+.brand-name {
+  font-family: var(--ff-brand);
+  letter-spacing: .12em;
+  font-size: .85em;
 }
 
-/* === CHECKLIST (S14) === */
-.checklist {
-  list-style: none;
-  padding: 0;
-  counter-reset: check;
-}
+/* === CHECKLIST === */
+.checklist { list-style: none; padding: 0; }
 .checklist li {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  font-size: 0.95rem;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15.5px;
   line-height: 1.6;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity .25s;
 }
 .checklist li:last-child { border-bottom: none; }
-.checklist li.checked {
-  opacity: 0.5;
-  text-decoration: line-through;
-}
-.check-box {
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
+.checklist li.done { opacity: .35; }
+.checklist li.done span { text-decoration: line-through; }
+.chk {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
   border: 2px solid var(--muted-dk);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
-  margin-top: 2px;
+  margin-top: 1px;
+  transition: all .25s var(--ease);
 }
-.checklist li.checked .check-box {
+.checklist li.done .chk {
   background: var(--gold);
   border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(176,141,46,.4);
 }
-.check-mark {
-  display: none;
-  color: var(--ink-2);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-.checklist li.checked .check-mark {
-  display: block;
-}
+.chk-mark { display: none; color: var(--ink-2); font-size: 12px; font-weight: 700; }
+.checklist li.done .chk-mark { display: block; }
 
 /* === CTA === */
-.cta-btn {
-  display: inline-block;
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   background: var(--gold);
   color: var(--ink-2);
-  font-family: var(--ff-heading);
+  font-family: var(--ff-head);
   font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.06em;
-  padding: 16px 40px;
-  border-radius: 8px;
+  font-size: 15px;
+  letter-spacing: .04em;
+  padding: 16px 36px;
+  border-radius: 100px;
   text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
-  cursor: pointer;
   border: none;
+  cursor: pointer;
+  transition: transform .3s var(--ease), background .3s, box-shadow .3s;
+  box-shadow: 0 12px 34px -12px rgba(176,141,46,.7);
 }
-.cta-btn:hover {
-  background: var(--gold-deep);
-  transform: translateY(-1px);
+.cta:hover {
+  transform: translateY(-3px);
+  background: var(--gold-light);
+  box-shadow: 0 16px 40px -10px rgba(176,141,46,.9);
 }
 
-/* === CLOSING (S15) === */
-.closing-text {
-  font-family: var(--ff-heading);
-  font-size: clamp(1.1rem, 3vw, 1.35rem);
-  line-height: 1.7;
+/* === CLOSING === */
+.closing {
   text-align: center;
-  max-width: 520px;
-  margin: 0 auto var(--space-lg);
+  padding: clamp(60px, 14vw, 110px) 0;
+  background: var(--ink-2);
+  position: relative;
+  overflow: hidden;
+}
+.closing-text {
+  font-family: var(--ff-head);
+  font-size: clamp(18px, 3.5vw, 24px);
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 480px;
+  margin: 0 auto 12px;
 }
 .closing-accent {
-  color: var(--gold);
-  font-weight: 600;
+  font-family: var(--ff-head);
+  font-size: clamp(22px, 4.5vw, 32px);
+  color: var(--gold-light);
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 36px;
 }
 
 /* === DIVIDER === */
-.section-divider {
+.div-gold {
   width: 40px;
   height: 1px;
   background: var(--gold);
-  margin: var(--space-lg) 0;
+  margin: 28px 0;
+  box-shadow: 0 0 8px rgba(176,141,46,.3);
 }
-.section-divider--center {
-  margin-left: auto;
-  margin-right: auto;
-}
+.div-gold--c { margin-left: auto; margin-right: auto; }
 
-/* === SECTION SPACER === */
-.content-block + .content-block {
-  margin-top: var(--space-md);
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 36px 24px 52px;
+  border-top: 1px solid var(--line);
+}
+footer .mark {
+  font-family: var(--ff-head);
+  font-size: 13px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+footer .tag {
+  margin-top: 6px;
+  font-family: var(--ff-head);
+  font-style: italic;
+  color: var(--muted-dk);
+  font-size: 14px;
 }
 
 /* === RESPONSIVE === */
 @media (min-width: 768px) {
-  .section { padding: var(--space-2xl) 24px; }
-  .section-inner { max-width: 720px; }
-  .timeline-track { gap: var(--space-sm); }
+  .sec { padding: clamp(60px, 12vw, 100px) 0; }
+  .w { max-width: 680px; }
 }
 </style>
 </head>
 <body>
 
-<!-- S0: HERO -->
-<section class="hero" id="hero">
-  <div class="hero-brand">AEVUM</div>
-  <div class="hero-line"></div>
-  <p class="hero-sub">31 days. One reset. A body that works the way it should.</p>
-</section>
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
 
-<!-- S1: PERSONAL WELCOME -->
-<section class="section section--dark" id="welcome">
-  <div class="section-inner">
-    <div class="welcome-card">
+<!-- Grain overlay -->
+<div class="grain"></div>
+
+<!-- ===================== S0: HERO ===================== -->
+<header class="hero">
+  <div class="glow glow--hero"></div>
+  <div class="w">
+    <div class="hero-brand">AEVUM</div>
+    <div class="hero-line"></div>
+    <p class="hero-sub">31 days. One reset. A body that works the way it should.</p>
+  </div>
+</header>
+
+<!-- ===================== S1: PERSONAL WELCOME ===================== -->
+<section class="sec sec--elevated">
+  <div class="glow glow--soft"></div>
+  <div class="w">
+    <div class="welcome-card rv">
       <div class="welcome-photo">M</div>
-      <p class="body-text">If you're here it means you decided to take action. That's the hardest part.</p>
-      <p class="body-text">Everything from here is designed so you don't have to figure anything out on your own. The plan is set. The app guides you daily. And I'm personally checking in on your progress throughout.</p>
-      <p class="body-text">This page walks you through how the program works, what to expect, and what to do. Read it once, save it for reference, and trust the process.</p>
-      <p class="body-text">You're in good hands.</p>
-      <p class="welcome-sig">Marco</p>
+      <p>If you're here it means you decided to take action. That's the hardest part.</p>
+      <p>Everything from here is designed so you don't have to figure anything out on your own. The plan is set. The app guides you daily. And I'm personally checking in on your progress throughout.</p>
+      <p>This page walks you through how the program works, what to expect, and what to do. Read it once, save it for reference, and trust the process.</p>
+      <p style="color:#fff;">You're in good hands.</p>
+      <div class="welcome-sig">Marco</div>
     </div>
   </div>
 </section>
 
-<!-- S2: PROGRAM AT A GLANCE -->
-<section class="section section--light" id="overview">
-  <div class="section-inner">
-    <h2 class="section-headline">Your program at a glance</h2>
+<!-- ===================== S2: PROGRAM AT A GLANCE ===================== -->
+<section class="sec">
+  <div class="w">
+    <span class="ey rv">Your program</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:8px;">At a glance</h2>
 
-    <!-- Phase timeline -->
-    <div class="timeline-track">
+    <div class="timeline-track rv rv-d1">
       <div class="timeline-phase">
-        <div class="timeline-phase-label">Reset</div>
-        <div class="timeline-phase-duration">13 days</div>
-        <p class="timeline-phase-desc">Structured nutrition + supplement. Your body switches its metabolism and starts drawing energy from your body fats while preserving muscle.</p>
+        <div class="tl-label">Reset</div>
+        <div class="tl-days">13 days</div>
+        <p class="tl-desc">Structured nutrition + supplement. Your body switches its metabolism and starts drawing energy from body fats while preserving muscle.</p>
       </div>
       <div class="timeline-phase">
-        <div class="timeline-phase-label">Stabilization</div>
-        <div class="timeline-phase-duration">18 days</div>
-        <p class="timeline-phase-desc">You'll return gradually to full meals. Your body adjusts its metabolism around your new weight and locks it as its baseline.</p>
+        <div class="tl-label">Stabilization</div>
+        <div class="tl-days">18 days</div>
+        <p class="tl-desc">Gradual return to full meals. Your body adjusts its metabolism around your new weight and locks it as baseline.</p>
       </div>
     </div>
 
-    <div class="timeline-maintenance">Then: <strong>Maintenance.</strong> The app stays with you. Recipes, tracking, guidance, for life.</div>
+    <div class="tl-after rv rv-d2">Then: <strong>Maintenance.</strong> The app stays with you. Recipes, tracking, guidance, for life.</div>
 
-    <!-- Reset sub-stages -->
-    <div class="stages">
+    <div class="stages rv rv-d3">
       <div class="stages-title">Inside the Reset (3 stages)</div>
       <div class="stage-row">
-        <div class="stage-marker">L</div>
+        <div class="stage-chip">L</div>
         <div>
-          <div class="stage-info-label">Loading</div>
-          <div class="stage-info-days">Days 1-2</div>
-          <p class="stage-info-desc">Eat freely, above your normal intake. This primes your body for what's next.</p>
+          <div class="stage-name">Loading</div>
+          <div class="stage-days">Days 1-2</div>
+          <p class="stage-desc">Eat freely, above your normal intake. This primes your body for what's next.</p>
         </div>
       </div>
       <div class="stage-row">
-        <div class="stage-marker">A</div>
+        <div class="stage-chip">A</div>
         <div>
-          <div class="stage-info-label">Activation</div>
-          <div class="stage-info-days">Days 3-10</div>
-          <p class="stage-info-desc">Low calorie, strict food rules, supplement twice daily. This is where the metabolic shift happens.</p>
+          <div class="stage-name">Activation</div>
+          <div class="stage-days">Days 3-10</div>
+          <p class="stage-desc">Low calorie, strict food rules, supplement twice daily. This is where the metabolic shift happens.</p>
         </div>
       </div>
       <div class="stage-row">
-        <div class="stage-marker">T</div>
+        <div class="stage-chip">T</div>
         <div>
-          <div class="stage-info-label">Transition</div>
-          <div class="stage-info-days">Days 11-13</div>
-          <p class="stage-info-desc">Helps the body adjust to the next phase, bridging you into Stabilization.</p>
+          <div class="stage-name">Transition</div>
+          <div class="stage-days">Days 11-13</div>
+          <p class="stage-desc">Helps the body adjust to the next phase, bridging you into Stabilization.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- S3: HOW IT WORKS -->
-<section class="section section--dark" id="science">
-  <div class="section-inner">
-    <h2 class="section-headline">The science, simplified.</h2>
-    <p class="body-text">Think of your body as having three fuel tanks.</p>
+<!-- ===================== S3: SCIENCE ===================== -->
+<section class="sec sec--elevated">
+  <div class="glow glow--soft"></div>
+  <div class="w">
+    <span class="ey rv">How it works</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px);">The science, simplified.</h2>
 
-    <div class="fuel-tanks">
+    <p class="rv" style="margin-top:20px;">Think of your body as having three fuel tanks.</p>
+
+    <div class="fuel-tanks rv rv-d1">
       <div class="fuel-tank">
-        <div class="fuel-icon">⚡</div>
-        <div>
-          <div class="fuel-label">Sugar</div>
-          <div class="fuel-desc">Your quick energy. Small tank, runs out fast.</div>
-        </div>
+        <div class="fuel-icon">&#9889;</div>
+        <div><div class="fuel-label">Sugar</div><div class="fuel-desc">Your quick energy. Small tank, runs out fast.</div></div>
       </div>
       <div class="fuel-tank">
-        <div class="fuel-icon">💪</div>
-        <div>
-          <div class="fuel-label">Muscle</div>
-          <div class="fuel-desc">The engine that keeps you strong and burns energy all day.</div>
-        </div>
+        <div class="fuel-icon">&#128170;</div>
+        <div><div class="fuel-label">Muscle</div><div class="fuel-desc">The engine that keeps you strong and burns energy all day.</div></div>
       </div>
       <div class="fuel-tank">
-        <div class="fuel-icon">🔋</div>
+        <div class="fuel-icon">&#128267;</div>
+        <div><div class="fuel-label">Fat</div><div class="fuel-desc">Your big backup tank, holding weeks of energy.</div></div>
+      </div>
+    </div>
+
+    <div class="div-gold rv"></div>
+
+    <p class="rv">Here is the problem with normal diets. When you just eat less, your body gets scared. It thinks food is running out. So it protects the big fat tank for "later" and burns your muscle instead.</p>
+    <p class="sci-note rv">The science: when sugar runs low, your body needs to make more. The easiest way is to break down muscle. Fat is harder to use, so your body holds onto it.</p>
+    <p class="rv" style="margin-top:16px;">That is why most diets fail. The scale drops, so you think it is working. But a lot of what you are losing is muscle, not just fat. And less muscle means a slower engine, so the weight creeps back, usually as fat. You end up softer and heavier than when you started.</p>
+
+    <div class="div-gold rv"></div>
+
+    <p class="rv" style="color:#fff; font-weight:500;"><span class="brand-name">AEVUM</span> flips this. It convinces your body that food is not running out, so it stops protecting the fat and starts burning it. We do this three ways.</p>
+
+    <div style="margin-top:24px;">
+      <div class="num-step rv">
+        <div class="num-dot">1</div>
         <div>
-          <div class="fuel-label">Fat</div>
-          <div class="fuel-desc">Your big backup tank, holding weeks of energy.</div>
+          <h3>We take away the fear.</h3>
+          <p>You eat less, but in a way that keeps your body calm. It feels fed, not starving. So it stops guarding the fat.</p>
+        </div>
+      </div>
+      <div class="num-step rv">
+        <div class="num-dot">2</div>
+        <div>
+          <h3>We protect your muscle.</h3>
+          <p>The food and supplement keep your muscle supplied, so your body has no reason to burn it. Your engine stays intact.</p>
+          <div class="sci-note">The science: give the body enough protein and it leaves the muscle alone. It turns to fat instead.</div>
+        </div>
+      </div>
+      <div class="num-step rv">
+        <div class="num-dot">3</div>
+        <div>
+          <h3>We keep the engine running smooth.</h3>
+          <p>Burning fat uses up vitamins, minerals, and salts. We keep those topped up, so you stay full of energy instead of feeling flat and tired.</p>
         </div>
       </div>
     </div>
 
-    <div class="section-divider"></div>
-
-    <p class="body-text">Here is the problem with normal diets. When you just eat less, your body gets scared. It thinks food is running out. So it protects the big fat tank for "later" and burns your muscle instead.</p>
-    <p class="science-note">The science: when sugar runs low, your body needs to make more. The easiest way is to break down muscle. Fat is harder to use, so your body holds onto it.</p>
-    <p class="body-text">That is why most diets fail. The scale drops, so you think it is working. But a lot of what you are losing is muscle, not just fat. And less muscle means a slower engine, so the weight creeps back, usually as fat. You end up softer and heavier than when you started.</p>
-
-    <div class="section-divider"></div>
-
-    <p class="body-text" style="font-weight:600; color: var(--paper);">AEVUM flips this. It convinces your body that food is not running out, so it stops protecting the fat and starts burning it. We do this three ways.</p>
-
-    <div style="margin-top: var(--space-md);">
-      <div class="numbered-step">
-        <div class="step-num">1</div>
-        <div>
-          <p class="body-text" style="font-weight:600; margin-bottom:4px;">We take away the fear.</p>
-          <p class="body-text" style="color: var(--muted-dk);">You eat less, but in a way that keeps your body calm. It feels fed, not starving. So it stops guarding the fat.</p>
-        </div>
-      </div>
-      <div class="numbered-step">
-        <div class="step-num">2</div>
-        <div>
-          <p class="body-text" style="font-weight:600; margin-bottom:4px;">We protect your muscle.</p>
-          <p class="body-text" style="color: var(--muted-dk);">The food and supplement keep your muscle supplied, so your body has no reason to burn it. Your engine stays intact.</p>
-          <p class="science-note">The science: give the body enough protein and it leaves the muscle alone. It turns to fat instead.</p>
-        </div>
-      </div>
-      <div class="numbered-step">
-        <div class="step-num">3</div>
-        <div>
-          <p class="body-text" style="font-weight:600; margin-bottom:4px;">We keep the engine running smooth.</p>
-          <p class="body-text" style="color: var(--muted-dk);">Burning fat uses up vitamins, minerals, and salts. We keep those topped up, so you stay full of energy instead of feeling flat and tired.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout-box">
+    <div class="callout rv">
       <div class="callout-big">The result</div>
-      <p class="callout-desc">Your body burns its own fat, keeps its muscle, and you feel good while it happens.</p>
+      <p class="callout-sub">Your body burns its own fat, keeps its muscle, and you feel good while it happens.</p>
     </div>
 
-    <div class="callout-box" style="margin-top: var(--space-sm); background: rgba(176,141,46,0.04);">
-      <div class="callout-big" style="font-size:1.1rem;">7,700 cal</div>
-      <p class="callout-desc">Energy stored in 1 kg of fat. That is nearly four days of fuel. You are carrying more than you think.</p>
+    <div class="callout rv" style="margin-top:10px; background:rgba(176,141,46,.04);">
+      <div class="callout-big" style="font-size:clamp(18px,3vw,22px);">7,700 cal</div>
+      <p class="callout-sub">Energy stored in 1 kg of fat. Nearly four days of fuel. You are carrying more than you think.</p>
     </div>
   </div>
 </section>
 
-<!-- S4: WHY IT MATTERS -->
-<section class="section section--light" id="why">
-  <div class="section-inner">
-    <h2 class="section-headline">Fat loss is not cosmetic. It's structural.</h2>
-    <ul class="clean-list">
+<!-- ===================== S4: WHY IT MATTERS ===================== -->
+<section class="sec">
+  <div class="w">
+    <span class="ey rv">Beyond the mirror</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">Fat loss is not cosmetic. It's structural.</h2>
+    <ul class="gold-list rv">
       <li>Muscle is where your body stores and controls sugar. Preserve your muscle mass and your body handles sugar better in the long term.</li>
       <li>The fat that ages you is not the fat you can pinch. It is the deep fat wrapped around your organs.</li>
       <li>Deep visceral fat is one of the most important markers of long-term health, and it is the first one to go during this program.</li>
     </ul>
-    <p class="body-text" style="margin-top: var(--space-md); font-weight: 500;">This is not about fitting into something. It's about how your body functions for the next 20 years.</p>
+    <p class="rv" style="margin-top:20px; color:#fff; font-weight:500;">This is not about fitting into something. It's about how your body functions for the next 20 years.</p>
   </div>
 </section>
 
-<!-- S5: THE RULES -->
-<section class="section section--light" id="rules" style="padding-top:0;">
-  <div class="section-inner">
-    <h2 class="section-headline">Clear, simple, non-negotiable.</h2>
-    <p class="section-subhead">Tap each card to expand the details.</p>
+<!-- ===================== S5: THE RULES ===================== -->
+<section class="sec sec--elevated">
+  <div class="w">
+    <span class="ey rv">The rules</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:6px;">Clear, simple, non-negotiable.</h2>
+    <p class="rv" style="font-size:14px; color:var(--muted-dk); margin-bottom:24px;">Tap each card to expand.</p>
 
-    <!-- Supplement -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">💧</span>
-        <span>Supplement (serum)</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>First 10 days only (Loading + Activation).</li>
-            <li>Twice daily: morning, and evening before dinner.</li>
-            <li>Shake the vial. Hold under your tongue for 1 minute. Swallow.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#128167;</span><span>Supplement (serum)</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>First 10 days only (Loading + Activation).</li><li>Twice daily: morning, and evening before dinner.</li><li>Shake the vial. Hold under your tongue for 1 minute. Swallow.</li></ul></div></div></div>
 
-    <!-- Food during Activation -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">🥗</span>
-        <span>Food during Activation</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <div class="sub-label">Eat</div>
-          <ul>
-            <li>Lean protein (chicken breast, prawns, white fish, tuna, tofu, tempeh)</li>
-            <li>Vegetables (~150g, low carb)</li>
-            <li>Fruit with sugar below 12g (~100g)</li>
-          </ul>
-          <div class="sub-label">Avoid</div>
-          <ul>
-            <li>Added sugar, carbs, all fats and oils (no butter, no oil, no pork belly, no salmon)</li>
-            <li>Starchy vegetables, sauces with sugar</li>
-            <li>Dairy: not allowed during Activation</li>
-            <li>Carbs: below 30g</li>
-          </ul>
-          <p style="font-size:0.85rem; color:var(--muted); margin-top:var(--space-sm);">The full list is in the app. If you're unsure about any food, ask the AI or your coach.</p>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d1"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#129367;</span><span>Food during Activation</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><div class="sub">Eat</div><ul><li>Lean protein (chicken breast, prawns, white fish, tuna, tofu, tempeh)</li><li>Vegetables (~150g, low carb)</li><li>Fruit with sugar below 12g (~100g)</li></ul><div class="sub">Avoid</div><ul><li>Added sugar, carbs, all fats and oils (no butter, no oil, no pork belly, no salmon)</li><li>Starchy vegetables, sauces with sugar</li><li>Dairy: not allowed during Activation</li><li>Carbs: below 30g</li></ul><p style="font-size:13px; color:var(--muted-dk); margin-top:10px;">The full list is in the app. If you're unsure about any food, ask the AI or your coach.</p></div></div></div>
 
-    <!-- Food during Loading -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">🍽️</span>
-        <span>Food during Loading (first 2 days)</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>Eat freely. No restrictions. Aim for 50 to 100% above your normal intake.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d1"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#127860;</span><span>Food during Loading (first 2 days)</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Eat freely. No restrictions. Aim for 50 to 100% above your normal intake.</li></ul></div></div></div>
 
-    <!-- Food during Stabilization -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">📈</span>
-        <span>Food during Stabilization</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>Fats reintroduced gradually (3 to 4 day ramp-up).</li>
-            <li>No calorie limit (stay below your BMR). High protein. Carbs below 40g (from vegetables and berries).</li>
-            <li>Your target: keep your weight stable within 500 to 700g of your Reset result.</li>
-            <li>Why: your body needs time to accept the new weight as its baseline. A sudden surplus tells the body the famine is over, and it stores fat again.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d2"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#128200;</span><span>Food during Stabilization</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Fats reintroduced gradually (3 to 4 day ramp-up).</li><li>No calorie limit (stay below your BMR). High protein. Carbs below 40g (from vegetables and berries).</li><li>Your target: keep your weight stable within 500 to 700g of your Reset result.</li><li>Why: your body needs time to accept the new weight as its baseline. A sudden surplus tells the body the famine is over, and it stores fat again.</li></ul></div></div></div>
 
-    <!-- Meal timing -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">⏰</span>
-        <span>Meal timing</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>Intermittent fasting during Activation: 16:8, ideally 18:6.</li>
-            <li>Optimal eating window: 10am to 6pm.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d2"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#9200;</span><span>Meal timing</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Intermittent fasting during Activation: 16:8, ideally 18:6.</li><li>Optimal eating window: 10am to 6pm.</li></ul></div></div></div>
 
-    <!-- Water -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">💧</span>
-        <span>Water</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>Minimum 2.5 litres daily, all 31 days. Non-negotiable.</li>
-            <li>The metabolic process flushes water from your body. Not drinking enough causes dehydration and constipation.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d3"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#128167;</span><span>Water</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Minimum 2.5 litres daily, all 31 days. Non-negotiable.</li><li>The metabolic process flushes water from your body. Not drinking enough causes dehydration and constipation.</li></ul></div></div></div>
 
-    <!-- Drinks -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">☕</span>
-        <span>Drinks</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>Coffee and tea: yes (no milk, no sugar).</li>
-            <li>Zero-calorie drinks: yes. Sweeteners: yes.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d3"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#9749;</span><span>Drinks</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Coffee and tea: yes (no milk, no sugar).</li><li>Zero-calorie drinks: yes. Sweeteners: yes.</li></ul></div></div></div>
 
-    <!-- Alcohol -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">🚫</span>
-        <span>Alcohol</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>During Activation: strictly off limits.</li>
-            <li>During Stabilization: low-sugar spirits only (gin, whiskey), no mixers. Limited to two drinks across the entire Stabilization phase.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d3"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#128683;</span><span>Alcohol</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>During Activation: strictly off limits.</li><li>During Stabilization: low-sugar spirits only (gin, whiskey), no mixers. Limited to two drinks across the entire Stabilization phase.</li></ul></div></div></div>
 
-    <!-- Exercise -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">🏃</span>
-        <span>Exercise</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>During Activation: keep to 60 to 80% of your normal effort. No running or high-intensity work.</li>
-            <li>Your heart rate may feel elevated during exercise. That's normal (your body is working harder to convert fat to fuel). If something feels off, consult your doctor.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d4"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#127939;</span><span>Exercise</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>During Activation: keep to 60 to 80% of your normal effort. No running or high-intensity work.</li><li>Your heart rate may feel elevated during exercise. That's normal (your body is working harder to convert fat to fuel). If something feels off, consult your doctor.</li></ul></div></div></div>
 
-    <!-- Snacking -->
-    <div class="accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <span class="accordion-icon">🍫</span>
-        <span>Snacking (Activation)</span>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <ul>
-            <li>Only within your eating window.</li>
-            <li>Allowed: konjac jelly, high-percentage dark chocolate.</li>
-            <li>Best kept to the first few days. Spacing your meals without snacking gives better results.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div class="acc rv rv-d4"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon">&#127851;</span><span>Snacking (Activation)</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Only within your eating window.</li><li>Allowed: konjac jelly, high-percentage dark chocolate.</li><li>Best kept to the first few days. Spacing your meals without snacking gives better results.</li></ul></div></div></div>
   </div>
 </section>
 
-<!-- S6: MISTAKES -->
-<section class="section section--dark" id="mistakes">
-  <div class="section-inner">
-    <h2 class="section-headline">The small things that trip people up.</h2>
-    <div class="mistake-item">
-      <div class="mistake-num">1</div>
-      <p class="mistake-text">Hidden sugars in sauces. Extremely common in Asian cooking. Check before you eat.</p>
-    </div>
-    <div class="mistake-item">
-      <div class="mistake-num">2</div>
-      <p class="mistake-text">Starchy vegetables. Potato, sweet potato, corn. They look harmless. They're not during Activation.</p>
-    </div>
-    <div class="mistake-item">
-      <div class="mistake-num">3</div>
-      <p class="mistake-text">Not reading ingredients. One wrong item can interrupt your metabolic state for a full day.</p>
-    </div>
-    <div class="mistake-item">
-      <div class="mistake-num">4</div>
-      <p class="mistake-text">Not drinking enough water. 2.5 litres is the floor, not the ceiling.</p>
-    </div>
-    <div class="mistake-item">
-      <div class="mistake-num">5</div>
-      <p class="mistake-text">Overeating. Even allowed foods, in excess, slow your progress. Use the app to track.</p>
-    </div>
+<!-- ===================== S6: MISTAKES ===================== -->
+<section class="sec">
+  <div class="w">
+    <span class="ey rv">Watch out</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">The small things that trip people up.</h2>
+    <div class="mistake rv"><div class="mistake-n">1</div><p>Hidden sugars in sauces. Extremely common in Asian cooking. Check before you eat.</p></div>
+    <div class="mistake rv rv-d1"><div class="mistake-n">2</div><p>Starchy vegetables. Potato, sweet potato, corn. They look harmless. They're not during Activation.</p></div>
+    <div class="mistake rv rv-d1"><div class="mistake-n">3</div><p>Not reading ingredients. One wrong item can interrupt your metabolic state for a full day.</p></div>
+    <div class="mistake rv rv-d2"><div class="mistake-n">4</div><p>Not drinking enough water. 2.5 litres is the floor, not the ceiling.</p></div>
+    <div class="mistake rv rv-d2"><div class="mistake-n">5</div><p>Overeating. Even allowed foods, in excess, slow your progress. Use the app to track.</p></div>
   </div>
 </section>
 
-<!-- S7: WHAT TO EXPECT -->
-<section class="section section--light" id="expect">
-  <div class="section-inner">
-    <h2 class="section-headline">Your body will tell you it's working.</h2>
+<!-- ===================== S7: WHAT TO EXPECT ===================== -->
+<section class="sec sec--elevated">
+  <div class="w">
+    <span class="ey rv">What to expect</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">Your body will tell you it's working.</h2>
     <div class="expect-grid">
-      <div class="expect-card">
-        <div class="expect-label">Energy</div>
-        <p class="expect-desc">A dip is possible on day 1 to 2 of Activation. After that, most people feel a significant energy boost from the metabolic shift.</p>
-      </div>
-      <div class="expect-card">
-        <div class="expect-label">Hunger</div>
-        <p class="expect-desc">Drops noticeably after the first couple of days. Mental clarity and steady energy replace the usual hunger patterns.</p>
-      </div>
-      <div class="expect-card">
-        <div class="expect-label">Mood</div>
-        <p class="expect-desc">Generally very positive. Low mood is rare and short-lived (day 1 to 2 at most).</p>
-      </div>
-      <div class="expect-card">
-        <div class="expect-label">Sleep</div>
-        <p class="expect-desc">Expect to sleep very well.</p>
-      </div>
-      <div class="expect-card">
-        <div class="expect-label">Constipation</div>
-        <p class="expect-desc">Possible, due to low food volume. Fix: drink 2.5L or more. If it persists beyond a few days, take magnesium citrate.</p>
-      </div>
+      <div class="expect-card rv"><div class="expect-label">Energy</div><p class="expect-desc">A dip is possible on day 1 to 2 of Activation. After that, most people feel a significant energy boost from the metabolic shift.</p></div>
+      <div class="expect-card rv rv-d1"><div class="expect-label">Hunger</div><p class="expect-desc">Drops noticeably after the first couple of days. Mental clarity and steady energy replace the usual hunger patterns.</p></div>
+      <div class="expect-card rv rv-d1"><div class="expect-label">Mood</div><p class="expect-desc">Generally very positive. Low mood is rare and short-lived (day 1 to 2 at most).</p></div>
+      <div class="expect-card rv rv-d2"><div class="expect-label">Sleep</div><p class="expect-desc">Expect to sleep very well.</p></div>
+      <div class="expect-card rv rv-d2"><div class="expect-label">Constipation</div><p class="expect-desc">Possible, due to low food volume. Fix: drink 2.5L or more. If it persists beyond a few days, take magnesium citrate.</p></div>
     </div>
   </div>
 </section>
 
-<!-- S8: IF YOU SLIP UP -->
-<section class="section section--dark" id="slipup">
-  <div class="section-inner">
-    <h2 class="section-headline">It's not the end of the world. But here's what happens.</h2>
-    <ul class="clean-list">
-      <li style="color: var(--paper);">You'll likely see the effect on the scale the next morning.</li>
-      <li style="color: var(--paper);">You may feel an energy dip (your metabolic state was interrupted).</li>
-      <li style="color: var(--paper);">The plan is designed to recover. One slip does not erase your progress but can slow it down.</li>
-      <li style="color: var(--paper); font-weight: 500;">But staying strict through the Reset is the goal. The program is kept short on purpose: 13 days of focus is achievable.</li>
+<!-- ===================== S8: IF YOU SLIP UP ===================== -->
+<section class="sec">
+  <div class="w">
+    <span class="ey rv">If you slip up</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">It's not the end of the world. But here's what happens.</h2>
+    <ul class="gold-list rv">
+      <li>You'll likely see the effect on the scale the next morning.</li>
+      <li>You may feel an energy dip (your metabolic state was interrupted).</li>
+      <li>The plan is designed to recover. One slip does not erase your progress but can slow it down.</li>
+      <li><strong>But staying strict through the Reset is the goal. The program is kept short on purpose: 13 days of focus is achievable.</strong></li>
     </ul>
   </div>
 </section>
 
-<!-- S9: YOUR KIT -->
-<section class="section section--light" id="kit">
-  <div class="section-inner">
-    <h2 class="section-headline">Everything you need is already in your hands.</h2>
+<!-- ===================== S9: KIT ===================== -->
+<section class="sec sec--elevated">
+  <div class="w">
+    <span class="ey rv">Your kit</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">Everything you need is already in your hands.</h2>
     <div class="kit-grid">
-      <div class="kit-item" style="background: var(--card); border-color: var(--line);">
-        <div class="kit-item-icon">⚖️</div>
-        <div class="kit-item-title" style="color: var(--ink);">Scale</div>
-        <p class="kit-item-desc" style="color: var(--ink-soft);">Weigh daily. Right after waking, before drinking, after using the toilet. Same conditions every time (ideally underwear only).</p>
+      <div class="kit-item rv">
+        <div class="kit-item-icon">&#9878;</div>
+        <div class="kit-item-title">Scale</div>
+        <p class="kit-item-desc">Weigh daily. Right after waking, before drinking, after using the toilet. Same conditions every time (ideally underwear only).</p>
       </div>
-      <div class="kit-item" style="background: var(--card); border-color: var(--line);">
-        <div class="kit-item-icon">🫗</div>
-        <div class="kit-item-title" style="color: var(--ink);">Water bottle</div>
-        <p class="kit-item-desc" style="color: var(--ink-soft);">Keep it with you. Track your intake throughout the day.</p>
+      <div class="kit-item rv rv-d1">
+        <div class="kit-item-icon">&#129379;</div>
+        <div class="kit-item-title">Water bottle</div>
+        <p class="kit-item-desc">Keep it with you. Track your intake throughout the day.</p>
       </div>
-      <div class="kit-item" style="background: var(--card); border-color: var(--line); grid-column: 1 / -1;">
-        <div class="kit-item-icon">📱</div>
-        <div class="kit-item-title" style="color: var(--ink);"><span class="brand-name" style="font-size: 0.85rem;">AEVUM</span> App</div>
-        <p class="kit-item-desc" style="color: var(--ink-soft);">Your daily companion:</p>
-        <ul class="kit-app-features">
-          <li style="color: var(--ink-soft);">Weight tracking</li>
-          <li style="color: var(--ink-soft);">AI food checker ("Can I eat this?")</li>
-          <li style="color: var(--ink-soft);">Meal planning and recipes</li>
-          <li style="color: var(--ink-soft);">Workout planning (coming soon)</li>
-          <li style="color: var(--ink-soft);">Lifetime access, included for all participants</li>
+      <div class="kit-item rv rv-d2" style="grid-column: 1 / -1;">
+        <div class="kit-item-icon">&#128241;</div>
+        <div class="kit-item-title"><span class="brand-name">AEVUM</span> App</div>
+        <p class="kit-item-desc">Your daily companion:</p>
+        <ul class="kit-features">
+          <li>Weight tracking</li>
+          <li>AI food checker ("Can I eat this?")</li>
+          <li>Meal planning and recipes</li>
+          <li>Workout planning (coming soon)</li>
+          <li>Lifetime access, included for all participants</li>
         </ul>
-        <p class="kit-item-desc" style="color: var(--ink-soft); margin-top: var(--space-sm);">The app is not just a tracker. Over time, it teaches you what foods work for your body and why.</p>
+        <p class="kit-item-desc" style="margin-top:10px;">The app is not just a tracker. Over time, it teaches you what foods work for your body and why.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- S10: PRACTICAL TIPS -->
-<section class="section section--dark" id="tips">
-  <div class="section-inner">
-    <h2 class="section-headline">A few things that make the 31 days easier.</h2>
-    <ul class="clean-list">
-      <li style="color: var(--paper);"><strong>Social situations.</strong> Time the program so Activation avoids travel if possible. If you're eating out, a salad with grilled protein works. Avoid sauces and oil.</li>
-      <li style="color: var(--paper);"><strong>Women.</strong> Avoid overlapping Activation with your menstrual cycle. Water retention and hormonal changes add unnecessary difficulty to an already focused phase.</li>
-      <li style="color: var(--paper);"><strong>Medications.</strong> There is no data on interactions. If you're taking anything, talk to your doctor before starting.</li>
+<!-- ===================== S10: PRACTICAL TIPS ===================== -->
+<section class="sec">
+  <div class="w">
+    <span class="ey rv">Practical tips</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">A few things that make the 31 days easier.</h2>
+    <ul class="gold-list rv">
+      <li><strong>Social situations.</strong> Time the program so Activation avoids travel if possible. If you're eating out, a salad with grilled protein works. Avoid sauces and oil.</li>
+      <li><strong>Women.</strong> Avoid overlapping Activation with your menstrual cycle. Water retention and hormonal changes add unnecessary difficulty to an already focused phase.</li>
+      <li><strong>Medications.</strong> There is no data on interactions. If you're taking anything, talk to your doctor before starting.</li>
     </ul>
   </div>
 </section>
 
-<!-- S11: MANAGING EXPECTATIONS -->
-<section class="section section--light" id="expectations">
-  <div class="section-inner">
-    <h2 class="section-headline">What success actually looks like.</h2>
-    <ul class="clean-list">
+<!-- ===================== S11: MANAGING EXPECTATIONS ===================== -->
+<section class="sec sec--elevated">
+  <div class="w">
+    <span class="ey rv">Expectations</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">What success actually looks like.</h2>
+    <ul class="gold-list rv">
       <li>This is a reset, not a one-time event. The 31 days build the foundation. What you do after matters just as much.</li>
       <li>Success is body composition change: how your clothes fit, how you feel, how you look. Not just a number on the scale.</li>
       <li>Results vary. Don't compare your progress with anyone else's.</li>
@@ -1178,126 +1021,124 @@ body::after {
   </div>
 </section>
 
-<!-- S12: INBODY SCANS -->
-<section class="section section--dark" id="inbody">
-  <div class="section-inner">
-    <h2 class="section-headline">We measure what matters.</h2>
-    <ul class="clean-list">
-      <li style="color: var(--paper);">You'll do an InBody scan before and after the Reset phase.</li>
-      <li style="color: var(--paper);">InBody measures body composition: fat versus muscle versus water. Not just weight.</li>
-      <li style="color: var(--paper);">This is how we see the real change, not a bathroom scale.</li>
+<!-- ===================== S12: INBODY ===================== -->
+<section class="sec">
+  <div class="w">
+    <span class="ey rv">InBody scans</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">We measure what matters.</h2>
+    <ul class="gold-list rv">
+      <li>You'll do an InBody scan before and after the Reset phase.</li>
+      <li>InBody measures body composition: fat versus muscle versus water. Not just weight.</li>
+      <li>This is how we see the real change, not a bathroom scale.</li>
     </ul>
   </div>
 </section>
 
-<!-- S13: SUPPORT -->
-<section class="section section--light" id="support">
-  <div class="section-inner">
-    <h2 class="section-headline">You're never on your own.</h2>
-    <ul class="clean-list">
+<!-- ===================== S13: SUPPORT ===================== -->
+<section class="sec sec--elevated">
+  <div class="w">
+    <span class="ey rv">Support</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">You're never on your own.</h2>
+    <ul class="gold-list rv">
       <li><strong>Day-to-day questions, discomfort, or doubts:</strong> reach out to Marco directly. That's what he's here for.</li>
       <li><strong>Anything medical or concerning:</strong> your doctor is always the primary reference. If something feels off, seek medical advice first.</li>
     </ul>
   </div>
 </section>
 
-<!-- S14: CHECKLIST -->
-<section class="section section--dark" id="checklist">
-  <div class="section-inner">
-    <h2 class="section-headline">Your pre-program checklist.</h2>
-    <ul class="checklist" id="preChecklist">
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Open the link to your personalized <span class="brand-name" style="font-size:0.85rem;">AEVUM</span> app. Familiarise yourself with the dashboard. Your program timeline is already set up.</span>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Do your first weigh-in. Morning, after waking, before drinking. Log it in the app. This is your starting point.</span>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Schedule your InBody scan. Marco will coordinate timing and location with you.</span>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Stock your kitchen. Check the allowed food list in the app and stock up before Day 1. You can refer to the personalized "Shopping List" in your <span class="brand-name" style="font-size:0.85rem;">AEVUM</span> App.</span>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Clear your calendar for the first week. No travel, no big dinners out. Give yourself the best conditions.</span>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Fill your water bottle. 2.5 litres starts on Day 1.</span>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="check-box"><span class="check-mark">✓</span></div>
-        <span>Read this page once, save it, and trust the process.</span>
-      </li>
+<!-- ===================== S14: CHECKLIST ===================== -->
+<section class="sec sec--deep">
+  <div class="glow glow--soft"></div>
+  <div class="w">
+    <span class="ey rv">Before you start</span>
+    <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">Your pre-program checklist.</h2>
+    <ul class="checklist rv" id="preChecklist">
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Open the link to your personalized <span class="brand-name">AEVUM</span> app. Familiarise yourself with the dashboard. Your program timeline is already set up.</span></li>
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Do your first weigh-in. Morning, after waking, before drinking. Log it in the app. This is your starting point.</span></li>
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Schedule your InBody scan. Marco will coordinate timing and location with you.</span></li>
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Stock your kitchen. Check the allowed food list in the app and stock up before Day 1. You can refer to the personalized "Shopping List" in your <span class="brand-name">AEVUM</span> App.</span></li>
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Clear your calendar for the first week. No travel, no big dinners out. Give yourself the best conditions.</span></li>
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Fill your water bottle. 2.5 litres starts on Day 1.</span></li>
+      <li onclick="toggleChk(this)"><div class="chk"><span class="chk-mark">&#10003;</span></div><span>Read this page once, save it, and trust the process.</span></li>
     </ul>
   </div>
 </section>
 
-<!-- S15: CLOSING -->
-<section class="section section--dark" id="closing" style="text-align:center; padding-top: var(--space-lg);">
-  <div class="section-inner">
-    <div class="section-divider section-divider--center"></div>
-    <p class="closing-text">You've already made the decision. The plan is set. The tools are ready. We're with you every step.</p>
-    <p class="closing-accent" style="font-family: var(--ff-heading); font-size: clamp(1.3rem, 3.5vw, 1.6rem); margin-bottom: var(--space-lg);">Let's begin.</p>
-    <a href="#" class="cta-btn">Start your program</a>
+<!-- ===================== S15: CLOSING ===================== -->
+<section class="closing">
+  <div class="glow glow--closing"></div>
+  <div class="w" style="position:relative; z-index:1;">
+    <div class="div-gold div-gold--c rv"></div>
+    <p class="closing-text rv">You've already made the decision. The plan is set. The tools are ready. We're with you every step.</p>
+    <p class="closing-accent rv rv-d1">Let's begin.</p>
+    <a href="#" class="cta rv rv-d2">Start your program</a>
   </div>
 </section>
 
+<!-- FOOTER -->
+<footer>
+  <div class="mark">AEVUM</div>
+  <div class="tag">The science of balance.</div>
+</footer>
+
 <script>
-// Accordion toggle
-function toggleAccordion(header) {
-  var card = header.parentElement;
-  var body = card.querySelector('.accordion-body');
-  var isOpen = card.classList.contains('open');
-
-  // Close all
-  document.querySelectorAll('.accordion-card.open').forEach(function(c) {
-    c.classList.remove('open');
-    c.querySelector('.accordion-body').style.maxHeight = null;
+/* === Scroll reveal === */
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   });
+}, { threshold: .12 });
+document.querySelectorAll('.rv').forEach(function(el) { io.observe(el); });
+if (!('IntersectionObserver' in window)) {
+  document.querySelectorAll('.rv').forEach(function(el) { el.classList.add('in'); });
+}
 
-  // Open clicked (if it was closed)
+/* === Progress bar === */
+window.addEventListener('scroll', function() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('progressBar').style.width = p + '%';
+}, { passive: true });
+
+/* === Accordion === */
+function toggleAcc(head) {
+  var card = head.parentElement;
+  var body = card.querySelector('.acc-body');
+  var isOpen = card.classList.contains('open');
+  document.querySelectorAll('.acc.open').forEach(function(c) {
+    c.classList.remove('open');
+    c.querySelector('.acc-body').style.maxHeight = null;
+  });
   if (!isOpen) {
     card.classList.add('open');
     body.style.maxHeight = body.scrollHeight + 'px';
   }
 }
 
-// Checklist toggle
-function toggleCheck(li) {
-  li.classList.toggle('checked');
-  saveChecklist();
+/* === Checklist === */
+function toggleChk(li) {
+  li.classList.toggle('done');
+  saveChk();
 }
-
-// Persist checklist state
-function saveChecklist() {
+function saveChk() {
   try {
     var items = document.querySelectorAll('#preChecklist li');
-    var state = [];
-    items.forEach(function(li) { state.push(li.classList.contains('checked')); });
-    localStorage.setItem('aevum-checklist', JSON.stringify(state));
+    var st = [];
+    items.forEach(function(li) { st.push(li.classList.contains('done')); });
+    localStorage.setItem('aevum-chk', JSON.stringify(st));
   } catch(e) {}
 }
-
-function loadChecklist() {
+function loadChk() {
   try {
-    var saved = localStorage.getItem('aevum-checklist');
-    if (saved) {
-      var state = JSON.parse(saved);
+    var s = localStorage.getItem('aevum-chk');
+    if (s) {
+      var st = JSON.parse(s);
       var items = document.querySelectorAll('#preChecklist li');
-      state.forEach(function(checked, i) {
-        if (checked && items[i]) items[i].classList.add('checked');
-      });
+      st.forEach(function(v, i) { if (v && items[i]) items[i].classList.add('done'); });
     }
   } catch(e) {}
 }
-
-loadChecklist();
+loadChk();
 </script>
 
 </body>
