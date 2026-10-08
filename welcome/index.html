@@ -613,6 +613,44 @@ body { opacity: 0; animation: pageIn 1.2s var(--ease) .2s forwards; }
   height: auto;
   display: block;
 }
+/* === PHOTO STRIPS === */
+.food-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 28px;
+}
+.food-strip-item {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--line);
+}
+.food-strip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sec-photo {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line-gold);
+  box-shadow: 0 8px 32px -8px rgba(176,141,46,.2);
+}
+.sec-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.sec-photo--closing {
+  max-width: 280px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+}
 .brand-name {
   font-family: var(--ff-brand);
   letter-spacing: .12em;
@@ -946,6 +984,13 @@ footer .tag {
     <div class="acc rv rv-d4"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" transform="translate(-6,3) scale(.8)"/><path d="M5.2 20L8 14l4 2 3-5 3.5 1"/><path d="M3 20h18"/></svg></span><span>Exercise</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>During Activation: keep to 60 to 80% of your normal effort. No running or high-intensity work.</li><li>Your heart rate may feel elevated during exercise. That's normal (your body is working harder to convert fat to fuel). If something feels off, consult your doctor.</li></ul></div></div></div>
 
     <div class="acc rv rv-d4"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span><span>Snacking (Activation)</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Only within your eating window.</li><li>Allowed: konjac jelly, high-percentage dark chocolate.</li><li>Best kept to the first few days. Spacing your meals without snacking gives better results.</li></ul></div></div></div>
+
+    <div class="food-strip rv rv-d4">
+      <div class="food-strip-item"><img src="../Images/food-salad-800.jpg" alt="Grilled chicken salad" loading="lazy"></div>
+      <div class="food-strip-item"><img src="../Images/food-omelette-800.jpg" alt="Egg white omelette with vegetables" loading="lazy"></div>
+      <div class="food-strip-item"><img src="../Images/food-soup-800.jpg" alt="Clear mushroom soup" loading="lazy"></div>
+    </div>
+    <p class="rv rv-d4" style="text-align:center; font-size:13px; color:var(--muted-dk); margin-top:10px;">Clean eating doesn't mean boring. These are all on-protocol meals.</p>
   </div>
 </section>
 
@@ -1071,7 +1116,8 @@ footer .tag {
   <div class="w">
     <span class="ey rv">Support</span>
     <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">You're never on your own.</h2>
-    <ul class="gold-list rv">
+    <div class="sec-photo rv rv-d1"><img src="../Images/marco-randy-800.jpg" alt="Marco and Randy" loading="lazy"></div>
+    <ul class="gold-list rv rv-d2">
       <li><strong>Day-to-day questions, discomfort, or doubts:</strong> reach out to Marco directly. That's what he's here for.</li>
       <li><strong>Anything medical or concerning:</strong> your doctor is always the primary reference. If something feels off, seek medical advice first.</li>
     </ul>
@@ -1100,6 +1146,7 @@ footer .tag {
 <section class="closing">
   <div class="glow glow--closing"></div>
   <div class="w" style="position:relative; z-index:1;">
+    <div class="sec-photo sec-photo--closing rv"><img src="../Images/handstand-540.jpg" alt="Balance" loading="lazy"></div>
     <div class="div-gold div-gold--c rv"></div>
     <p class="closing-text rv">You've already made the decision. The plan is set. The tools are ready. We're with you every step.</p>
     <p class="closing-accent rv rv-d1">Let's begin.</p>
