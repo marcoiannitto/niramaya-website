@@ -94,8 +94,8 @@ async function handlePost(request, env) {
       'Phone':      phone,
       'Readiness':  readiness,
       'Motivation': motivation || '',
-      'Channel':    'Website',
-      'Stage':      'Applied',
+      'Channel':    'Web Form',
+      'Stage':      'New Lead',
       'Last Touch': today,
       'Needs You':  true,
     };
