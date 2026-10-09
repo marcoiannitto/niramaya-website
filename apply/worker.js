@@ -102,7 +102,7 @@ async function handlePost(request, env) {
 
     // Link to cohort if one is open
     if (cohort) {
-      fields[COHORT_LINK_FIELD] = [{ id: cohort.id }];
+      fields['Cohort'] = [cohort.id];
     }
 
     const res = await fetch(
