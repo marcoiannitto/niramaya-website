@@ -12,7 +12,6 @@
 const AIRTABLE_BASE    = 'app7n9Tx32hBTqasF';
 const CRM_TABLE        = 'tblAjqQKlMXRR09i4';
 const COHORTS_TABLE    = 'tblsMdjfOCseVnh2A';
-const COHORT_LINK_FIELD = 'fldAqINFrSHu7tRdS';
 
 const ALLOWED_ORIGINS = [
   'https://niramaya.sg',
@@ -48,10 +47,7 @@ async function handleGet(env) {
       return json({ cohort: null, seats: 0, total: 0 });
     }
 
-    // 2. Count applied records linked to this cohort
-    const applied = await countApplied(env, cohort.id);
-
-    const remaining = Math.max(0, cohort.totalSeats - applied);
+    const remaining = Math.max(0, cohort.totalSeats - cohort.applied);
 
     return json({
       cohort: cohort.name,
@@ -148,37 +144,13 @@ async function getOpenCohort(env) {
   if (!data.records || data.records.length === 0) return null;
 
   const rec = data.records[0];
+  const linkedCRM = rec.fields['CRM'] || [];
   return {
     id: rec.id,
     name: rec.fields['Cohort'] || '',
     totalSeats: rec.fields['Total Seats'] || 0,
+    applied: Array.isArray(linkedCRM) ? linkedCRM.length : 0,
   };
-}
-
-async function countApplied(env, cohortRecordId) {
-  let count = 0;
-  let offset = null;
-
-  // Page through all records linked to this cohort
-  do {
-    const url = new URL(`https://api.airtable.com/v0/${AIRTABLE_BASE}/${CRM_TABLE}`);
-    url.searchParams.set('filterByFormula', `FIND("${cohortRecordId}", ARRAYJOIN(RECORD_ID({Cohort})))`);
-    url.searchParams.set('fields[]', 'Name');
-    url.searchParams.set('pageSize', '100');
-    if (offset) url.searchParams.set('offset', offset);
-
-    const res = await fetch(url.toString(), {
-      headers: { 'Authorization': `Bearer ${env.AIRTABLE_TOKEN}` },
-    });
-
-    if (!res.ok) break;
-
-    const data = await res.json();
-    count += (data.records || []).length;
-    offset = data.offset || null;
-  } while (offset);
-
-  return count;
 }
 
 function json(data, status = 200) {
