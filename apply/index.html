@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply for AEVUM | Niramaya</title>
+<meta name="description" content="Apply for a place in AEVUM Cohort 01. Limited to 20 founding members.">
+<meta property="og:title" content="Apply for AEVUM | Niramaya">
+<meta property="og:description" content="A 31-day metabolic reset. By invitation. Limited to 20 founding members.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ── EDITABLE CONSTANTS ── */
+  :root {
+    --seats-total: 20;
+    /* Update this number as spots fill: */
+    --seats-remaining: 20;
+
+    /* Brand tokens (from brand-guide.md) */
+    --ink:        #1A1A1A;
+    --ink-2:      #111010;
+    --ink-soft:   #4a463f;
+    --gold:       #B08D2E;
+    --gold-deep:  #8f6f1f;
+    --gold-light: #d8b95e;
+    --paper:      #FBFAF7;
+    --card:       #ffffff;
+    --line:       #EBE5D8;
+    --line-soft:  #F2EDE2;
+    --muted:      #938c7d;
+    --muted-dk:   #9a9385;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--ink-2);
+    color: var(--paper);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .aevum-apply {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  /* ── HEADER ── */
+  .aevum-apply__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .aevum-apply__brand {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .aevum-apply__title {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: var(--paper);
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .aevum-apply__subtitle {
+    font-size: 0.95rem;
+    color: var(--muted-dk);
+    max-width: 360px;
+    margin: 0 auto 28px;
+    line-height: 1.5;
+  }
+
+  /* ── COHORT BADGE ── */
+  .aevum-apply__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border: 1px solid rgba(176, 141, 46, 0.25);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: rgba(176, 141, 46, 0.06);
+  }
+
+  .aevum-apply__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── FORM CARD ── */
+  .aevum-apply__card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 40px 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* ── FORM FIELDS ── */
+  .aevum-apply__field {
+    margin-bottom: 24px;
+  }
+
+  .aevum-apply__label {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-dk);
+    margin-bottom: 8px;
+  }
+
+  .aevum-apply__label span {
+    color: var(--gold);
+    margin-left: 2px;
+  }
+
+  .aevum-apply__input,
+  .aevum-apply__select,
+  .aevum-apply__textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 1rem;
+    color: var(--paper);
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .aevum-apply__input:focus,
+  .aevum-apply__select:focus,
+  .aevum-apply__textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .aevum-apply__input::placeholder,
+  .aevum-apply__textarea::placeholder {
+    color: rgba(251, 250, 247, 0.2);
+  }
+
+  /* Select arrow */
+  .aevum-apply__select-wrap {
+    position: relative;
+  }
+
+  .aevum-apply__select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--muted-dk);
+    pointer-events: none;
+  }
+
+  .aevum-apply__select {
+    cursor: pointer;
+    padding-right: 40px;
+  }
+
+  .aevum-apply__select option {
+    background: var(--ink-2);
+    color: var(--paper);
+  }
+
+  .aevum-apply__textarea {
+    resize: vertical;
+    min-height: 80px;
+    max-height: 160px;
+    line-height: 1.5;
+  }
+
+  /* Phone field with prefix */
+  .aevum-apply__phone-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .aevum-apply__phone-prefix {
+    position: absolute;
+    left: 16px;
+    color: var(--muted-dk);
+    font-size: 1rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .aevum-apply__phone-wrap .aevum-apply__input {
+    padding-left: 52px;
+  }
+
+  /* ── SUBMIT BUTTON ── */
+  .aevum-apply__submit {
+    width: 100%;
+    margin-top: 32px;
+    padding: 16px 32px;
+    background: var(--gold);
+    color: var(--ink-2);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .aevum-apply__submit:hover {
+    background: var(--gold-light);
+  }
+
+  .aevum-apply__submit:active {
+    transform: scale(0.98);
+    background: var(--gold-deep);
+  }
+
+  .aevum-apply__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── STATES ── */
+  .aevum-apply__status {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    min-height: 20px;
+  }
+
+  .aevum-apply__status--error {
+    color: #e07c5a;
+  }
+
+  .aevum-apply__status--success {
+    color: var(--gold-light);
+  }
+
+  /* Success state replaces form */
+  .aevum-apply__success {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+  }
+
+  .aevum-apply__success-icon {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: var(--gold);
+  }
+
+  .aevum-apply__success h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: var(--paper);
+  }
+
+  .aevum-apply__success p {
+    color: var(--muted-dk);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER NOTE ── */
+  .aevum-apply__footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 480px) {
+    body { padding: 24px 16px; }
+    .aevum-apply__card { padding: 28px 20px; }
+    .aevum-apply__header { margin-bottom: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aevum-apply">
+
+  <!-- Header -->
+  <header class="aevum-apply__header">
+    <div class="aevum-apply__brand">AEVUM</div>
+    <h1 class="aevum-apply__title" id="aevum-cohort-title">Apply</h1>
+    <p class="aevum-apply__subtitle">A 31-day metabolic reset, guided from day one. Not a course, not an app. A private program for founding members.</p>
+    <div class="aevum-apply__badge">
+      <span class="aevum-apply__badge-dot"></span>
+      <span id="aevum-seats">Loading...</span>
+    </div>
+  </header>
+
+  <!-- Form Card -->
+  <div class="aevum-apply__card">
+    <form id="aevum-form">
+
+      <!-- Full Name -->
+      <div class="aevum-apply__field">
+        <label class="aevum-apply__label" for="aevum-name">Full name <span>*</span></label>
+        <input class="aevum-apply__input" type="text" id="aevum-name" name="name" required autocomplete="name" placeholder="Your full name">
+      </div>
+
+      <!-- Email -->
+      <div class="aevum-apply__field">
+        <label class="aevum-apply__label" for="aevum-email">Email <span>*</span></label>
+        <input class="aevum-apply__input" type="email" id="aevum-email" name="email" required autocomplete="email" placeholder="your@email.com">
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="aevum-apply__field">
+        <label class="aevum-apply__label" for="aevum-phone">WhatsApp number <span>*</span></label>
+        <div class="aevum-apply__phone-wrap">
+          <span class="aevum-apply__phone-prefix">+65</span>
+          <input class="aevum-apply__input" type="tel" id="aevum-phone" name="phone" required autocomplete="tel" placeholder="8123 4567" pattern="[0-9\s\-]{7,15}">
+        </div>
+      </div>
+
+      <!-- Readiness -->
+      <div class="aevum-apply__field">
+        <label class="aevum-apply__label" for="aevum-readiness">When would you like to start? <span>*</span></label>
+        <div class="aevum-apply__select-wrap">
+          <select class="aevum-apply__select" id="aevum-readiness" name="readiness" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="I'm ready now">I'm ready now</option>
+            <option value="Within the next 30 days">Within the next 30 days</option>
+            <option value="In 2-3 months">In 2-3 months</option>
+            <option value="Just exploring">Just exploring</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Motivation -->
+      <div class="aevum-apply__field">
+        <label class="aevum-apply__label" for="aevum-motivation">What's your motivation? <span style="color: var(--muted-dk); font-size: 0.7rem; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+        <textarea class="aevum-apply__textarea" id="aevum-motivation" name="motivation" placeholder="What are you hoping to change?" rows="3"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="aevum-apply__submit" type="submit" id="aevum-submit">Submit your application</button>
+
+      <div class="aevum-apply__status" id="aevum-status"></div>
+    </form>
+
+    <!-- Success (hidden until submission) -->
+    <div class="aevum-apply__success" id="aevum-success">
+      <div class="aevum-apply__success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Application received</h3>
+      <p>We'll review your application and reach out via WhatsApp within 48 hours.</p>
+    </div>
+  </div>
+
+  <p class="aevum-apply__footer">By applying, you're expressing interest. No commitment, no payment at this stage.</p>
+</div>
+
+<script>
+const FORMSPREE_URL = 'https://formspree.io/f/mppqdklb';
+const WORKER_URL    = 'https://aevum-apply.niramaya.workers.dev';
+
+const form = document.getElementById('aevum-form');
+const status = document.getElementById('aevum-status');
+const submitBtn = document.getElementById('aevum-submit');
+const successEl = document.getElementById('aevum-success');
+
+// Fetch seats remaining on load
+(async () => {
+  try {
+    const res = await fetch(WORKER_URL);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.cohort) {
+      document.getElementById('aevum-cohort-title').textContent = 'Apply for ' + data.cohort;
+      document.getElementById('aevum-seats').textContent = data.seats + ' seats remaining';
+    }
+  } catch (e) {
+    document.getElementById('aevum-seats').textContent = 'Limited seats';
+  }
+})();
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+  status.textContent = '';
+  status.className = 'aevum-apply__status';
+
+  const data = {
+    name: document.getElementById('aevum-name').value.trim(),
+    _replyto: document.getElementById('aevum-email').value.trim(),
+    email: document.getElementById('aevum-email').value.trim(),
+    phone: '+65 ' + document.getElementById('aevum-phone').value.trim(),
+    readiness: document.getElementById('aevum-readiness').value,
+    motivation: document.getElementById('aevum-motivation').value.trim()
+  };
+
+  try {
+    // Fire both in parallel: Formspree (email) + Worker (Airtable)
+    const [formspreeRes] = await Promise.all([
+      fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }),
+      // Worker is fire-and-forget: don't block success on it
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).catch(() => {})
+    ]);
+
+    if (!formspreeRes.ok) throw new Error('Submission failed');
+
+    form.style.display = 'none';
+    successEl.style.display = 'block';
+  } catch (err) {
+    status.textContent = 'Something went wrong. Please try again or message us on WhatsApp.';
+    status.className = 'aevum-apply__status aevum-apply__status--error';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit your application';
+  }
+});
+</script>
+
+</body>
+</html>
