@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Niramaya</title>
+  <meta name="description" content="The science of balance. Niramaya applies science, precision, and personal commitment to the one asset no portfolio can replace.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ───── RESET ───── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ───── TOKENS ───── */
+    :root {
+      --ink:        #1A1A1A;
+      --ink-2:      #111010;
+      --ink-soft:   #4a463f;
+      --gold:       #B08D2E;
+      --gold-deep:  #8f6f1f;
+      --gold-light: #d8b95e;
+      --paper:      #FBFAF7;
+      --card:       #ffffff;
+      --line:       #EBE5D8;
+      --line-soft:  #F2EDE2;
+      --muted:      #938c7d;
+      --muted-dk:   #9a9385;
+
+      --f-display:  'Cinzel Decorative', 'Times New Roman', serif;
+      --f-heading:  'Cinzel', 'Times New Roman', serif;
+      --f-body:     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      color-scheme: dark;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--f-body);
+      color: var(--paper);
+      background: var(--ink-2);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+
+    /* ───── NAVBAR ───── */
+    .nrm-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+
+    .nrm-nav.is-scrolled {
+      background: rgba(17, 16, 16, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 24px;
+    }
+
+    .nrm-nav__logo {
+      height: 28px;
+      width: auto;
+      display: block;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .nrm-nav__logo:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .nrm-nav__logo {
+        height: 22px;
+      }
+    }
+
+
+    /* ───── GRAIN OVERLAY ───── */
+    #nrm-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      mix-blend-mode: overlay;
+    }
+
+
+    /* ───── SECTION BASE ───── */
+    .nrm-s {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 100px 24px;
+      overflow: hidden;
+    }
+
+    .nrm-s--short {
+      min-height: 70vh;
+      min-height: 70svh;
+    }
+
+    .nrm-s--auto {
+      min-height: auto;
+    }
+
+
+    /* ───── BACKGROUNDS ───── */
+    .nrm-s__bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    @supports (background-attachment: fixed) {
+      @media (min-width: 769px) and (hover: hover) {
+        .nrm-s__bg--parallax {
+          background-attachment: fixed;
+        }
+      }
+    }
+
+    .nrm-s__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .nrm-s__overlay--heavy {
+      background: rgba(17, 16, 16, 0.55);
+    }
+
+    .nrm-s__overlay--gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(17, 16, 16, 0.7) 0%,
+        rgba(17, 16, 16, 0.35) 40%,
+        rgba(17, 16, 16, 0.5) 100%
+      );
+    }
+
+    .nrm-s__overlay--vignette {
+      background: radial-gradient(
+        ellipse at center,
+        rgba(17, 16, 16, 0.15) 0%,
+        rgba(17, 16, 16, 0.7) 100%
+      );
+    }
+
+
+    /* ───── CONTENT WRAPPER ───── */
+    .nrm-c {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .nrm-c--wide {
+      max-width: 1100px;
+    }
+
+    .nrm-c--narrow {
+      max-width: 600px;
+    }
+
+
+    /* ───── TYPOGRAPHY ───── */
+    .nrm-brand {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      color: var(--paper);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .nrm-tagline {
+      font-family: var(--f-heading);
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: var(--muted-dk);
+      text-transform: uppercase;
+      margin-top: 1.5em;
+    }
+
+    .nrm-statement {
+      font-family: var(--f-heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--paper);
+      text-wrap: balance;
+    }
+
+    .nrm-statement--sub {
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      color: var(--muted-dk);
+      margin-top: 0.6em;
+    }
+
+    .nrm-body {
+      font-family: var(--f-body);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.75;
+      color: var(--muted-dk);
+    }
+
+    .nrm-body--light {
+      color: var(--ink-soft);
+    }
+
+    .nrm-heading {
+      font-family: var(--f-heading);
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--paper);
+      text-wrap: balance;
+    }
+
+
+    /* ───── SECTION: HERO ───── */
+    .nrm-hero {
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    .nrm-hero .nrm-s__bg {
+      transform: scale(1.05);
+      transition: transform 1.2s ease-out;
+    }
+
+    .nrm-hero.is-visible .nrm-s__bg {
+      transform: scale(1);
+    }
+
+
+    /* ───── SECTION: DARK TEXT ───── */
+    .nrm-s--dark {
+      background: var(--ink-2);
+    }
+
+
+    /* ───── SECTION: LIGHT (PAPER) ───── */
+    .nrm-s--paper {
+      background: var(--paper);
+    }
+
+    .nrm-s--paper .nrm-statement {
+      color: var(--ink);
+    }
+
+    .nrm-s--paper .nrm-body {
+      color: var(--ink-soft);
+    }
+
+    .nrm-s--paper .nrm-heading {
+      color: var(--ink);
+    }
+
+
+    /* ───── SECTION 5: SPLIT LAYOUT ───── */
+    .nrm-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nrm-split__img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .nrm-split__text {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+    }
+
+    @media (max-width: 768px) {
+      .nrm-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .nrm-split--reverse-mobile > *:first-child {
+        order: 2;
+      }
+    }
+
+
+    /* ───── SECTION 7: AEVUM CARD ───── */
+    .nrm-aevum {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1000px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nrm-aevum__img-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .nrm-aevum__img {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .nrm-aevum__card {
+      text-align: left;
+    }
+
+    .nrm-aevum__name {
+      font-family: var(--f-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--ink);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .nrm-aevum__latin {
+      font-family: var(--f-heading);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-top: 0.5em;
+    }
+
+    .nrm-aevum__desc {
+      font-family: var(--f-body);
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--ink-soft);
+      margin-top: 1.2em;
+      line-height: 1.6;
+    }
+
+    .nrm-cta {
+      display: inline-block;
+      margin-top: 2em;
+      padding: 14px 36px;
+      font-family: var(--f-heading);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--gold);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .nrm-cta:hover {
+      background: var(--gold-deep);
+    }
+
+    .nrm-cta:active {
+      transform: scale(0.98);
+    }
+
+    @media (max-width: 768px) {
+      .nrm-aevum {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .nrm-aevum__card {
+        text-align: center;
+      }
+
+      .nrm-aevum__img {
+        max-width: 260px;
+      }
+    }
+
+
+    /* ───── FOOTER ───── */
+    .nrm-footer {
+      background: var(--ink-2);
+      padding: 60px 24px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(235, 229, 216, 0.08);
+    }
+
+    .nrm-footer__logo {
+      height: 36px;
+      width: auto;
+      display: block;
+      margin: 0 auto 20px;
+      opacity: 0.5;
+    }
+
+    .nrm-footer__text {
+      font-family: var(--f-body);
+      font-size: 0.8rem;
+      color: var(--muted-dk);
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+    }
+
+
+    /* ───── DIVIDER: GRADIENT BLEED ───── */
+    .nrm-bleed {
+      height: 120px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nrm-bleed--dark-to-paper {
+      background: linear-gradient(180deg, var(--ink-2) 0%, var(--paper) 100%);
+    }
+
+    .nrm-bleed--paper-to-dark {
+      background: linear-gradient(180deg, var(--paper) 0%, var(--ink-2) 100%);
+    }
+
+
+    /* ───── SCROLL ANIMATIONS ───── */
+    .nrm-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nrm-fade.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nrm-fade--delay-1 { transition-delay: 0.15s; }
+    .nrm-fade--delay-2 { transition-delay: 0.3s; }
+    .nrm-fade--delay-3 { transition-delay: 0.45s; }
+
+
+    /* ───── ETYMOLOGY STYLING ───── */
+    .nrm-ety {
+      font-family: var(--f-heading);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--paper);
+      line-height: 1.3;
+    }
+
+    .nrm-ety__meaning {
+      font-family: var(--f-body);
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      color: var(--muted-dk);
+      margin-top: 0.8em;
+      letter-spacing: 0.04em;
+    }
+
+
+    /* ───── HORIZONTAL RULE (GOLD) ───── */
+    .nrm-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      border: none;
+      margin: 2em auto;
+      opacity: 0.6;
+    }
+
+
+    /* ───── SPACING UTILITIES ───── */
+    .mt-1 { margin-top: 0.8em; }
+    .mt-2 { margin-top: 1.6em; }
+    .mt-3 { margin-top: 2.4em; }
+
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 768px) {
+      .nrm-s {
+        padding: 80px 20px;
+      }
+
+      .nrm-brand {
+        letter-spacing: 0.2em;
+      }
+
+      .nrm-bleed {
+        height: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nrm-s {
+        padding: 60px 16px;
+      }
+    }
+
+
+    /* ───── REDUCED MOTION ───── */
+    @media (prefers-reduced-motion: reduce) {
+      .nrm-fade {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .nrm-hero .nrm-s__bg {
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="nrm-nav" aria-label="Main">
+    <a href="/">
+      <img src="Images/Logo/niramaya-logo-horizontal.png"
+           alt="Niramaya"
+           class="nrm-nav__logo">
+    </a>
+  </nav>
+
+
+  <!-- ===== GRAIN OVERLAY (generated by JS) ===== -->
+  <canvas id="nrm-grain" aria-hidden="true"></canvas>
+
+
+  <!-- ===== 1. HERO ===== -->
+  <section class="nrm-s nrm-hero nrm-fade" aria-label="Hero">
+    <div class="nrm-s__bg nrm-s__bg--parallax"
+         style="background-image: url('images/Homepage/homepage-image1.jpg')"></div>
+    <div class="nrm-s__overlay nrm-s__overlay--gradient"></div>
+    <div class="nrm-c">
+      <h1 class="nrm-brand nrm-fade nrm-fade--delay-1">Niramaya</h1>
+      <p class="nrm-tagline nrm-fade nrm-fade--delay-2">The science of balance.</p>
+    </div>
+  </section>
+
+
+  <!-- ===== 2. SOME THINGS ===== -->
+  <section class="nrm-s nrm-s--dark nrm-s--short" aria-label="Time">
+    <div class="nrm-c nrm-c--narrow">
+      <p class="nrm-statement nrm-fade">Some things can't be bought back.</p>
+    </div>
+  </section>
+
+
+  <!-- ===== 3. TIME IS ONE ===== -->
+  <section class="nrm-s" aria-label="Time continued">
+    <div class="nrm-s__bg nrm-s__bg--parallax"
+         style="background-image: url('images/Homepage/homepage-image2.jpg')"></div>
+    <div class="nrm-s__overlay nrm-s__overlay--vignette"></div>
+    <div class="nrm-c nrm-c--narrow">
+      <p class="nrm-statement nrm-fade">Time is one.</p>
+      <p class="nrm-statement nrm-statement--sub nrm-fade nrm-fade--delay-1">How your body carries it is another.</p>
+    </div>
+  </section>
+
+
+  <!-- ===== BLEED: dark to paper ===== -->
+  <div class="nrm-bleed nrm-bleed--dark-to-paper" aria-hidden="true"></div>
+
+
+  <!-- ===== 4. THE HARDER PATH ===== -->
+  <section class="nrm-s nrm-s--paper" aria-label="The harder path">
+    <div class="nrm-c nrm-c--narrow">
+      <p class="nrm-body nrm-body--light nrm-fade">
+        You chose the harder path, always.<br>
+        The early mornings. The discipline. The decisions nobody else wanted to make.
+      </p>
+      <hr class="nrm-rule nrm-fade nrm-fade--delay-1">
+      <p class="nrm-statement nrm-fade nrm-fade--delay-1">You built something that lasts.</p>
+      <p class="nrm-body nrm-body--light mt-1 nrm-fade nrm-fade--delay-2">Your body should, too.</p>
+    </div>
+  </section>
+
+
+  <!-- ===== BLEED: paper to dark ===== -->
+  <div class="nrm-bleed nrm-bleed--paper-to-dark" aria-hidden="true"></div>
+
+
+  <!-- ===== 5. THE INSTRUMENT ===== -->
+  <section class="nrm-s nrm-s--dark" aria-label="Conviction">
+    <div class="nrm-split nrm-split--reverse-mobile">
+      <div class="nrm-split__text">
+        <p class="nrm-body nrm-fade">Niramaya was founded on a single conviction:</p>
+        <p class="nrm-heading nrm-fade nrm-fade--delay-1">
+          The body is not separate from the life you've built. It is the instrument.
+        </p>
+        <p class="nrm-body mt-1 nrm-fade nrm-fade--delay-2">
+          We apply science, precision, and personal commitment to the one asset no portfolio can replace.
+        </p>
+      </div>
+      <div class="nrm-fade nrm-fade--delay-1">
+        <img src="images/Homepage/homepage-image4.jpg"
+             alt="Interior of a grand piano, golden strings catching warm light"
+             class="nrm-split__img" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 6. ETYMOLOGY ===== -->
+  <section class="nrm-s nrm-s--dark nrm-s--short" aria-label="Etymology">
+    <div class="nrm-c nrm-c--narrow">
+      <p class="nrm-ety nrm-fade">Nirāmaya.</p>
+      <p class="nrm-ety__meaning nrm-fade nrm-fade--delay-1">Sanskrit: a body free from what holds it back.</p>
+    </div>
+  </section>
+
+
+  <!-- ===== BLEED: dark to paper ===== -->
+  <div class="nrm-bleed nrm-bleed--dark-to-paper" aria-hidden="true"></div>
+
+
+  <!-- ===== 7. AEVUM ===== -->
+  <section class="nrm-s nrm-s--paper nrm-s--auto" style="padding-top: 80px; padding-bottom: 120px;" aria-label="AEVUM program">
+    <div class="nrm-aevum">
+      <div class="nrm-aevum__img-wrap nrm-fade">
+        <img src="images/Homepage/homepage-image5.jpg"
+             alt="A glass vial of golden liquid on dark stone"
+             class="nrm-aevum__img" loading="lazy" decoding="async">
+      </div>
+      <div class="nrm-aevum__card nrm-fade nrm-fade--delay-1">
+        <p class="nrm-aevum__name">AEVUM</p>
+        <p class="nrm-aevum__latin">vital force (Latin)</p>
+        <p class="nrm-aevum__desc">Our metabolic reset program.</p>
+        <a href="/aevum/" class="nrm-cta">Explore AEVUM</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== BLEED: paper to dark ===== -->
+  <div class="nrm-bleed nrm-bleed--paper-to-dark" aria-hidden="true"></div>
+
+
+  <!-- ===== 8. FOOTER ===== -->
+  <footer class="nrm-footer">
+    <img src="Images/Logo/Niramaya-Logo-logo.png"
+         alt=""
+         class="nrm-footer__logo" aria-hidden="true">
+    <p class="nrm-footer__text">
+      Niramaya Pte. Ltd.<br>
+      Singapore
+    </p>
+  </footer>
+
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    /* ── Grain texture ── */
+    (function generateGrain() {
+      var c = document.getElementById('nrm-grain');
+      if (!c) return;
+      var w = 256, h = 256;
+      c.width = w;
+      c.height = h;
+      c.style.width = '100%';
+      c.style.height = '100%';
+      var ctx = c.getContext('2d');
+      if (!ctx) return;
+      var img = ctx.createImageData(w, h);
+      var d = img.data;
+      for (var i = 0; i < d.length; i += 4) {
+        var v = Math.random() * 255;
+        d[i] = v;
+        d[i + 1] = v;
+        d[i + 2] = v;
+        d[i + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+    })();
+
+    /* ── Navbar scroll ── */
+    (function initNav() {
+      var nav = document.querySelector('.nrm-nav');
+      if (!nav) return;
+      var onScroll = function() {
+        if (window.scrollY > 60) {
+          nav.classList.add('is-scrolled');
+        } else {
+          nav.classList.remove('is-scrolled');
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ── Scroll reveal ── */
+    (function initObserver() {
+      var els = document.querySelectorAll('.nrm-fade');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
