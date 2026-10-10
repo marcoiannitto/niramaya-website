@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEVUM | Metabolic Reset Program by Niramaya</title>
+<meta name="description" content="A 31-day metabolic reset. Fat loss, not weight loss. Natural, no drugs. Limited to 20 founding members. Apply for Cohort 01.">
+<meta property="og:title" content="AEVUM | Metabolic Reset Program">
+<meta property="og:description" content="31 days to reset your metabolism. Naturally. Limited seats.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ── */
+:root {
+  --ink: #1A1A1A;
+  --ink-2: #111010;
+  --gold: #B08D2E;
+  --gold-deep: #8f6f1f;
+  --gold-light: #d8b95e;
+  --paper: #FBFAF7;
+  --muted-light: #938c7d;
+  --muted-dark: #9a9385;
+  --font-brand: 'Cinzel Decorative', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background: var(--ink-2);
+  color: var(--paper);
+}
+
+/* ── GRAIN TEXTURE ── */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── SECTION BASE ── */
+.aevum-section {
+  width: 100%;
+  padding: 80px 16px;
+  position: relative;
+}
+
+.aevum-section--dark {
+  background: var(--ink-2);
+  color: var(--paper);
+}
+
+.aevum-section--light {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.aevum-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.aevum-inner--narrow {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── TYPOGRAPHY ── */
+.aevum-brand {
+  font-family: var(--font-brand);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.aevum-heading {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.aevum-body {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.aevum-muted-dark { color: var(--muted-dark); }
+.aevum-muted-light { color: var(--muted-light); }
+.aevum-gold { color: var(--gold); }
+
+/* ── 1. HERO ── */
+.aevum-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 16px;
+}
+
+.aevum-hero__bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('Images/landing/hero-bg-800.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+}
+
+.aevum-hero__overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(17,16,16,0.7) 0%,
+    rgba(17,16,16,0.5) 50%,
+    rgba(17,16,16,0.85) 100%
+  );
+  z-index: 1;
+}
+
+.aevum-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+.aevum-hero__title {
+  font-family: var(--font-brand);
+  font-size: clamp(3rem, 10vw, 6rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 16px;
+}
+
+.aevum-hero__sub {
+  font-size: 1rem;
+  color: var(--muted-dark);
+  letter-spacing: 0.08em;
+  margin-bottom: 48px;
+}
+
+.aevum-cta {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--gold);
+  padding: 16px 48px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.aevum-cta:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+/* ── 2. THE QUESTION ── */
+.aevum-question {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 16px;
+}
+
+.aevum-question__text {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.aevum-question__text span {
+  display: block;
+  margin-top: 24px;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--muted-dark);
+}
+
+/* ── 3. TWO FUTURES ── */
+.aevum-futures {
+  padding: 60px 16px 80px;
+}
+
+.aevum-futures__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+
+.aevum-futures__img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  filter: grayscale(60%) sepia(20%);
+}
+
+.aevum-futures__caption {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: var(--muted-dark);
+  line-height: 1.6;
+}
+
+/* ── 4. MARCO'S CONFESSION ── */
+.aevum-confession {
+  padding: 100px 16px;
+}
+
+.aevum-confession__layout {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .aevum-confession__layout {
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+}
+
+.aevum-confession__portrait {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(30%) sepia(10%);
+  margin: 0 auto;
+}
+
+.aevum-confession__text p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.aevum-confession__text p:last-of-type {
+  margin-bottom: 32px;
+}
+
+.aevum-confession__sig {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.aevum-confession__sig span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--muted-light);
+  margin-top: 2px;
+}
+
+/* ── 5. THE DISTINCTION ── */
+.aevum-distinction {
+  padding: 100px 16px;
+  text-align: center;
+}
+
+.aevum-distinction__headline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1.3;
+}
+
+.aevum-distinction__body {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--muted-dark);
+}
+
+.aevum-distinction__body p {
+  margin-bottom: 20px;
+}
+
+.aevum-distinction__body strong {
+  color: var(--paper);
+  font-weight: 400;
+}
+
+/* ── 6. THE PROOF ── */
+.aevum-proof {
+  padding: 100px 16px;
+}
+
+.aevum-proof__personal {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.aevum-proof__label {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 400;
+  margin-bottom: 48px;
+}
+
+.aevum-proof__stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.aevum-proof__stat {
+  text-align: center;
+}
+
+.aevum-proof__stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.aevum-proof__stat-label {
+  font-size: 0.85rem;
+  color: var(--muted-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.aevum-proof__note {
+  font-size: 1rem;
+  color: var(--muted-dark);
+  margin-top: 24px;
+}
+
+.aevum-proof__chart {
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.aevum-proof__chart img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.aevum-proof__pattern {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 60px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.aevum-proof__pattern-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.aevum-proof__pattern-body {
+  font-size: 1rem;
+  color: var(--muted-dark);
+  line-height: 1.7;
+}
+
+/* ── 7. THE PROGRAM ── */
+.aevum-program {
+  padding: 100px 16px;
+}
+
+.aevum-program__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 60px;
+  color: var(--ink);
+}
+
+.aevum-program__phases {
+  max-width: 700px;
+  margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 600px) {
+  .aevum-program__phases {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+.aevum-program__phase {
+  padding: 32px;
+  border: 1px solid rgba(26,26,26,0.08);
+  border-radius: 12px;
+}
+
+.aevum-program__phase-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.aevum-program__phase-desc {
+  font-size: 0.95rem;
+  color: var(--muted-light);
+  line-height: 1.6;
+}
+
+.aevum-program__footer {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--muted-light);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── 8. WALKED WITH YOU ── */
+.aevum-walked {
+  padding: 100px 16px;
+}
+
+.aevum-walked__layout {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .aevum-walked__layout {
+    grid-template-columns: 1fr 280px;
+    text-align: left;
+  }
+}
+
+.aevum-walked__text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--paper);
+  margin-bottom: 16px;
+}
+
+.aevum-walked__text p:last-child {
+  color: var(--muted-dark);
+  font-size: 1rem;
+}
+
+.aevum-walked__phone {
+  max-width: 240px;
+  margin: 0 auto;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+}
+
+/* ── 9. WHAT HAPPENS AFTER ── */
+.aevum-after {
+  padding: 80px 16px;
+  text-align: center;
+}
+
+.aevum-after__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.aevum-after__body {
+  font-size: 1rem;
+  color: var(--muted-light);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ── 10. COMMITMENT ── */
+.aevum-commit {
+  padding: 120px 16px;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aevum-commit__text {
+  max-width: 560px;
+}
+
+.aevum-commit__text p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.aevum-commit__text p.aevum-commit__bold {
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  color: var(--paper);
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.aevum-commit__text p.aevum-commit__sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--muted-dark);
+}
+
+/* ── 11. PRICE ── */
+.aevum-price {
+  padding: 100px 16px;
+  text-align: center;
+}
+
+.aevum-price__anchor {
+  margin-bottom: 16px;
+}
+
+.aevum-price__amount {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: var(--gold);
+  line-height: 1;
+}
+
+.aevum-price__desc {
+  font-size: 1rem;
+  color: var(--muted-dark);
+  margin-bottom: 80px;
+}
+
+.aevum-price__early {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.aevum-price__early-label {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.aevum-price__tier {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.aevum-price__tier-name {
+  font-size: 0.95rem;
+  color: var(--muted-dark);
+}
+
+.aevum-price__tier-seats {
+  font-size: 0.8rem;
+  color: var(--muted-dark);
+  opacity: 0.7;
+}
+
+.aevum-price__tier-amount {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--paper);
+}
+
+.aevum-price__note {
+  font-size: 0.95rem;
+  color: var(--muted-dark);
+  margin-top: 40px;
+  line-height: 1.6;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── 12. SUITABILITY ── */
+.aevum-suit {
+  padding: 80px 16px;
+  text-align: center;
+}
+
+.aevum-suit__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.aevum-suit__body {
+  font-size: 1rem;
+  color: var(--muted-light);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.aevum-suit__body p {
+  margin-bottom: 16px;
+}
+
+.aevum-suit__body p:last-child {
+  font-family: var(--font-heading);
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+/* ── 13. CLOSE + FORM ── */
+.aevum-close {
+  padding: 120px 16px;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.aevum-close__question {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 400;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+
+.aevum-close__line {
+  font-size: 1rem;
+  color: var(--muted-dark);
+  margin-bottom: 48px;
+}
+
+/* ── FOOTER ── */
+.aevum-footer {
+  padding: 40px 16px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.aevum-footer__logo {
+  max-width: 120px;
+  margin: 0 auto 16px;
+  opacity: 0.5;
+}
+
+.aevum-footer__text {
+  font-size: 0.75rem;
+  color: var(--muted-dark);
+  opacity: 0.5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 639px) {
+  .aevum-section { padding: 60px 16px; }
+  .aevum-hero { padding: 60px 16px; }
+  .aevum-hero__bg { background-attachment: scroll; }
+  .aevum-proof__stats { gap: 24px; }
+  .aevum-futures__grid { gap: 2px; }
+}
+
+/* ── PARALLAX DISABLE ON MOBILE ── */
+@media (hover: none) {
+  .aevum-hero__bg { background-attachment: scroll; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 1. HERO ═══ -->
+<section class="aevum-hero aevum-section--dark">
+  <div class="aevum-hero__bg"></div>
+  <div class="aevum-hero__overlay"></div>
+  <div class="aevum-hero__content">
+    <h1 class="aevum-hero__title">AEVUM</h1>
+    <p class="aevum-hero__sub">Metabolic reset program by Niramaya.</p>
+    <a href="apply/" class="aevum-cta">Apply for Cohort 01</a>
+  </div>
+</section>
+
+<!-- ═══ 2. THE QUESTION ═══ -->
+<section class="aevum-section aevum-section--dark aevum-question">
+  <div class="aevum-question__text">
+    We don't age overnight. We make our choices.
+    <span>Every choice shapes our future.</span>
+  </div>
+</section>
+
+<!-- ═══ 3. TWO FUTURES ═══ -->
+<section class="aevum-section aevum-section--dark aevum-futures">
+  <div class="aevum-futures__grid">
+    <img src="Images/landing/two-futures-left-600.jpg" alt="Active, healthy woman in her 60s exercising outdoors" class="aevum-futures__img">
+    <img src="Images/landing/two-futures-right-600.jpg" alt="Elderly person struggling with mobility, using a walker" class="aevum-futures__img">
+  </div>
+  <p class="aevum-futures__caption">That second person didn't get there overnight. That started twenty years ago.</p>
+</section>
+
+<!-- ═══ 4. MARCO'S CONFESSION ═══ -->
+<section class="aevum-section aevum-section--light aevum-confession">
+  <div class="aevum-confession__layout">
+    <img src="Images/Marco-profile.jpg" alt="Marco Iannitto" class="aevum-confession__portrait">
+    <div class="aevum-confession__text">
+      <p>I wasn't sick. I functioned. I just didn't feel like I used to.</p>
+      <p>I've been chasing my balance for seven years. I train, I compete, I eat well. I enjoy life. I wasn't looking for a fix. I was curious.</p>
+      <p>After years of research and refinement, we built a natural method that works with your body, not against it. No drugs. No surgery. No starvation. Just science.</p>
+      <p>Now I want to share it.</p>
+      <div class="aevum-confession__sig">
+        Marco Iannitto
+        <span>Founder, Niramaya</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5. THE DISTINCTION ═══ -->
+<section class="aevum-section aevum-section--dark aevum-distinction">
+  <div class="aevum-inner--narrow">
+    <h2 class="aevum-distinction__headline">This is not weight loss.<br>This is fat loss.</h2>
+    <div class="aevum-distinction__body">
+      <p>Most diets burn everything. Fat, muscle, water. You get lighter, but weaker. Your body fights back the moment you stop.</p>
+      <p>AEVUM targets fat specifically. <strong>Your body keeps what you've built.</strong> That's the difference between losing weight and resetting your body.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. THE PROOF ═══ -->
+<section class="aevum-section aevum-section--dark aevum-proof">
+  <div class="aevum-inner--narrow">
+    <div class="aevum-proof__personal">
+      <h2 class="aevum-proof__label">13 days. My own body.</h2>
+      <div class="aevum-proof__stats">
+        <div class="aevum-proof__stat">
+          <span class="aevum-proof__stat-num">-4.9 kg</span>
+          <span class="aevum-proof__stat-label">Fat</span>
+        </div>
+        <div class="aevum-proof__stat">
+          <span class="aevum-proof__stat-num">+0.4 kg</span>
+          <span class="aevum-proof__stat-label">Muscle</span>
+        </div>
+        <div class="aevum-proof__stat">
+          <span class="aevum-proof__stat-num">7 → 4</span>
+          <span class="aevum-proof__stat-label">Visceral Fat Index</span>
+        </div>
+      </div>
+      <p class="aevum-proof__note">Not weight. Fat. The muscle stayed.</p>
+    </div>
+    <div class="aevum-proof__chart">
+      <img src="Images/landing/weight-chart-800.png" alt="Weight progress chart showing Reset and Stabilization phases">
+    </div>
+    <div class="aevum-proof__pattern">
+      <h3 class="aevum-proof__pattern-title">The pattern.</h3>
+      <p class="aevum-proof__pattern-body">On average, participants lose 4 kg of fat in the Reset phase. Measured by clinical-grade InBody scans, not a bathroom scale. Muscle stayed. In some cases, it went up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7. THE PROGRAM ═══ -->
+<section class="aevum-section aevum-section--light aevum-program">
+  <div class="aevum-inner--narrow">
+    <h2 class="aevum-program__title">31 days to reset your metabolism. Naturally.</h2>
+    <div class="aevum-program__phases">
+      <div class="aevum-program__phase">
+        <h3 class="aevum-program__phase-name">Reset (13 days)</h3>
+        <p class="aevum-program__phase-desc">Your body switches fuel source. You burn stored fat. Muscles preserved.</p>
+      </div>
+      <div class="aevum-program__phase">
+        <h3 class="aevum-program__phase-name">Stabilization (18 days)</h3>
+        <p class="aevum-program__phase-desc">No calorie restrictions. Your body resets around its new configuration.</p>
+      </div>
+    </div>
+    <p class="aevum-program__footer">The hard part is the first 48 hours. After that, you feel better than before.</p>
+  </div>
+</section>
+
+<!-- ═══ 8. WALKED WITH YOU ═══ -->
+<section class="aevum-section aevum-section--dark aevum-walked">
+  <div class="aevum-walked__layout">
+    <div class="aevum-walked__text">
+      <p>Every day, I check in with you personally. Not a chatbot. Not an algorithm. Me.</p>
+      <p>The AEVUM app tracks your journey, your meals, your progress. Lifetime access.</p>
+    </div>
+    <img src="Images/landing/app-screenshot-400.png" alt="AEVUM app showing meal tracking and daily check-in" class="aevum-walked__phone">
+  </div>
+</section>
+
+<!-- ═══ 9. WHAT HAPPENS AFTER ═══ -->
+<section class="aevum-section aevum-section--light aevum-after">
+  <div class="aevum-inner--narrow">
+    <h2 class="aevum-after__title">Day 32 and beyond.</h2>
+    <p class="aevum-after__body">The program ends. The support doesn't. The app, the recipes, the tools. All stay with you.</p>
+  </div>
+</section>
+
+<!-- ═══ 10. COMMITMENT ═══ -->
+<section class="aevum-section aevum-section--dark aevum-commit">
+  <div class="aevum-commit__text">
+    <p class="aevum-muted-dark">You don't need to be an athlete.</p>
+    <p class="aevum-muted-dark">You don't need to change your life.</p>
+    <p class="aevum-commit__bold">You just need to commit to 31 days.</p>
+    <p class="aevum-commit__sub">That's it. Your commitment is the only thing we ask for. Everything else, we handle.</p>
+  </div>
+</section>
+
+<!-- ═══ 11. PRICE ═══ -->
+<section class="aevum-section aevum-section--dark aevum-price">
+  <div class="aevum-inner--narrow">
+    <div class="aevum-price__anchor">
+      <div class="aevum-price__amount">S$3,980</div>
+    </div>
+    <p class="aevum-price__desc">Everything included. 31 days. Walked with you personally.</p>
+
+    <div class="aevum-price__early">
+      <h3 class="aevum-price__early-label">You're early.</h3>
+
+      <div class="aevum-price__tier">
+        <div>
+          <div class="aevum-price__tier-name">Private Circle</div>
+          <div class="aevum-price__tier-seats">5 seats. Until 31 October.</div>
+        </div>
+        <div class="aevum-price__tier-amount">S$2,480</div>
+      </div>
+
+      <div class="aevum-price__tier">
+        <div>
+          <div class="aevum-price__tier-name">Early Access</div>
+          <div class="aevum-price__tier-seats">15 seats. After Private Circle fills.</div>
+        </div>
+        <div class="aevum-price__tier-amount">S$2,980</div>
+      </div>
+
+      <p class="aevum-price__note">I can take 20 people before December. I do the daily check-ins myself. Twenty is the most I can serve properly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12. SUITABILITY ═══ -->
+<section class="aevum-section aevum-section--light aevum-suit">
+  <div class="aevum-inner--narrow">
+    <h2 class="aevum-suit__title">This is not for everyone.</h2>
+    <div class="aevum-suit__body">
+      <p>Before you start, we check if the program is right for you. Not everyone is accepted. Seats are limited, and suitability matters more than timing.</p>
+      <p>This is an application, not a checkout.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 13. CLOSE + CTA ═══ -->
+<section class="aevum-section aevum-section--dark aevum-close">
+  <h2 class="aevum-close__question">What are you waiting for?</h2>
+  <p class="aevum-close__line">The best time was ten years ago. The second best time is now.</p>
+  <a href="apply/" class="aevum-cta">Apply Now</a>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="aevum-section--dark aevum-footer">
+  <img src="Images/landing/niramaya-logo-300.png" alt="Niramaya" class="aevum-footer__logo">
+  <p class="aevum-footer__text">&copy; 2026 Niramaya Pte. Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
