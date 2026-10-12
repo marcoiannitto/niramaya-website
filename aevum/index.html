@@ -766,6 +766,19 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 80px;
 }
 
+.aevum-price__early {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.aevum-price__early-label {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  font-weight: 400;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
 .aevum-price__badge {
   display: inline-flex;
   align-items: center;
@@ -1057,18 +1070,19 @@ a { color: inherit; text-decoration: none; }
 <section class="aevum-section aevum-section--dark aevum-price">
   <div class="glow glow--soft"></div>
   <div class="aevum-inner--narrow">
-    <span class="ey rv" style="text-align:center;">Investment</span>
     <div class="aevum-price__anchor rv rv-d1">
-      <div class="aevum-price__amount">S$2,980</div>
+      <div class="aevum-price__amount">S$3,980</div>
     </div>
-    <p class="aevum-price__desc rv rv-d1">Founding members. 20 spots before December.</p>
+    <p class="aevum-price__desc rv rv-d1">Everything included. 31 days. Personally guided.</p>
 
-    <div class="aevum-price__badge rv rv-d2" id="aevum-price-badge">
-      <span class="aevum-price__badge-dot"></span>
-      <span id="aevum-price-seats">Loading...</span>
+    <div class="aevum-price__early">
+      <h3 class="aevum-price__early-label rv rv-d2">Founding cohort. S$2,980 until December.</h3>
+
+      <div class="aevum-price__badge rv rv-d2" id="aevum-price-badge">
+        <span class="aevum-price__badge-dot"></span>
+        <span id="aevum-price-seats">Loading...</span>
+      </div>
     </div>
-
-    <p class="aevum-price__note rv rv-d3">Everything included. 31 days. Personally guided.</p>
   </div>
 </section>
 
