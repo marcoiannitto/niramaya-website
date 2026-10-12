@@ -766,52 +766,32 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 80px;
 }
 
-.aevum-price__early {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.aevum-price__early-label {
-  font-family: var(--font-heading);
-  font-size: clamp(1.3rem, 3vw, 1.6rem);
-  font-weight: 400;
-  margin-bottom: 40px;
-  color: #fff;
-}
-
-.aevum-price__tier {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 20px 24px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  margin-bottom: 10px;
-  background: rgba(255,255,255,.02);
-  transition: border-color .3s, background .3s;
-}
-
-.aevum-price__tier:hover {
-  border-color: var(--line-gold);
-  background: rgba(176,141,46,.04);
-}
-
-.aevum-price__tier-name {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  font-weight: 500;
-}
-
-.aevum-price__tier-seats {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.aevum-price__tier-amount {
-  font-family: var(--font-heading);
-  font-size: 1.3rem;
+.aevum-price__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1px solid rgba(176,141,46,.25);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--gold-light);
+  background: rgba(176,141,46,.06);
+  margin-bottom: 40px;
+}
+
+.aevum-price__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: aevum-pulse 2s ease-in-out infinite;
+}
+
+@keyframes aevum-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .aevum-price__note {
@@ -1077,11 +1057,18 @@ a { color: inherit; text-decoration: none; }
 <section class="aevum-section aevum-section--dark aevum-price">
   <div class="glow glow--soft"></div>
   <div class="aevum-inner--narrow">
-    <div class="aevum-price__anchor rv">
-      <div class="aevum-price__amount">S$3,980</div>
+    <span class="ey rv" style="text-align:center;">Investment</span>
+    <div class="aevum-price__anchor rv rv-d1">
+      <div class="aevum-price__amount">S$2,980</div>
     </div>
-    <p class="aevum-price__desc rv rv-d1">Everything included. 31 days. Personally guided.</p>
-    <p class="aevum-price__note rv rv-d2">Each cohort is limited to twenty people.</p>
+    <p class="aevum-price__desc rv rv-d1">Founding members. 20 spots before December.</p>
+
+    <div class="aevum-price__badge rv rv-d2" id="aevum-price-badge">
+      <span class="aevum-price__badge-dot"></span>
+      <span id="aevum-price-seats">Loading...</span>
+    </div>
+
+    <p class="aevum-price__note rv rv-d3">Everything included. 31 days. Personally guided.</p>
   </div>
 </section>
 
@@ -1132,6 +1119,20 @@ window.addEventListener('scroll', function() {
   var p = h > 0 ? (window.scrollY / h) * 100 : 0;
   document.getElementById('progressBar').style.width = p + '%';
 }, { passive: true });
+
+/* === Seat counter === */
+(async function() {
+  try {
+    var res = await fetch('https://aevum-apply.marco-iannitto.workers.dev');
+    if (!res.ok) return;
+    var data = await res.json();
+    if (data.seats != null) {
+      document.getElementById('aevum-price-seats').textContent = data.seats + ' seats remaining';
+    }
+  } catch(e) {
+    document.getElementById('aevum-price-seats').textContent = 'Limited seats';
+  }
+})();
 </script>
 
 </body>
