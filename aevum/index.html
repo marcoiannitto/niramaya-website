@@ -20,29 +20,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   AEVUM LANDING PAGE v2.0
-   Premium cinematic. Gold inlay. Scroll reveals.
+   AEVUM LANDING PAGE v3.0
+   Cinzel typography. Cinematic gold. Launch-page visual system.
    ============================================================ */
 
 :root {
-  --ink:       #1A1A1A;
-  --ink-2:     #111010;
+  --ink:       #141311;
+  --ink-2:     #0f0e0d;
   --ink-3:     #1a1816;
   --ink-soft:  #d3ccbe;
+  --paper:     #FBFAF7;
+  --paper-ink: #26221b;
   --gold:      #B08D2E;
   --gold-deep: #8f6f1f;
   --gold-light:#d8b95e;
   --gold-glow: rgba(176,141,46,.12);
-  --paper:     #FBFAF7;
   --muted:     #9a9385;
   --muted-dk:  #7a7468;
-  --muted-light: #938c7d;
-  --line:      rgba(255,255,255,.08);
+  --muted-light:#938c7d;
+  --line:      rgba(255,255,255,.14);
   --line-gold: rgba(216,185,94,.18);
 
   --font-brand:  'Cinzel Decorative', serif;
-  --font-heading: 'Cinzel', serif;
+  --font-heading:'Cinzel', serif;
   --font-body:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --maxw:        960px;
   --ease:        cubic-bezier(.22,.61,.36,1);
 }
 
@@ -53,1089 +55,534 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font-body);
   line-height: 1.6;
   overflow-x: hidden;
-  background: var(--ink-2);
-  color: var(--paper);
-  opacity: 0;
-  animation: pageIn 1.2s var(--ease) .2s forwards;
-}
-
-@keyframes pageIn { to { opacity: 1; } }
-
-/* ── SCROLL PROGRESS BAR ── */
-/* ── HOME LOGO ── */
-.aevum-home-logo {
-  position: fixed;
-  top: 16px;
-  left: 20px;
-  z-index: 100;
-  opacity: 0;
-  animation: heroFadeUp 1s var(--ease) 1.8s forwards;
-}
-.aevum-home-logo__img {
-  height: 28px;
-  width: auto;
-  filter: brightness(0) invert(1);
-  opacity: .7;
-  transition: opacity .3s ease;
-}
-.aevum-home-logo:hover .aevum-home-logo__img {
-  opacity: 1;
-}
-
-.aevum-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
-  z-index: 1000;
-  transition: width .1s linear;
-}
-
-/* ── GRAIN TEXTURE ── */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
+  background: var(--ink);
+  color: #f3efe6;
+  font-size: 17px;
 }
 
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.15; }
+p { color: var(--ink-soft); }
 
-/* ── REVEAL ANIMATION ── */
-.rv {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .85s var(--ease), transform .85s var(--ease);
-}
+/* ── UTILITIES ── */
+.w { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 3; }
+.sec { padding: clamp(64px, 10vw, 120px) 0; position: relative; isolation: isolate; }
+.ey { display: inline-block; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; font-weight: 600; color: var(--gold-light); margin-bottom: 20px; }
+
+/* ── GOLD DIVIDER ── */
+.div-gold { width: 40px; height: 1px; background: var(--gold); margin: 28px 0; box-shadow: 0 0 8px rgba(176,141,46,.3); }
+.div-gold--c { margin-left: auto; margin-right: auto; }
+
+/* ── FULL-BLEED DUOTONE BG ── */
+.sec-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.sec-bg img { position: absolute; inset: 0; width: 100%; height: 112%; top: -6%; object-fit: cover; filter: grayscale(1) brightness(.5) contrast(1.08); }
+.sec-bg .tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,19,17,.7), rgba(20,19,17,.88)); }
+.sec-bg .glow { position: absolute; inset: 0; background: radial-gradient(60% 60% at 26% 28%, rgba(176,141,46,.32), transparent 62%); mix-blend-mode: overlay; }
+
+/* ── GRAIN ── */
+.grain { position: fixed; inset: 0; z-index: 900; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+/* ── SCROLL PROGRESS BAR ── */
+.aevum-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--gold-deep), var(--gold-light)); z-index: 1000; transition: width .1s linear; }
+
+/* ── REVEAL ── */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
 .rv.in { opacity: 1; transform: none; }
 .rv-d1 { transition-delay: .1s; }
 .rv-d2 { transition-delay: .2s; }
 .rv-d3 { transition-delay: .3s; }
 @media (prefers-reduced-motion: reduce) {
   .rv { opacity: 1; transform: none; transition: none; }
-  body { opacity: 1; animation: none; }
-}
-
-/* ── GOLD GLOW ── */
-.glow {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-.glow--hero {
-  background: radial-gradient(70% 55% at 50% 18%, rgba(176,141,46,.18), transparent 62%);
-}
-.glow--soft {
-  background: radial-gradient(80% 60% at 50% 0%, rgba(176,141,46,.06), transparent 50%);
-}
-.glow--closing {
-  background: radial-gradient(60% 55% at 50% 30%, rgba(176,141,46,.16), transparent 58%);
-}
-
-/* ── EYEBROW LABEL ── */
-.ey {
-  display: block;
-  font-size: 11px;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--gold-light);
-  margin-bottom: 20px;
-}
-
-/* ── GOLD DIVIDER ── */
-.div-gold {
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
-  margin: 28px 0;
-  box-shadow: 0 0 8px rgba(176,141,46,.3);
-}
-.div-gold--c { margin-left: auto; margin-right: auto; }
-
-/* ── SECTION BASE ── */
-.aevum-section {
-  width: 100%;
-  padding: clamp(60px, 10vw, 100px) 16px;
-  position: relative;
-  overflow: hidden;
-}
-
-.aevum-section + .aevum-section {
-  border-top: 1px solid var(--line);
-}
-
-.aevum-section--dark {
-  background: var(--ink-2);
-  color: var(--paper);
-}
-
-.aevum-section--elevated {
-  background: var(--ink-3);
-  color: var(--paper);
-}
-
-.aevum-section--light {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.aevum-section--light + .aevum-section--light {
-  border-top-color: rgba(0,0,0,.06);
-}
-
-.aevum-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-.aevum-inner--narrow {
-  max-width: 640px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* ── TYPOGRAPHY ── */
-.aevum-brand {
-  font-family: var(--font-brand);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-}
-
-.aevum-heading {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-.aevum-body {
-  font-size: 1.05rem;
-  line-height: 1.7;
-}
-
-.aevum-gold { color: var(--gold); }
-
-/* ── 1. HERO ── */
-.aevum-hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  padding: 40px 16px;
-  border-top: none !important;
-}
-
-.aevum-hero__bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url('../Images/landing/hero-bg-800.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: 0;
-}
-
-.aevum-hero__overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(17,16,16,0.7) 0%,
-    rgba(17,16,16,0.5) 50%,
-    rgba(17,16,16,0.85) 100%
-  );
-  z-index: 1;
-}
-
-.aevum-hero__content {
-  position: relative;
-  z-index: 2;
-}
-
-.aevum-hero__title {
-  font-family: var(--font-brand);
-  font-size: clamp(3rem, 10vw, 6rem);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--paper);
-  margin-bottom: 8px;
-  opacity: 0;
-  animation: heroFadeUp 1.4s var(--ease) .6s forwards;
-}
-
-.aevum-hero__line {
-  width: 52px;
-  height: 1px;
-  margin: 20px auto 24px;
-  background: var(--gold);
-  opacity: 0;
-  animation: heroFadeUp 1s var(--ease) 1s forwards, heroGlow 4s ease-in-out 2s infinite;
-  box-shadow: 0 0 20px rgba(176,141,46,.4);
-}
-
-@keyframes heroGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(176,141,46,.3); }
-  50% { box-shadow: 0 0 36px rgba(176,141,46,.6); }
-}
-
-.aevum-hero__sub {
-  font-size: 1rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  margin-bottom: 48px;
-  opacity: 0;
-  animation: heroFadeUp 1s var(--ease) 1.2s forwards;
-}
-
-@keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: none; }
-}
-
-.aevum-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  background: var(--gold);
-  padding: 16px 44px;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: transform 0.3s var(--ease), background 0.3s, box-shadow 0.3s;
-  box-shadow: 0 12px 34px -12px rgba(176,141,46,.7);
-  opacity: 0;
-  animation: heroFadeUp 1s var(--ease) 1.5s forwards;
-}
-
-.aevum-cta:hover {
-  background: var(--gold-light);
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px -10px rgba(176,141,46,.9);
-}
-
-.aevum-cta--static {
-  opacity: 1;
-  animation: none;
-}
-
-/* ── 2. THE QUESTION ── */
-.aevum-question {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: clamp(80px, 14vw, 120px) 16px;
-}
-
-.aevum-question__text {
-  font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 400;
-  line-height: 1.5;
-  max-width: 600px;
-}
-
-.aevum-question__text span {
-  display: block;
-  margin-top: 24px;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  color: var(--muted);
-}
-
-/* ── 3. TWO FUTURES ── */
-.aevum-futures {
-  padding: clamp(48px, 8vw, 80px) 16px;
-}
-
-.aevum-futures__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
-  max-width: 900px;
-  margin: 0 auto 40px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.aevum-futures__img {
-  width: 100%;
-  aspect-ratio: 10/11;
-  object-fit: cover;
-  filter: grayscale(60%) sepia(20%);
-  transition: filter .6s var(--ease);
-}
-
-.aevum-futures__img:hover {
-  filter: grayscale(30%) sepia(10%);
-}
-
-.aevum-futures__caption {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1rem;
-  color: var(--muted);
-  line-height: 1.6;
-  text-align: center;
-}
-
-/* ── 4. MARCO'S CONFESSION ── */
-.aevum-confession {
-  padding: clamp(60px, 10vw, 100px) 16px;
-}
-
-.aevum-confession__layout {
-  max-width: 800px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-@media (min-width: 640px) {
-  .aevum-confession__layout {
-    grid-template-columns: 200px 1fr;
-    gap: 48px;
-  }
-}
-
-.aevum-confession__portrait {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  filter: grayscale(30%) sepia(10%);
-  margin: 0 auto;
-  border: 2px solid rgba(216,185,94,.25);
-  box-shadow: 0 0 24px -6px rgba(176,141,46,.3);
-}
-
-.aevum-confession__text p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  color: var(--ink);
-}
-
-.aevum-confession__text p:last-of-type {
-  margin-bottom: 32px;
-}
-
-.aevum-confession__sig {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  color: var(--ink);
-}
-
-.aevum-confession__sig span {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--muted-light);
-  margin-top: 2px;
-}
-
-/* ── 5. THE DISTINCTION ── */
-.aevum-distinction {
-  padding: clamp(60px, 10vw, 100px) 16px;
-  text-align: center;
-}
-
-.aevum-distinction__headline {
-  font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 400;
-  margin-bottom: 40px;
-  line-height: 1.3;
-  color: #fff;
-}
-
-.aevum-distinction__body {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: var(--muted);
-}
-
-.aevum-distinction__body p {
-  margin-bottom: 20px;
-}
-
-.aevum-distinction__body strong {
-  color: var(--paper);
-  font-weight: 400;
-}
-
-/* ── 6. THE PROOF ── */
-.aevum-proof {
-  padding: clamp(60px, 10vw, 100px) 16px;
-}
-
-.aevum-proof__personal {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.aevum-proof__label {
-  font-family: var(--font-heading);
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  font-weight: 400;
-  margin-bottom: 48px;
-  color: #fff;
-}
-
-.aevum-proof__stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 32px;
-}
-
-.aevum-proof__stat {
-  text-align: center;
-}
-
-.aevum-proof__stat-num {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  color: var(--gold);
-  display: block;
-  line-height: 1;
-  margin-bottom: 8px;
-  text-shadow: 0 0 24px rgba(176,141,46,.3);
-}
-
-.aevum-proof__stat-label {
-  font-size: 0.85rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.aevum-proof__note {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-top: 24px;
-}
-
-.aevum-proof__chart {
-  max-width: 700px;
-  margin: 0 auto 60px;
-}
-
-.aevum-proof__chart img {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--line-gold);
-  box-shadow: 0 8px 32px -8px rgba(176,141,46,.15);
-}
-
-.aevum-proof__pattern {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-top: 60px;
-  border-top: 1px solid var(--line);
-}
-
-.aevum-proof__pattern-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 400;
-  margin-bottom: 24px;
-  color: #fff;
-}
-
-.aevum-proof__pattern-body {
-  font-size: 1rem;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-/* ── 7. THE PROGRAM ── */
-.aevum-program {
-  padding: clamp(60px, 10vw, 100px) 16px;
-}
-
-.aevum-program__title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 60px;
-  color: var(--ink);
-}
-
-.aevum-program__phases {
-  max-width: 700px;
-  margin: 0 auto 48px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-@media (min-width: 600px) {
-  .aevum-program__phases {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-}
-
-.aevum-program__phase {
-  padding: 32px;
-  border: 1px solid rgba(26,26,26,0.08);
-  border-radius: 14px;
-  background: rgba(26,26,26,.02);
-  transition: border-color .3s, transform .3s var(--ease), background .3s;
-}
-
-.aevum-program__phase:hover {
-  border-color: rgba(176,141,46,.25);
-  transform: translateY(-2px);
-  background: rgba(176,141,46,.03);
-}
-
-.aevum-program__phase-name {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  margin-bottom: 12px;
-  color: var(--ink);
-}
-
-.aevum-program__phase-desc {
-  font-size: 0.95rem;
-  color: var(--muted-light);
-  line-height: 1.6;
-}
-
-.aevum-program__footer {
-  text-align: center;
-  font-size: 1rem;
-  color: var(--muted-light);
-  max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* ── 8. WALKED WITH YOU ── */
-.aevum-walked {
-  padding: clamp(60px, 10vw, 100px) 16px;
-}
-
-.aevum-walked__layout {
-  max-width: 800px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  align-items: center;
-  text-align: center;
-}
-
-@media (min-width: 640px) {
-  .aevum-walked__layout {
-    grid-template-columns: 1fr 280px;
-    text-align: left;
-  }
-}
-
-.aevum-walked__text p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--paper);
-  margin-bottom: 16px;
-}
-
-.aevum-walked__text p:last-child {
-  color: var(--muted);
-  font-size: 1rem;
-}
-
-.aevum-walked__phone {
-  max-width: 240px;
-  margin: 0 auto;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
-  border-radius: 20px;
-}
-
-/* ── 9. WHAT HAPPENS AFTER ── */
-.aevum-after {
-  padding: clamp(48px, 8vw, 80px) 16px;
-  text-align: center;
-}
-
-.aevum-after__title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 20px;
-}
-
-.aevum-after__body {
-  font-size: 1rem;
-  color: var(--muted-light);
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-/* ── 10. COMMITMENT ── */
-.aevum-commit {
-  padding: clamp(80px, 14vw, 120px) 16px;
-  text-align: center;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.aevum-commit__text {
-  max-width: 560px;
-}
-
-.aevum-commit__text p {
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  font-weight: 400;
-  line-height: 1.6;
-  margin-bottom: 16px;
-  color: var(--muted);
-}
-
-.aevum-commit__text p.aevum-commit__bold {
-  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-  color: var(--paper);
-  margin-top: 32px;
-  margin-bottom: 24px;
-}
-
-.aevum-commit__text p.aevum-commit__sub {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--muted);
-}
-
-/* ── 11. PRICE ── */
-.aevum-price {
-  padding: clamp(60px, 10vw, 100px) 16px;
-  text-align: center;
-}
-
-.aevum-price__anchor {
-  margin-bottom: 16px;
-}
-
-.aevum-price__amount {
-  font-family: var(--font-heading);
-  font-size: clamp(3rem, 8vw, 5rem);
-  color: var(--gold);
-  line-height: 1;
-  text-shadow: 0 0 40px rgba(176,141,46,.25);
-}
-
-.aevum-price__desc {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-bottom: 80px;
-}
-
-.aevum-price__early {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.aevum-price__early-label {
-  font-family: var(--font-heading);
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-  font-weight: 400;
-  margin-bottom: 24px;
-  color: #fff;
-}
-
-.aevum-price__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  border: 1px solid rgba(176,141,46,.25);
-  border-radius: 100px;
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  background: rgba(176,141,46,.06);
-  margin-bottom: 40px;
-}
-
-.aevum-price__badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  animation: aevum-pulse 2s ease-in-out infinite;
-}
-
-@keyframes aevum-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.aevum-price__note {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin-top: 40px;
-  line-height: 1.6;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ── 12. SUITABILITY ── */
-.aevum-suit {
-  padding: clamp(48px, 8vw, 80px) 16px;
-  text-align: center;
-}
-
-.aevum-suit__title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 24px;
-}
-
-.aevum-suit__body {
-  font-size: 1rem;
-  color: var(--muted-light);
-  max-width: 480px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-.aevum-suit__body p {
-  margin-bottom: 16px;
-}
-
-.aevum-suit__body p:last-child {
-  font-family: var(--font-heading);
-  color: var(--ink);
-  font-size: 1.05rem;
-}
-
-/* ── 13. CLOSE + CTA ── */
-.aevum-close {
-  padding: clamp(80px, 14vw, 120px) 16px;
-  text-align: center;
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.aevum-close__question {
-  font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  font-weight: 400;
-  margin-bottom: 24px;
-  line-height: 1.3;
-  color: #fff;
-}
-
-.aevum-close__line {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-bottom: 48px;
-}
+  .daybar-track .seg { transition: none; }
+  .daybar .seg.strict { width: 41.9%; }
+  .daybar .seg.open { width: 58.1%; }
+}
+
+/* ── NAV ── */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between; padding: 16px clamp(20px, 4vw, 36px); transition: background .4s var(--ease), padding .4s var(--ease); }
+.nav.solid { background: rgba(15,14,13,.82); backdrop-filter: saturate(150%) blur(12px); -webkit-backdrop-filter: saturate(150%) blur(12px); padding-top: 12px; padding-bottom: 12px; box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+.nav .brand { display: flex; align-items: center; gap: 11px; }
+.nav .brand .logo { height: 23px; width: auto; display: block; opacity: .85; transition: opacity .3s; }
+.nav .brand:hover .logo { opacity: 1; }
+.nav .brand .brand-sub { font-family: var(--font-heading); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); font-weight: 600; }
+.nav-cta { font-family: var(--font-heading); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 10px 22px; border-radius: 100px; transition: transform .3s var(--ease), background .3s; }
+.nav-cta:hover { transform: translateY(-2px); background: var(--gold-light); }
+
+/* ── HERO ── */
+.hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 120px 16px 90px; background: var(--ink-2); }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) sepia(.55) saturate(1.8) hue-rotate(-6deg) brightness(.42) contrast(1.14); }
+.hero-gold { position: absolute; inset: 0; z-index: 1; background: radial-gradient(60% 70% at 50% 34%, rgba(176,141,46,.28), transparent 62%); }
+.hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(15,14,13,.6) 0%, rgba(15,14,13,.3) 40%, rgba(15,14,13,.7) 100%); }
+.hero .w { position: relative; z-index: 3; }
+.hero__title { font-family: var(--font-brand); font-size: clamp(3rem, 10vw, 6rem); letter-spacing: 0.15em; text-transform: uppercase; color: #fff; margin-bottom: 8px; opacity: 0; animation: fadeUp 1.4s var(--ease) .6s forwards; }
+.hero__line { width: 52px; height: 1px; margin: 20px auto 24px; background: var(--gold); opacity: 0; animation: fadeUp 1s var(--ease) 1s forwards, heroGlow 4s ease-in-out 2s infinite; box-shadow: 0 0 20px rgba(176,141,46,.4); }
+@keyframes heroGlow { 0%, 100% { box-shadow: 0 0 20px rgba(176,141,46,.3); } 50% { box-shadow: 0 0 36px rgba(176,141,46,.6); } }
+.hero__sub { font-size: 1rem; color: var(--muted); letter-spacing: 0.08em; opacity: 0; animation: fadeUp 1s var(--ease) 1.2s forwards; }
+.hero__sub2 { font-size: clamp(0.85rem, 2vw, 1rem); color: var(--ink-soft); margin-top: 12px; opacity: 0; animation: fadeUp 1s var(--ease) 1.4s forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); background: var(--gold); padding: 16px 44px; border-radius: 100px; border: none; cursor: pointer; font-family: inherit; transition: transform 0.3s var(--ease), background 0.3s, box-shadow 0.3s; box-shadow: 0 12px 34px -12px rgba(176,141,46,.7); }
+.btn:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 16px 40px -10px rgba(176,141,46,.9); }
+.btn--hero { font-family: var(--font-heading); margin-top: 48px; opacity: 0; animation: fadeUp 1s var(--ease) 1.6s forwards; }
+.btn--static { opacity: 1; animation: none; }
+.scroll-cue { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.4); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.scroll-cue .bar { width: 1px; height: 36px; background: linear-gradient(rgba(255,255,255,.5), transparent); animation: cue 2s var(--ease) infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); opacity: 0; } 40% { opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* ── THE QUESTION ── */
+.question { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: clamp(80px, 14vw, 120px) 16px; }
+.question__text { font-family: var(--font-heading); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 400; line-height: 1.5; max-width: 600px; color: #fff; }
+.question__text span { display: block; margin-top: 24px; font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: var(--muted); }
+
+/* ── TWO FUTURES ── */
+.futures { padding: clamp(48px, 8vw, 80px) 0; }
+.futures__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; max-width: 900px; margin: 0 auto 40px; padding: 0 24px; border-radius: 12px; overflow: hidden; }
+.futures__img { width: 100%; aspect-ratio: 10/11; object-fit: cover; filter: grayscale(60%) sepia(20%); transition: filter .6s var(--ease); }
+.futures__img:hover { filter: grayscale(30%) sepia(10%); }
+.futures__caption { max-width: 600px; margin: 0 auto; font-size: 1rem; color: var(--muted); line-height: 1.6; text-align: center; padding: 0 24px; }
+
+/* ── PHOTO FRAME ── */
+.photo-frame { aspect-ratio: 4/3; border-radius: 18px; overflow: hidden; border: 1px solid rgba(216,185,94,.28); box-shadow: 0 40px 80px -40px rgba(0,0,0,.7); position: relative; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.55) contrast(1.06) brightness(.82); transition: filter .6s var(--ease), transform .8s var(--ease); }
+.photo-frame:hover img { filter: grayscale(.15) contrast(1.05) brightness(.92); transform: scale(1.03); }
+.photo-frame .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 22px 16px; background: linear-gradient(0deg, rgba(15,14,13,.85), transparent); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-light); font-weight: 600; }
+.photo-frame.tall { aspect-ratio: 4/5; }
+
+/* ── MARCO'S STORY (two-column) ── */
+.story .grid { display: grid; grid-template-columns: 1.05fr .82fr; gap: clamp(32px, 6vw, 68px); align-items: center; }
+.story .prose p { max-width: 52ch; font-size: clamp(16px, 1.9vw, 18px); margin-bottom: 20px; line-height: 1.7; }
+.story .prose p:last-of-type { margin-bottom: 0; }
+.story .sig { font-family: var(--font-heading); font-size: 1rem; color: #fff; margin-top: 28px; }
+.story .sig span { display: block; font-family: var(--font-body); font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+.pull { font-family: var(--font-heading); font-size: clamp(22px, 3.4vw, 36px); color: #fff; line-height: 1.3; max-width: 18ch; margin-bottom: 24px; }
+@media (max-width: 760px) { .story .grid { grid-template-columns: 1fr; } .story .photo-frame { order: -1; max-width: 400px; margin: 0 auto; } }
+
+/* ── DISTINCTION ── */
+.distinction { text-align: center; }
+.distinction__headline { font-family: var(--font-heading); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; margin-bottom: 40px; line-height: 1.3; color: #fff; }
+.distinction__body { max-width: 600px; margin: 0 auto; font-size: 1.05rem; line-height: 1.8; }
+.distinction__body p { margin-bottom: 20px; }
+.distinction__body strong { color: #fff; font-weight: 500; }
+
+/* ── PROOF ── */
+.proof__personal { text-align: center; margin-bottom: 80px; }
+.proof__label { font-family: var(--font-heading); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: 48px; color: #fff; }
+.proof__stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 32px; }
+.proof__stat { text-align: center; }
+.proof__stat-num { font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 3.5rem); color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; text-shadow: 0 0 24px rgba(176,141,46,.3); }
+.proof__stat-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.proof__note { font-size: 1rem; color: var(--muted); margin-top: 24px; }
+.proof__chart { max-width: 700px; margin: 0 auto 60px; }
+.proof__chart img { width: 100%; border-radius: 12px; border: 1px solid var(--line-gold); box-shadow: 0 8px 32px -8px rgba(176,141,46,.15); }
+.proof__pattern { text-align: center; max-width: 600px; margin: 0 auto; padding-top: 60px; border-top: 1px solid var(--line); }
+.proof__pattern-title { font-family: var(--font-heading); font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 400; margin-bottom: 24px; color: #fff; }
+.proof__pattern-body { font-size: 1rem; color: var(--muted); line-height: 1.7; }
+
+/* ── PROGRAM (light) ── */
+.program { background: var(--paper); color: var(--paper-ink); }
+.program .ey { color: var(--gold-deep); }
+.program h2 { color: var(--paper-ink); }
+.program p { color: #5b544a; }
+.program__title { font-family: var(--font-heading); font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 400; margin-bottom: 16px; }
+.program__sub { font-size: 1rem; color: var(--muted-light); max-width: 500px; margin-bottom: 40px; line-height: 1.6; }
+
+/* day bar */
+.daybar { margin: 34px 0 0; max-width: 680px; }
+.daybar-track { display: flex; height: 22px; border-radius: 12px; overflow: hidden; background: #ece5d6; border: 1px solid #e0d8c6; }
+.daybar-track .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #fff; overflow: hidden; white-space: nowrap; width: 0; transition: width 1.2s var(--ease); }
+.daybar-track .seg.strict { background: linear-gradient(90deg, var(--gold-deep), var(--gold)); }
+.daybar-track .seg.open { background: #d8cbae; color: var(--gold-deep); }
+.daybar.in .seg.strict { width: 41.9%; }
+.daybar.in .seg.open { width: 58.1%; }
+.daybar-scale { position: relative; margin-top: 14px; height: 34px; font-size: 11px; letter-spacing: .03em; color: #8a8272; }
+.daybar-scale span { position: absolute; transform: translateX(-50%); white-space: nowrap; display: flex; flex-direction: column; gap: 3px; }
+.daybar-scale b { font-family: var(--font-heading); font-weight: 600; color: var(--paper-ink); font-size: 14px; }
+.daybar-scale .d1 { left: 0; transform: none; align-items: flex-start; }
+.daybar-scale .d11 { left: 41.9%; text-align: center; align-items: center; }
+.daybar-scale .d31 { left: auto; right: 0; transform: none; text-align: right; align-items: flex-end; }
+
+.program__phases { max-width: 700px; margin: 48px 0 40px; display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 600px) { .program__phases { grid-template-columns: 1fr 1fr; gap: 20px; } }
+.program__phase { padding: 32px; border: 1px solid rgba(26,26,26,0.08); border-radius: 14px; background: rgba(26,26,26,.02); transition: border-color .3s, transform .3s var(--ease), background .3s; }
+.program__phase:hover { border-color: rgba(176,141,46,.25); transform: translateY(-2px); background: rgba(176,141,46,.03); }
+.program__phase-name { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 12px; color: var(--paper-ink); }
+.program__phase-desc { font-size: 0.95rem; color: var(--muted-light); line-height: 1.6; }
+.program__footer { font-size: 1rem; color: var(--muted-light); max-width: 500px; line-height: 1.6; margin-top: 24px; }
+
+/* ── FOOD GALLERY ── */
+.food h2 { font-family: var(--font-heading); font-size: clamp(1.4rem, 3.5vw, 2rem); max-width: 16ch; color: #fff; }
+.gallery { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.gcard { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 60px -34px rgba(0,0,0,.7); }
+.gcard img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.gcard:hover img { transform: scale(1.06); }
+.gcard::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(15,14,13,.6), transparent 50%); }
+.gcard .t { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px 20px 18px; font-family: var(--font-heading); font-size: 16px; color: #fff; letter-spacing: .02em; }
+.food .foot { margin-top: 34px; font-style: italic; color: var(--ink-soft); font-size: clamp(16px, 2vw, 18px); max-width: 46ch; }
+@media (max-width: 700px) { .gallery { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; } }
+
+/* ── COACHING ── */
+.coached__layout { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; text-align: center; }
+@media (min-width: 640px) { .coached__layout { grid-template-columns: 1fr 280px; text-align: left; } }
+.coached__text p { font-size: 1.1rem; line-height: 1.7; color: #fff; margin-bottom: 16px; }
+.coached__text p:last-child { color: var(--muted); font-size: 1rem; }
+.coached__phone { max-width: 240px; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)); border-radius: 20px; }
+
+/* ── COMMITMENT ── */
+.commit { min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: clamp(80px, 14vw, 120px) 0; }
+.commit__text { max-width: 560px; }
+.commit__text .big { font-family: var(--font-heading); font-size: clamp(1.4rem, 3.5vw, 1.8rem); color: #fff; margin-bottom: 24px; }
+.commit__text .sub { font-size: 1rem; color: var(--muted); margin-bottom: 16px; }
+
+/* ── PRICE ── */
+.price { text-align: center; }
+.price__amount { font-family: var(--font-heading); font-size: clamp(3rem, 8vw, 5rem); color: var(--gold); line-height: 1; text-shadow: 0 0 40px rgba(176,141,46,.25); }
+.price__desc { font-size: 1rem; color: var(--muted); margin-top: 16px; margin-bottom: 80px; }
+.price__early-label { font-family: var(--font-heading); font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 400; margin-bottom: 24px; color: #fff; }
+.price__badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border: 1px solid rgba(176,141,46,.25); border-radius: 100px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); background: rgba(176,141,46,.06); margin-bottom: 40px; }
+.price__badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.price__note { font-size: 0.95rem; color: var(--muted); margin-top: 40px; line-height: 1.6; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+/* ── SUITABILITY ── */
+.suit { text-align: center; background: var(--paper); color: var(--paper-ink); }
+.suit .ey { color: var(--gold-deep); }
+.suit__title { font-family: var(--font-heading); font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 400; color: var(--paper-ink); margin-bottom: 24px; }
+.suit__body { font-size: 1rem; color: var(--muted-light); max-width: 480px; margin: 0 auto; line-height: 1.7; }
+.suit__body p { margin-bottom: 16px; }
+.suit__body p:last-child { font-family: var(--font-heading); color: var(--paper-ink); font-size: 1.05rem; }
+
+/* ── CLOSE + CTA ── */
+.close { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: clamp(80px, 14vw, 120px) 0; }
+.close__question { font-family: var(--font-heading); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 400; margin-bottom: 24px; line-height: 1.3; color: #fff; }
+.close__line { font-size: 1rem; color: var(--muted); margin-bottom: 48px; }
 
 /* ── FOOTER ── */
-.aevum-footer {
-  padding: 40px 16px;
-  text-align: center;
-  border-top: 1px solid var(--line);
-}
+.foot-sec { background: var(--ink-2); border-top: 1px solid rgba(255,255,255,.07); padding: 60px 0 70px; text-align: center; }
+.foot-logo { height: 74px; width: auto; margin: 0 auto 18px; opacity: .92; }
+.foot-sub { font-family: var(--font-heading); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-light); font-weight: 600; }
+.foot-tag { margin-top: 8px; font-family: var(--font-heading); font-style: italic; color: var(--muted-dk); font-size: 14px; }
+.foot-fine { margin-top: 14px; font-size: 12.5px; color: #6f6a5f; line-height: 1.6; }
 
-.aevum-footer__mark {
-  font-family: var(--font-heading);
-  font-size: 13px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-}
-
-.aevum-footer__tag {
-  margin-top: 6px;
-  font-family: var(--font-heading);
-  font-style: italic;
-  color: var(--muted-dk);
-  font-size: 14px;
-}
-
-.aevum-footer__text {
-  font-size: 0.75rem;
-  color: var(--muted-dk);
-  margin-top: 12px;
-  opacity: 0.5;
-}
+/* ── STICKY MOBILE CTA ── */
+.sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(15,14,13,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,.1); display: none; transform: translateY(120%); transition: transform .4s var(--ease); }
+.sticky.show { transform: none; }
+.sticky a { display: flex; align-items: center; justify-content: space-between; background: var(--gold); color: var(--ink); padding: 15px 22px; border-radius: 100px; font-family: var(--font-heading); font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+@media (max-width: 720px) { .sticky { display: block; } }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 639px) {
-  .aevum-hero { padding: 60px 16px; }
-  .aevum-hero__bg { background-attachment: scroll; }
-  .aevum-proof__stats { gap: 24px; }
-  .aevum-futures__grid { gap: 2px; }
-}
-
-@media (hover: none) {
-  .aevum-hero__bg { background-attachment: scroll; }
+  .hero { padding: 80px 16px 60px; }
+  .proof__stats { gap: 24px; }
+  .futures__grid { gap: 2px; }
 }
 </style>
 </head>
 <body>
-
-<!-- Top logo -->
-<a href="https://niramaya.sg" class="aevum-home-logo" aria-label="Niramaya home">
-  <img src="../Images/landing/niramaya-logo-300.png" alt="Niramaya" class="aevum-home-logo__img">
-</a>
+<div class="grain"></div>
 
 <!-- Progress bar -->
 <div class="aevum-progress" id="progressBar"></div>
 
-<!-- ═══ 1. HERO ═══ -->
-<section class="aevum-hero aevum-section--dark">
-  <div class="glow glow--hero"></div>
-  <div class="aevum-hero__bg"></div>
-  <div class="aevum-hero__overlay"></div>
-  <div class="aevum-hero__content">
-    <h1 class="aevum-hero__title">AEVUM</h1>
-    <div class="aevum-hero__line"></div>
-    <p class="aevum-hero__sub">A metabolic reset by Niramaya.</p>
-    <p class="aevum-hero__sub" style="margin-top:12px; font-size:clamp(0.85rem,2vw,1rem); opacity:0; animation: heroFadeUp 1s var(--ease) 1.4s forwards;">Reclaim the body you were meant to keep.</p>
-    <a href="/apply/" class="aevum-cta">Apply for Cohort 01</a>
-  </div>
-</section>
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+  <a href="https://niramaya.sg" class="brand">
+    <img src="../Images/landing/niramaya-logo-300.png" alt="Niramaya" class="logo">
+    <span class="brand-sub">AEVUM</span>
+  </a>
+  <a href="/apply/" class="nav-cta">Apply</a>
+</nav>
 
-<!-- ═══ 2. THE QUESTION ═══ -->
-<section class="aevum-section aevum-section--dark aevum-question">
-  <div class="glow glow--soft"></div>
-  <div class="aevum-question__text rv">
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="metadata" poster="../Images/landing/bg-event.jpg">
+      <source src="../Images/landing/media/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-gold"></div>
+  <div class="hero-scrim"></div>
+  <div class="w" style="text-align:center;">
+    <h1 class="hero__title">AEVUM</h1>
+    <div class="hero__line"></div>
+    <p class="hero__sub">A metabolic reset by Niramaya.</p>
+    <p class="hero__sub2">Reclaim the body you were meant to keep.</p>
+    <a href="/apply/" class="btn btn--hero">Apply for Cohort 01</a>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="bar"></span></div>
+</header>
+
+<!-- ═══ THE QUESTION ═══ -->
+<section class="sec question">
+  <div class="question__text rv">
     You built the career. The life. The family.
     <span>Somewhere along the way, you stopped building the body.</span>
   </div>
 </section>
 
-<!-- ═══ 3. TWO FUTURES ═══ -->
-<section class="aevum-section aevum-section--dark aevum-futures">
-  <div class="aevum-futures__grid rv">
-    <img src="../Images/landing/two-futures-left-600.jpg" alt="Active, healthy woman in her 60s exercising outdoors" class="aevum-futures__img">
-    <img src="../Images/landing/two-futures-right-600.jpg" alt="Elderly person struggling with mobility, using a walker" class="aevum-futures__img">
+<!-- ═══ TWO FUTURES ═══ -->
+<section class="sec futures">
+  <div class="futures__grid rv">
+    <img src="../Images/landing/two-futures-left-600.jpg" alt="Active, healthy woman in her 60s exercising outdoors" class="futures__img">
+    <img src="../Images/landing/two-futures-right-600.jpg" alt="Elderly person struggling with mobility, using a walker" class="futures__img">
   </div>
-  <p class="aevum-futures__caption rv rv-d1">Same age. Different choices.</p>
+  <p class="futures__caption rv rv-d1">Same age. Different choices.</p>
 </section>
 
-<!-- ═══ 4. MARCO'S CONFESSION ═══ -->
-<section class="aevum-section aevum-section--light aevum-confession">
-  <div class="aevum-confession__layout">
-    <img src="../Images/Marco-profile.jpg" alt="Marco Iannitto" class="aevum-confession__portrait rv">
-    <div class="aevum-confession__text">
-      <p class="rv">This didn't start with me. It started with a doctor trying to help his mother.</p>
-      <p class="rv rv-d1">After a serious accident left her bedridden, she gained over 20 kilograms. He used fifteen years of metabolic research to bring her back. Then he started coaching others, one person at a time.</p>
-      <p class="rv rv-d2">I was one of them. What I experienced changed how I understood my own body. No drugs. No surgery. No starvation. Just a method that works with the body, not against it.</p>
-      <p class="rv rv-d3">A method refined for almost two decades. A private, one-to-one program. Until now.</p>
-      <p class="rv rv-d3">We partnered to bring this method to Singapore. That became AEVUM.</p>
-      <div class="aevum-confession__sig rv rv-d3">
-        Marco Iannitto
-        <span>Founder, Niramaya</span>
+<!-- ═══ MARCO'S STORY ═══ -->
+<section class="sec story">
+  <div class="sec-bg">
+    <img src="../Images/landing/handstand.png" alt="">
+    <div class="tint"></div>
+    <div class="glow"></div>
+  </div>
+  <div class="w">
+    <div class="grid">
+      <div class="prose">
+        <span class="ey rv">The story</span>
+        <p class="rv">This didn't start with me. It started with a doctor trying to help his mother.</p>
+        <p class="rv">After a serious accident left her bedridden, she gained over 20 kilograms. He used fifteen years of metabolic research to bring her back. Then he started coaching others, one person at a time.</p>
+        <p class="rv">I was one of them. What I experienced changed how I understood my own body. No drugs. No surgery. No starvation. Just a method that works with the body, not against it.</p>
+        <p class="rv">A method refined for almost two decades. A private, one-to-one program. Until now.</p>
+        <p class="rv">We partnered to bring this method to Singapore. That became AEVUM.</p>
+        <div class="sig rv">
+          Marco Iannitto
+          <span>Founder, Niramaya</span>
+        </div>
+      </div>
+      <div class="photo-frame tall rv">
+        <img src="../Images/landing/selfie.jpg" alt="Marco Iannitto">
+        <div class="cap">Marco · Niramaya</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 5. THE DISTINCTION ═══ -->
-<section class="aevum-section aevum-section--elevated aevum-distinction">
-  <div class="glow glow--soft"></div>
-  <div class="aevum-inner--narrow">
+<!-- ═══ THE DISTINCTION ═══ -->
+<section class="sec distinction">
+  <div class="sec-bg">
+    <img src="../Images/landing/food-soup.jpg" alt="">
+    <div class="tint"></div>
+    <div class="glow"></div>
+  </div>
+  <div class="w" style="max-width:640px;">
     <span class="ey rv">The difference</span>
-    <h2 class="aevum-distinction__headline rv rv-d1">Fat loss. Not weight loss.</h2>
+    <h2 class="distinction__headline rv rv-d1">Fat loss. Not weight loss.</h2>
     <div class="div-gold div-gold--c rv rv-d1"></div>
-    <div class="aevum-distinction__body">
+    <div class="distinction__body">
       <p class="rv rv-d2">This is not a diet. It's a metabolic reset. Your body learns to burn fat while keeping everything you've built.</p>
       <p class="rv rv-d3">Diets take from you. <strong>AEVUM gives you back what time took away.</strong></p>
     </div>
   </div>
 </section>
 
-<!-- ═══ 6. THE PROOF ═══ -->
-<section class="aevum-section aevum-section--dark aevum-proof">
-  <div class="glow glow--soft"></div>
-  <div class="aevum-inner--narrow">
-    <div class="aevum-proof__personal">
+<!-- ═══ THE PROOF ═══ -->
+<section class="sec">
+  <div class="w" style="max-width:640px;">
+    <div class="proof__personal">
       <span class="ey rv">The proof</span>
-      <h2 class="aevum-proof__label rv rv-d1">13 days. My own body.</h2>
-      <div class="aevum-proof__stats rv rv-d2">
-        <div class="aevum-proof__stat">
-          <span class="aevum-proof__stat-num">-4.9 kg</span>
-          <span class="aevum-proof__stat-label">Fat</span>
+      <h2 class="proof__label rv rv-d1">13 days. My own body.</h2>
+      <div class="proof__stats rv rv-d2">
+        <div class="proof__stat">
+          <span class="proof__stat-num">-4.9 kg</span>
+          <span class="proof__stat-label">Fat</span>
         </div>
-        <div class="aevum-proof__stat">
-          <span class="aevum-proof__stat-num">+0.4 kg</span>
-          <span class="aevum-proof__stat-label">Muscle</span>
+        <div class="proof__stat">
+          <span class="proof__stat-num">+0.4 kg</span>
+          <span class="proof__stat-label">Muscle</span>
         </div>
-        <div class="aevum-proof__stat">
-          <span class="aevum-proof__stat-num">7 &rarr; 4</span>
-          <span class="aevum-proof__stat-label">Visceral Fat Index</span>
+        <div class="proof__stat">
+          <span class="proof__stat-num">7 &rarr; 4</span>
+          <span class="proof__stat-label">Visceral Fat Index</span>
         </div>
       </div>
-      <p class="aevum-proof__note rv rv-d3">Measured by InBody scan. The muscle stayed.</p>
+      <p class="proof__note rv rv-d3">Measured by InBody scan. The muscle stayed.</p>
     </div>
-    <div class="aevum-proof__chart rv">
+    <div class="proof__chart rv">
       <img src="../Images/landing/weight-chart-800.png" alt="Weight progress chart showing Reset and Stabilization phases">
     </div>
-    <div class="aevum-proof__pattern rv">
-      <h3 class="aevum-proof__pattern-title">The pattern.</h3>
-      <p class="aevum-proof__pattern-body">Up to 4 kg of fat in 13 days. Muscle intact. Every result verified by clinical-grade body scan.</p>
+    <div class="proof__pattern rv">
+      <h3 class="proof__pattern-title">The pattern.</h3>
+      <p class="proof__pattern-body">Up to 4 kg of fat in 13 days. Muscle intact. Every result verified by clinical-grade body scan.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ 7. THE PROGRAM ═══ -->
-<section class="aevum-section aevum-section--light aevum-program">
-  <div class="aevum-inner--narrow">
-    <span class="ey rv" style="text-align:center; color:var(--gold-deep);">Your program</span>
-    <h2 class="aevum-program__title rv rv-d1">31 days. Two phases. Nothing artificial.</h2>
-    <p class="aevum-program__footer rv rv-d2" style="margin-bottom:48px;">A natural supplement, taken twice daily during Reset. No drugs. No stimulants. Nothing synthetic.</p>
-    <div class="aevum-program__phases">
-      <div class="aevum-program__phase rv rv-d1">
-        <h3 class="aevum-program__phase-name">Reset (13 days)</h3>
-        <p class="aevum-program__phase-desc">Your meals during Reset are prepared daily from whole, natural ingredients. No processed food. Delivered to your door so the only thing you manage is your commitment.</p>
+<!-- ═══ THE PROGRAM ═══ -->
+<section class="sec program">
+  <div class="w">
+    <span class="ey rv">Your program</span>
+    <h2 class="program__title rv rv-d1">31 days. Two phases. Nothing artificial.</h2>
+    <p class="program__sub rv rv-d2">A natural supplement, taken twice daily during Reset. No drugs. No stimulants. Nothing synthetic.</p>
+
+    <div class="daybar rv" id="daybar">
+      <div class="daybar-track">
+        <div class="seg strict">13 reset</div>
+        <div class="seg open">18 stabilization</div>
       </div>
-      <div class="aevum-program__phase rv rv-d2">
-        <h3 class="aevum-program__phase-name">Stabilization (18 days)</h3>
-        <p class="aevum-program__phase-desc">Your body learns to hold its new composition. No restrictions. No rebound.</p>
+      <div class="daybar-scale">
+        <span class="d1"><b>Day 1</b>Start</span>
+        <span class="d11"><b>Day 13</b>Reset ends</span>
+        <span class="d31"><b>Day 31</b>Done</span>
       </div>
     </div>
-    <p class="aevum-program__footer rv rv-d3">The first 48 hours are the hardest. After that, most people say they feel better than before.</p>
-    <p class="aevum-program__footer rv rv-d3" style="margin-top:24px;">Every element of the program, from the supplement to the meals, is sourced and prepared to the standard we'd hold for ourselves.</p>
-  </div>
-</section>
 
-<!-- ═══ 8. WALKED WITH YOU ═══ -->
-<section class="aevum-section aevum-section--elevated aevum-walked">
-  <div class="glow glow--soft"></div>
-  <div class="aevum-walked__layout">
-    <div class="aevum-walked__text">
-      <span class="ey rv">Personally guided</span>
-      <p class="rv rv-d1">We guide you through every day of it. Nothing is left for you to figure out alone.</p>
-      <p class="rv rv-d2">The AEVUM app tracks your meals, your progress, and your transformation. After day 31, the app, the recipes, and the knowledge stay with you.</p>
+    <div class="program__phases">
+      <div class="program__phase rv rv-d1">
+        <h3 class="program__phase-name">Reset (13 days)</h3>
+        <p class="program__phase-desc">Your meals during Reset are prepared daily from whole, natural ingredients. No processed food. Delivered to your door so the only thing you manage is your commitment.</p>
+      </div>
+      <div class="program__phase rv rv-d2">
+        <h3 class="program__phase-name">Stabilization (18 days)</h3>
+        <p class="program__phase-desc">Your body learns to hold its new composition. No restrictions. No rebound.</p>
+      </div>
     </div>
-    <img src="../Images/landing/app-screenshot-400.png" alt="AEVUM app showing meal tracking and daily check-in" class="aevum-walked__phone rv rv-d2">
+
+    <p class="program__footer rv rv-d3">The first 48 hours are the hardest. After that, most people say they feel better than before.</p>
+    <p class="program__footer rv rv-d3">Every element of the program, from the supplement to the meals, is sourced and prepared to the standard we'd hold for ourselves.</p>
   </div>
 </section>
 
-<!-- ═══ 9. COMMITMENT ═══ -->
-<section class="aevum-section aevum-section--dark aevum-commit">
-  <div class="glow glow--soft"></div>
-  <div class="aevum-commit__text">
-    <p class="aevum-commit__bold rv">Just 31 days.</p>
-    <p class="aevum-commit__sub rv rv-d1">Not the destination. The starting point of a body you recognize again.</p>
-    <p class="aevum-commit__sub rv rv-d2">Your commitment is the only thing we ask for. Everything else, we handle.</p>
+<!-- ═══ FOOD GALLERY ═══ -->
+<section class="sec food">
+  <div class="sec-bg">
+    <img src="../Images/landing/food-salad.jpg" alt="">
+    <div class="tint"></div>
+    <div class="glow"></div>
   </div>
-</section>
-
-<!-- ═══ 11. PRICE ═══ -->
-<section class="aevum-section aevum-section--dark aevum-price">
-  <div class="glow glow--soft"></div>
-  <div class="aevum-inner--narrow">
-    <div class="aevum-price__anchor rv rv-d1">
-      <div class="aevum-price__amount">S$3,980</div>
+  <div class="w">
+    <span class="ey rv">On the plate</span>
+    <h2 class="rv">No shakes. Only real food, done properly.</h2>
+    <div class="gallery">
+      <div class="gcard rv"><img src="../Images/landing/food-salad.jpg" alt="Grilled chicken salad"><div class="t">Lean and bright</div></div>
+      <div class="gcard rv"><img src="../Images/landing/food-soup.jpg" alt="Chicken and mushroom soup"><div class="t">Warm and clean</div></div>
+      <div class="gcard rv"><img src="../Images/landing/food-omelette.jpg" alt="Egg white omelette"><div class="t">Simple and satisfying</div></div>
     </div>
-    <p class="aevum-price__desc rv rv-d1">Everything included. 31 days. Personally guided.</p>
+    <p class="foot rv">Real meals, prepared daily. Not packets. Not powders.</p>
+  </div>
+</section>
 
-    <div class="aevum-price__early">
-      <h3 class="aevum-price__early-label rv rv-d2">Founding cohort. S$2,980 until December.</h3>
+<!-- ═══ COACHING ═══ -->
+<section class="sec">
+  <div class="w">
+    <div class="coached__layout">
+      <div class="coached__text">
+        <span class="ey rv">Personally guided</span>
+        <p class="rv rv-d1">We guide you through every day of it. Nothing is left for you to figure out alone.</p>
+        <p class="rv rv-d2">The AEVUM app tracks your meals, your progress, and your transformation. After day 31, the app, the recipes, and the knowledge stay with you.</p>
+      </div>
+      <img src="../Images/landing/app-screenshot-400.png" alt="AEVUM app showing meal tracking and daily check-in" class="coached__phone rv rv-d2">
+    </div>
+  </div>
+</section>
 
-      <div class="aevum-price__badge rv rv-d2" id="aevum-price-badge">
-        <span class="aevum-price__badge-dot"></span>
+<!-- ═══ COMMITMENT ═══ -->
+<section class="sec commit">
+  <div class="w">
+    <div class="commit__text">
+      <p class="big rv">Just 31 days.</p>
+      <p class="sub rv rv-d1">Not the destination. The starting point of a body you recognize again.</p>
+      <p class="sub rv rv-d2">Your commitment is the only thing we ask for. Everything else, we handle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICE ═══ -->
+<section class="sec price">
+  <div class="w" style="max-width:640px;">
+    <div class="rv rv-d1">
+      <div class="price__amount">S$3,980</div>
+    </div>
+    <p class="price__desc rv rv-d1">Everything included. 31 days. Personally guided.</p>
+
+    <div style="max-width:500px; margin:0 auto;">
+      <h3 class="price__early-label rv rv-d2">Founding cohort. S$2,980 until December.</h3>
+      <div class="price__badge rv rv-d2" id="aevum-price-badge">
+        <span class="price__badge-dot"></span>
         <span id="aevum-price-seats">Loading...</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 12. SUITABILITY ═══ -->
-<section class="aevum-section aevum-section--light aevum-suit">
-  <div class="aevum-inner--narrow">
-    <h2 class="aevum-suit__title rv">Not for everyone.</h2>
-    <div class="aevum-suit__body rv rv-d1">
+<!-- ═══ SUITABILITY ═══ -->
+<section class="sec suit">
+  <div class="w" style="max-width:640px;">
+    <h2 class="suit__title rv">Not for everyone.</h2>
+    <div class="suit__body rv rv-d1">
       <p>For people who've built everything except the time to rebuild themselves.</p>
       <p>We screen every applicant. This is an application, not a checkout.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ 13. CLOSE + CTA ═══ -->
-<section class="aevum-section aevum-section--dark aevum-close">
-  <div class="glow glow--closing"></div>
-  <div style="position:relative; z-index:1;">
+<!-- ═══ CLOSE + CTA ═══ -->
+<section class="sec close">
+  <div class="sec-bg">
+    <img src="../Images/landing/marco-randy.jpg" alt="">
+    <div class="tint"></div>
+    <div class="glow"></div>
+  </div>
+  <div class="w" style="text-align:center;">
     <div class="div-gold div-gold--c rv"></div>
-    <h2 class="aevum-close__question rv rv-d1">When you're ready.</h2>
-    <p class="aevum-close__line rv rv-d2">We'll share the journey back to the body you were meant to keep.</p>
-    <a href="/apply/" class="aevum-cta aevum-cta--static rv rv-d3">Begin Your Application</a>
+    <h2 class="close__question rv rv-d1">When you're ready.</h2>
+    <p class="close__line rv rv-d2">We'll share the journey back to the body you were meant to keep.</p>
+    <a href="/apply/" class="btn btn--static rv rv-d3">Begin Your Application</a>
   </div>
 </section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer class="aevum-section--dark aevum-footer">
-  <div class="aevum-footer__mark">AEVUM</div>
-  <div class="aevum-footer__tag">The science of balance.</div>
-  <p class="aevum-footer__text">&copy; 2026 Niramaya Pte. Ltd. All rights reserved.</p>
+<footer class="foot-sec">
+  <div class="w">
+    <img src="../Images/landing/logo-stacked-white.png" alt="Niramaya" class="foot-logo">
+    <p class="foot-sub">AEVUM · Metabolic Reset · Singapore</p>
+    <p class="foot-tag">The science of balance.</p>
+    <p class="foot-fine">&copy; 2026 Niramaya Pte. Ltd. All rights reserved. Not medical advice.</p>
+  </div>
 </footer>
 
+<!-- ═══ STICKY MOBILE CTA ═══ -->
+<div class="sticky" id="sticky">
+  <a href="/apply/">Apply for Cohort 01 <span>&rarr;</span></a>
+</div>
+
 <script>
-/* === Scroll reveal === */
+/* === Scroll reveal + daybar === */
 var io = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
   });
-}, { threshold: .12 });
-document.querySelectorAll('.rv').forEach(function(el) { io.observe(el); });
+}, { threshold: .15 });
+document.querySelectorAll('.rv, #daybar').forEach(function(el) { io.observe(el); });
 if (!('IntersectionObserver' in window)) {
-  document.querySelectorAll('.rv').forEach(function(el) { el.classList.add('in'); });
+  document.querySelectorAll('.rv, #daybar').forEach(function(el) { el.classList.add('in'); });
 }
 
-/* === Progress bar === */
-window.addEventListener('scroll', function() {
+/* === Nav scroll effect + sticky CTA === */
+var nav = document.getElementById('nav');
+var sticky = document.getElementById('sticky');
+function onScroll() {
+  var y = window.scrollY;
+  nav.classList.toggle('solid', y > 40);
+  sticky.classList.toggle('show', y > window.innerHeight * 0.9);
+  /* progress bar */
   var h = document.documentElement.scrollHeight - window.innerHeight;
-  var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  var p = h > 0 ? (y / h) * 100 : 0;
   document.getElementById('progressBar').style.width = p + '%';
-}, { passive: true });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 /* === Seat counter === */
 (async function() {
