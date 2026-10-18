@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apply for AEVUM | Niramaya</title>
-<meta name="description" content="Apply for a place in AEVUM Cohort 01. Limited to 20 founding members.">
+<meta name="description" content="Apply for a place in the AEVUM program. Limited seats per cohort.">
 <meta property="og:title" content="Apply for AEVUM | Niramaya">
-<meta property="og:description" content="A 31-day metabolic reset. By invitation. Limited to 20 founding members.">
+<meta property="og:description" content="A 31-day metabolic reset. Personally guided. Limited seats per cohort.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -362,24 +362,13 @@
     margin-bottom: 20px;
   }
 
-  .aevum-apply__pricing-tiers {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    font-size: 0.75rem;
+  .aevum-apply__pricing-original {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
     color: var(--muted);
-    letter-spacing: 0.04em;
-  }
-
-  .aevum-apply__pricing-tiers span {
-    opacity: 0.7;
-  }
-
-  .aevum-apply__pricing-divider {
-    width: 48px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
-    margin: 16px auto;
+    text-decoration: line-through;
+    margin-bottom: 6px;
+    display: none;
   }
 
   /* ── FOOTER NOTE ── */
@@ -415,15 +404,11 @@
   </header>
 
   <!-- Pricing -->
-  <div class="aevum-apply__pricing">
-    <div class="aevum-apply__pricing-label">Founding cohort rate</div>
-    <div class="aevum-apply__pricing-amount">S$2,480</div>
+  <div class="aevum-apply__pricing" id="aevum-pricing">
+    <div class="aevum-apply__pricing-label" id="aevum-pricing-label">Program investment</div>
+    <div class="aevum-apply__pricing-original" id="aevum-pricing-original">S$3,980</div>
+    <div class="aevum-apply__pricing-amount" id="aevum-pricing-amount">S$3,980</div>
     <p class="aevum-apply__pricing-note">Everything included. 31 days. Personally guided.</p>
-    <div class="aevum-apply__pricing-divider"></div>
-    <div class="aevum-apply__pricing-tiers">
-      <span>Cohort 02: S$2,980</span>
-      <span>Standard: S$3,980</span>
-    </div>
   </div>
 
   <!-- Form Card -->
@@ -499,7 +484,7 @@ const status = document.getElementById('aevum-status');
 const submitBtn = document.getElementById('aevum-submit');
 const successEl = document.getElementById('aevum-success');
 
-// Fetch seats remaining on load
+// Fetch cohort data on load
 (async () => {
   try {
     const res = await fetch(WORKER_URL);
@@ -508,6 +493,14 @@ const successEl = document.getElementById('aevum-success');
     if (data.cohort) {
       document.getElementById('aevum-cohort-title').textContent = 'Apply for ' + data.cohort;
       document.getElementById('aevum-seats').textContent = data.seats + ' seats remaining';
+
+      // Dynamic pricing
+      if (data.cohortPrice) {
+        const fmt = n => 'S$' + n.toLocaleString('en-SG');
+        document.getElementById('aevum-pricing-label').textContent = data.cohort + ' rate';
+        document.getElementById('aevum-pricing-original').style.display = 'block';
+        document.getElementById('aevum-pricing-amount').textContent = fmt(data.cohortPrice);
+      }
     }
   } catch (e) {
     document.getElementById('aevum-seats').textContent = 'Limited seats';

@@ -52,7 +52,8 @@ async function handleGet(env) {
     return json({
       cohort: cohort.name,
       seats: remaining,
-      total: cohort.totalSeats
+      total: cohort.totalSeats,
+      cohortPrice: cohort.cohortPrice,
     });
 
   } catch (err) {
@@ -150,6 +151,7 @@ async function getOpenCohort(env) {
     name: rec.fields['Cohort'] || '',
     totalSeats: rec.fields['Total Seats'] || 0,
     applied: Array.isArray(linkedCRM) ? linkedCRM.length : 0,
+    cohortPrice: rec.fields['Cohort Price'] || null,
   };
 }
 
