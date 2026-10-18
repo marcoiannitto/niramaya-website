@@ -544,10 +544,9 @@ const successEl = document.getElementById('aevum-success');
     // Past editions
     if (data.pastCohorts && data.pastCohorts.length) {
       const list = document.getElementById('aevum-editions-list');
-      const toRoman = n => ['I','II','III','IV','V','VI','VII','VIII','IX','X'][n - 1] || n;
-      data.pastCohorts.forEach((c, i) => {
+      data.pastCohorts.forEach(c => {
         const li = document.createElement('li');
-        li.textContent = 'Edition ' + toRoman(i + 1) + ' · Complete';
+        li.textContent = c.name + ' · Complete';
         list.appendChild(li);
       });
       document.getElementById('aevum-editions').style.display = 'block';
