@@ -371,6 +371,38 @@
     display: none;
   }
 
+  /* ── PAST COHORTS ── */
+  .aevum-apply__editions {
+    display: none;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .aevum-apply__editions-line {
+    width: 32px;
+    height: 1px;
+    background: var(--gold-deep);
+    margin: 0 auto 20px;
+    opacity: 0.4;
+  }
+
+  .aevum-apply__editions-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .aevum-apply__editions-list li {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.5;
+  }
+
   /* ── FOOTER NOTE ── */
   .aevum-apply__footer {
     text-align: center;
@@ -409,6 +441,12 @@
     <div class="aevum-apply__pricing-original" id="aevum-pricing-original">S$3,980</div>
     <div class="aevum-apply__pricing-amount" id="aevum-pricing-amount">S$3,980</div>
     <p class="aevum-apply__pricing-note">Everything included. 31 days. Personally guided.</p>
+  </div>
+
+  <!-- Past Editions -->
+  <div class="aevum-apply__editions" id="aevum-editions">
+    <div class="aevum-apply__editions-line"></div>
+    <ul class="aevum-apply__editions-list" id="aevum-editions-list"></ul>
   </div>
 
   <!-- Form Card -->
@@ -501,6 +539,18 @@ const successEl = document.getElementById('aevum-success');
         document.getElementById('aevum-pricing-original').style.display = 'block';
         document.getElementById('aevum-pricing-amount').textContent = fmt(data.cohortPrice);
       }
+    }
+
+    // Past editions
+    if (data.pastCohorts && data.pastCohorts.length) {
+      const list = document.getElementById('aevum-editions-list');
+      const toRoman = n => ['I','II','III','IV','V','VI','VII','VIII','IX','X'][n - 1] || n;
+      data.pastCohorts.forEach((c, i) => {
+        const li = document.createElement('li');
+        li.textContent = 'Edition ' + toRoman(i + 1) + ' · Complete';
+        list.appendChild(li);
+      });
+      document.getElementById('aevum-editions').style.display = 'block';
     }
   } catch (e) {
     document.getElementById('aevum-seats').textContent = 'Limited seats';

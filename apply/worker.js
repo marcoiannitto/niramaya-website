@@ -43,8 +43,10 @@ async function handleGet(env) {
   try {
     // 1. Find the open cohort
     const cohort = await getOpenCohort(env);
+    const pastCohorts = await getFullCohorts(env);
+
     if (!cohort) {
-      return json({ cohort: null, seats: 0, total: 0 });
+      return json({ cohort: null, seats: 0, total: 0, pastCohorts });
     }
 
     const remaining = Math.max(0, cohort.totalSeats - cohort.applied);
@@ -54,6 +56,7 @@ async function handleGet(env) {
       seats: remaining,
       total: cohort.totalSeats,
       cohortPrice: cohort.cohortPrice,
+      pastCohorts,
     });
 
   } catch (err) {
@@ -153,6 +156,24 @@ async function getOpenCohort(env) {
     applied: Array.isArray(linkedCRM) ? linkedCRM.length : 0,
     cohortPrice: rec.fields['Cohort Price'] || null,
   };
+}
+
+async function getFullCohorts(env) {
+  const url = new URL(`https://api.airtable.com/v0/${AIRTABLE_BASE}/${COHORTS_TABLE}`);
+  url.searchParams.set('filterByFormula', '{Status} = "Full"');
+  url.searchParams.set('sort[0][field]', 'Cohort');
+  url.searchParams.set('sort[0][direction]', 'asc');
+
+  const res = await fetch(url.toString(), {
+    headers: { 'Authorization': `Bearer ${env.AIRTABLE_TOKEN}` },
+  });
+
+  if (!res.ok) return [];
+
+  const data = await res.json();
+  if (!data.records) return [];
+
+  return data.records.map(r => ({ name: r.fields['Cohort'] || '' }));
 }
 
 function json(data, status = 200) {
