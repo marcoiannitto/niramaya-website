@@ -283,6 +283,36 @@ p { color: var(--ink-soft); }
 .sticky a { display: flex; align-items: center; justify-content: space-between; background: var(--gold); color: var(--ink); padding: 15px 22px; border-radius: 100px; font-family: var(--font-heading); font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
 @media (max-width: 720px) { .sticky { display: block; } }
 
+/* ── RESULTS ── */
+.results { padding: clamp(64px, 10vw, 120px) 0; position: relative; isolation: isolate; }
+.results__intro { text-align: center; margin-bottom: clamp(56px, 8vw, 80px); }
+.results__title { font-family: var(--font-heading); font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 400; color: #fff; margin-bottom: 16px; }
+.results__sub { font-size: 1rem; color: var(--muted); }
+.results__cards { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+.rcard { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; padding: clamp(40px, 7vw, 64px) 0; }
+.rcard:first-child { padding-top: 0; }
+.rcard + .rcard { border-top: 1px solid rgba(216,185,94,.1); }
+.rcard__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rcard__photo { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 3/4; border: 1px solid rgba(216,185,94,.18); box-shadow: 0 20px 50px -20px rgba(0,0,0,.6); }
+.rcard__photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.55) contrast(1.06) brightness(.82); transition: filter .6s var(--ease); }
+.rcard__photo:hover img { filter: grayscale(.15) contrast(1.05) brightness(.92); }
+.rcard__photo-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 12px 8px; background: linear-gradient(0deg, rgba(15,14,13,.7), transparent); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-dk); text-align: center; }
+.rcard__info { display: flex; flex-direction: column; justify-content: center; padding: 12px 0; }
+.rcard__stat { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 2.8rem); color: var(--gold); line-height: 1; margin-bottom: 6px; text-shadow: 0 0 20px rgba(176,141,46,.25); }
+.rcard__stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+.rcard__quote { font-family: var(--font-heading); font-style: italic; font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--ink-soft); line-height: 1.5; margin-bottom: 16px; }
+.rcard__name { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.06em; }
+.results__footer { text-align: center; margin-top: clamp(40px, 6vw, 56px); padding-top: 32px; border-top: 1px solid var(--line); }
+.results__footer p { font-size: 0.85rem; color: var(--muted-dk); letter-spacing: .06em; }
+.rcard:nth-child(even) { direction: rtl; }
+.rcard:nth-child(even) > * { direction: ltr; }
+@media (max-width: 600px) {
+  .rcard { grid-template-columns: 1fr; gap: 24px; }
+  .rcard:nth-child(even) { direction: ltr; }
+  .rcard__info { text-align: center; align-items: center; }
+  .rcard__photos { max-width: 360px; margin: 0 auto; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 639px) {
   .hero { padding: 80px 16px 60px; }
@@ -433,6 +463,101 @@ p { color: var(--ink-soft); }
     <div class="proof__pattern rv" style="margin-top:48px;">
       <h3 class="proof__pattern-title">The pattern.</h3>
       <p class="proof__pattern-body">Up to 4 kg of fat in 13 days. Muscle intact. Every result verified by clinical-grade body scan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE RESULTS ═══ -->
+<section class="results sec">
+  <div class="w">
+    <div class="results__intro">
+      <span class="ey rv">The results</span>
+      <h2 class="results__title rv rv-d1">Not just me.</h2>
+      <div class="div-gold div-gold--c rv rv-d1"></div>
+    </div>
+
+    <div class="results__cards">
+
+      <div class="rcard rv">
+        <div class="rcard__photos">
+          <div class="rcard__photo">
+            <img src="../Images/landing/before-front2.jpg" alt="Before">
+            <div class="rcard__photo-label">Before</div>
+          </div>
+          <div class="rcard__photo">
+            <img src="../Images/landing/after-front2.jpg" alt="After">
+            <div class="rcard__photo-label">After</div>
+          </div>
+        </div>
+        <div class="rcard__info">
+          <div class="rcard__stat">-3.5 kg</div>
+          <div class="rcard__stat-label">Body fat</div>
+          <p class="rcard__quote">"I feel this is a new start."</p>
+          <p class="rcard__name">Jane, 34</p>
+        </div>
+      </div>
+
+      <div class="rcard rv">
+        <div class="rcard__photos">
+          <div class="rcard__photo">
+            <img src="../Images/landing/before-front3.jpg" alt="Before">
+            <div class="rcard__photo-label">Before</div>
+          </div>
+          <div class="rcard__photo">
+            <img src="../Images/landing/after-front3.jpg" alt="After">
+            <div class="rcard__photo-label">After</div>
+          </div>
+        </div>
+        <div class="rcard__info">
+          <div class="rcard__stat">-3.8 kg</div>
+          <div class="rcard__stat-label">Body fat</div>
+          <p class="rcard__quote">"I used to need 30 minutes to get going. Now I wake up and feel great."</p>
+          <p class="rcard__name">Emilio, 69</p>
+        </div>
+      </div>
+
+      <div class="rcard rv">
+        <div class="rcard__photos">
+          <div class="rcard__photo">
+            <img src="../Images/landing/before-front4.jpg" alt="Before">
+            <div class="rcard__photo-label">Before</div>
+          </div>
+          <div class="rcard__photo">
+            <img src="../Images/landing/after-front4.jpg" alt="After">
+            <div class="rcard__photo-label">After</div>
+          </div>
+        </div>
+        <div class="rcard__info">
+          <div class="rcard__stat">-2.7 kg</div>
+          <div class="rcard__stat-label">Body fat</div>
+          <p class="rcard__quote">"I haven't felt this good since before giving birth to my children."</p>
+          <p class="rcard__name">Gabriella, 72</p>
+        </div>
+      </div>
+
+      <div class="rcard rv">
+        <div class="rcard__photos">
+          <div class="rcard__photo">
+            <img src="../Images/landing/before-front5.jpg" alt="Before">
+            <div class="rcard__photo-label">Before</div>
+          </div>
+          <div class="rcard__photo">
+            <img src="../Images/landing/after-front5.jpg" alt="After">
+            <div class="rcard__photo-label">After</div>
+          </div>
+        </div>
+        <div class="rcard__info">
+          <div class="rcard__stat">-4.3 kg</div>
+          <div class="rcard__stat-label">Body fat</div>
+          <p class="rcard__quote">"I have failed so many diets. I was surprised by how easy it's been to stick to the program."</p>
+          <p class="rcard__name">Dillon, 44</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="results__footer rv">
+      <p>Every result verified by InBody clinical scan.</p>
     </div>
   </div>
 </section>
