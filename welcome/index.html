@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v.1.1.0 | 2026-11-18 | Program 10+21 days, kit photo, loading removed, protocol A-17/E-08/V-01, timeline animation fixed -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -251,15 +252,25 @@ body { opacity: 0; animation: pageIn 1.2s var(--ease) .2s forwards; }
   top: 20px;
   left: 6px;
   height: 6px;
-  width: 40%;
+  width: 50%;
   background: var(--gold);
   border-radius: 3px;
   box-shadow: 0 0 14px rgba(176,141,46,.5);
-  animation: trackPulse 3s ease-in-out infinite;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.4s var(--ease) .5s;
 }
-@keyframes trackPulse {
-  0%, 100% { opacity: .5; width: 40%; }
-  50% { opacity: .9; width: 42%; }
+.timeline-track.in::after {
+  transform: scaleX(1);
+  animation: trackGlow 3.5s ease-in-out 2s infinite;
+}
+@keyframes trackGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(176,141,46,.35); }
+  50% { box-shadow: 0 0 20px rgba(176,141,46,.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline-track::after { transform: none; transition: none; }
+  .timeline-track.in::after { animation: none; }
 }
 .timeline-phase {
   flex: 1;
@@ -831,12 +842,12 @@ footer .tag {
     <div class="timeline-track rv rv-d1">
       <div class="timeline-phase">
         <div class="tl-label">Reset</div>
-        <div class="tl-days">13 days</div>
-        <p class="tl-desc">Structured nutrition + supplement. Your body switches its metabolism and starts drawing energy from body fats while preserving muscle.</p>
+        <div class="tl-days">10 days</div>
+        <p class="tl-desc">Structured nutrition + protocol. Your body switches its metabolism and starts drawing energy from body fats while preserving muscle.</p>
       </div>
       <div class="timeline-phase">
         <div class="tl-label">Stabilization</div>
-        <div class="tl-days">18 days</div>
+        <div class="tl-days">21 days</div>
         <p class="tl-desc">Gradual return to full meals. Your body adjusts its metabolism around your new weight and locks it as baseline.</p>
       </div>
     </div>
@@ -844,21 +855,13 @@ footer .tag {
     <div class="tl-after rv rv-d2">Then: <strong>Maintenance.</strong> The app stays with you. Recipes, tracking, guidance, for life.</div>
 
     <div class="stages rv rv-d3">
-      <div class="stages-title">Inside the Reset (3 stages)</div>
-      <div class="stage-row">
-        <div class="stage-chip">L</div>
-        <div>
-          <div class="stage-name">Loading</div>
-          <div class="stage-days">Days 1-2</div>
-          <p class="stage-desc">Eat freely, above your normal intake. This primes your body for what's next.</p>
-        </div>
-      </div>
+      <div class="stages-title">Inside the 31 days (3 stages)</div>
       <div class="stage-row">
         <div class="stage-chip">A</div>
         <div>
           <div class="stage-name">Activation</div>
-          <div class="stage-days">Days 3-10</div>
-          <p class="stage-desc">Low calorie, strict food rules, supplement twice daily. This is where the metabolic shift happens.</p>
+          <div class="stage-days">Days 1-10</div>
+          <p class="stage-desc">Low calorie, strict food rules, daily protocol. This is where the metabolic shift happens.</p>
         </div>
       </div>
       <div class="stage-row">
@@ -866,7 +869,15 @@ footer .tag {
         <div>
           <div class="stage-name">Transition</div>
           <div class="stage-days">Days 11-13</div>
-          <p class="stage-desc">Helps the body adjust to the next phase, bridging you into Stabilization.</p>
+          <p class="stage-desc">Calories ramp up gradually. The first step of Stabilization.</p>
+        </div>
+      </div>
+      <div class="stage-row">
+        <div class="stage-chip">S</div>
+        <div>
+          <div class="stage-name">Stabilization</div>
+          <div class="stage-days">Days 14-31</div>
+          <p class="stage-desc">Full meals, weight held steady. Your body locks in the new baseline.</p>
         </div>
       </div>
     </div>
@@ -919,7 +930,7 @@ footer .tag {
         <div class="num-dot">2</div>
         <div>
           <h3>We protect your muscle.</h3>
-          <p>The food and supplement keep your muscle supplied, so your body has no reason to burn it. Your engine stays intact.</p>
+          <p>The food and protocol keep your muscle supplied, so your body has no reason to burn it. Your engine stays intact.</p>
           <div class="sci-note">The science: give the body enough protein and it leaves the muscle alone. It turns to fat instead.</div>
         </div>
       </div>
@@ -965,11 +976,9 @@ footer .tag {
     <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:6px;">Clear, simple, non-negotiable.</h2>
     <p class="rv" style="font-size:14px; color:var(--muted-dk); margin-bottom:24px;">Tap each card to expand.</p>
 
-    <div class="acc rv"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6l3 2v10a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V10l3-2V2"/></svg></span><span>Supplement (serum)</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>First 10 days only (Loading + Activation).</li><li>Twice daily: morning, and evening before dinner.</li><li>Shake the vial. Hold under your tongue for 1 minute. Swallow.</li></ul></div></div></div>
+    <div class="acc rv"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6l3 2v10a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V10l3-2V2"/></svg></span><span>Protocol</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><p style="margin-bottom:10px;">Three products, taken during Activation only (days 1-10).</p><div class="sub">A-17 &middot; 3x daily (lunch, dinner, bedtime)</div><ul><li>Essential amino acids plus fibre. Supplies protein building blocks so your muscle is not used for fuel.</li><li>One scoop in a glass of water.</li></ul><div class="sub">E-08 &middot; 2x daily (morning, afternoon)</div><ul><li>Electrolytes: potassium, magnesium, sodium, calcium, zinc. Keeps energy up and helps avoid cramps and headaches.</li><li>One scoop in a glass of water.</li></ul><div class="sub">V-01 &middot; 1x daily (anytime)</div><ul><li>Multivitamin. Covers the vitamins and minerals a smaller food intake can miss.</li><li>One tablet with water.</li></ul></div></div></div>
 
     <div class="acc rv rv-d1"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2"/><path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2"/><ellipse cx="12" cy="11" rx="9" ry="4"/><path d="M3 15c0 2.2 4 4 9 4s9-1.8 9-4"/></svg></span><span>Food during Activation</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><div class="sub">Eat</div><ul><li>Lean protein (chicken breast, prawns, white fish, tuna, tofu, tempeh)</li><li>Vegetables (~150g, low carb)</li><li>Fruit with sugar below 12g (~100g)</li></ul><div class="sub">Avoid</div><ul><li>Added sugar, carbs, all fats and oils (no butter, no oil, no pork belly, no salmon)</li><li>Starchy vegetables, sauces with sugar</li><li>Dairy: not allowed during Activation</li><li>Carbs: below 30g</li></ul><p style="font-size:13px; color:var(--muted-dk); margin-top:10px;">The full list is in the app. If you're unsure about any food, ask the AI or your coach.</p></div></div></div>
-
-    <div class="acc rv rv-d1"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M5 11V7a7 7 0 0 1 14 0v4"/><path d="M3 11c0 5 4 9 9 9s9-4 9-9"/></svg></span><span>Food during Loading (first 2 days)</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Eat freely. No restrictions. Aim for 50 to 100% above your normal intake.</li></ul></div></div></div>
 
     <div class="acc rv rv-d2"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span>Food during Stabilization</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><ul><li>Fats reintroduced gradually (3 to 4 day ramp-up).</li><li>No calorie limit (stay below your BMR). High protein. Carbs below 40g (from vegetables and berries).</li><li>Your target: keep your weight stable within 500 to 700g of your Reset result.</li><li>Why: your body needs time to accept the new weight as its baseline. A sudden surplus tells the body the famine is over, and it stores fat again.</li></ul></div></div></div>
 
@@ -1031,7 +1040,7 @@ footer .tag {
       <li>You'll likely see the effect on the scale the next morning.</li>
       <li>You may feel an energy dip (your metabolic state was interrupted).</li>
       <li>The plan is designed to recover. One slip does not erase your progress but can slow it down.</li>
-      <li><strong>But staying strict through the Reset is the goal. The program is kept short on purpose: 13 days of focus is achievable.</strong></li>
+      <li><strong>But staying strict through the Reset is the goal. The program is kept short on purpose: 10 days of focus is achievable.</strong></li>
     </ul>
   </div>
 </section>
@@ -1041,7 +1050,7 @@ footer .tag {
   <div class="w">
     <span class="ey rv">Your kit</span>
     <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:20px;">Everything you need is already in your hands.</h2>
-    <div class="kit-hero rv rv-d1"><img src="../Images/aevum-box-serum-800.jpg" alt="AEVUM serum box" loading="lazy"></div>
+    <div class="kit-hero rv rv-d1"><img src="../Images/Aevum-kit-final.jpg" alt="AEVUM kit" loading="lazy"></div>
     <div class="kit-grid">
       <div class="kit-item rv">
         <div class="kit-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M12 9v4l2.5 1.5"/></svg></div>
