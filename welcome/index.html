@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.1.1.2 | 2026-11-18 | Protocol copy: premium, no ingredient detail -->
+<!-- v.1.2.0 | 2026-11-18 | Protocol: discreet ingredient lists, active vs other (no quantities) -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -624,6 +624,21 @@ body { opacity: 0; animation: pageIn 1.2s var(--ease) .2s forwards; }
   height: auto;
   display: block;
 }
+/* === PROTOCOL INGREDIENTS === */
+.inside { margin: -2px 0 14px; }
+.inside summary {
+  display: inline-block;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  color: var(--muted-dk);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  padding: 4px 0;
+}
+.inside summary::-webkit-details-marker { display: none; }
+.inside p { font-size: 12.5px; line-height: 1.6; color: var(--muted-dk); margin: 6px 0 0; }
+.inside em { font-style: normal; color: var(--muted); }
 /* === PHOTO STRIPS === */
 .food-strip {
   display: grid;
@@ -976,7 +991,7 @@ footer .tag {
     <h2 class="rv" style="font-size:clamp(24px,5vw,34px); margin-bottom:6px;">Clear, simple, non-negotiable.</h2>
     <p class="rv" style="font-size:14px; color:var(--muted-dk); margin-bottom:24px;">Tap each card to expand.</p>
 
-    <div class="acc rv"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6l3 2v10a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V10l3-2V2"/></svg></span><span>Protocol</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><p style="margin-bottom:10px;">Three formulas, prepared exclusively for AEVUM participants. Taken during Activation only (days 1-10). Each has one role.</p><div class="sub">A-17 &middot; The Core</div><ul><li>The heart of the Reset. Works alongside your meals to guide your body into drawing on its own fat, while your muscle stays where it is.</li><li>3x daily: lunch, dinner, bedtime. One scoop in water.</li></ul><div class="sub">E-08 &middot; The Balance</div><ul><li>Keeps your system in balance while your metabolism shifts gear. Steady energy, clear head, no crash.</li><li>2x daily: morning, afternoon. One scoop in water.</li></ul><div class="sub">V-01 &middot; The Foundation</div><ul><li>Covers every base, so nothing holds the process back.</li><li>1x daily, anytime. One tablet with water.</li></ul></div></div></div>
+    <div class="acc rv"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6l3 2v10a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V10l3-2V2"/></svg></span><span>Protocol</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><p style="margin-bottom:10px;">Three formulas, prepared exclusively for AEVUM participants. Taken during Activation only (days 1-10). Each has one role.</p><div class="sub">A-17 &middot; The Core</div><ul><li>The heart of the Reset. Works alongside your meals to guide your body into drawing on its own fat, while your muscle stays where it is.</li><li>3x daily: lunch, dinner, bedtime. One scoop in water.</li></ul><details class="inside"><summary>Ingredients</summary><p><em>Active:</em> L-Leucine, L-Isoleucine, L-Valine, L-Lysine HCl, L-Threonine, L-Phenylalanine, L-Histidine, L-Tryptophan, L-Methionine, Partially Hydrolyzed Guar Gum.</p><p><em>Other ingredients:</em> Malic Acid, Citric Acid, Natural and Artificial Flavors, Sucralose, Acesulfame Potassium, Silica, Blue Spirulina (colour).</p></details><div class="sub">E-08 &middot; The Balance</div><ul><li>Keeps your system in balance while your metabolism shifts gear. Steady energy, clear head, no crash.</li><li>2x daily: morning, afternoon. One scoop in water.</li></ul><details class="inside"><summary>Ingredients</summary><p><em>Active:</em> Potassium Citrate, Magnesium Citrate, Sodium Bicarbonate, Calcium Citrate, Zinc Gluconate.</p><p><em>Other ingredients:</em> Citric Acid, Lemon Powder, Sucralose.</p></details><div class="sub">V-01 &middot; The Foundation</div><ul><li>Covers every base, so nothing holds the process back.</li><li>1x daily, anytime. One tablet with water.</li></ul><details class="inside"><summary>Ingredients</summary><p><em>Active:</em> Vitamin A, C, D3, E, K, B1, B2, B3, B5, B6, B12, Folate, Biotin, Calcium, Phosphorus, Iodine, Magnesium, Zinc, Selenium, Copper, Manganese, Chromium, Molybdenum, Chloride, Potassium, Lutein, Lycopene.</p></details></div></div></div>
 
     <div class="acc rv rv-d1"><div class="acc-head" onclick="toggleAcc(this)"><span class="acc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#d8b95e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2"/><path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2"/><ellipse cx="12" cy="11" rx="9" ry="4"/><path d="M3 15c0 2.2 4 4 9 4s9-1.8 9-4"/></svg></span><span>Food during Activation</span><span class="acc-arrow">&#9660;</span></div><div class="acc-body"><div class="acc-body-inner"><div class="sub">Eat</div><ul><li>Lean protein (chicken breast, prawns, white fish, tuna, tofu, tempeh)</li><li>Vegetables (~150g, low carb)</li><li>Fruit with sugar below 12g (~100g)</li></ul><div class="sub">Avoid</div><ul><li>Added sugar, carbs, all fats and oils (no butter, no oil, no pork belly, no salmon)</li><li>Starchy vegetables, sauces with sugar</li><li>Dairy: not allowed during Activation</li><li>Carbs: below 30g</li></ul><p style="font-size:13px; color:var(--muted-dk); margin-top:10px;">The full list is in the app. If you're unsure about any food, ask the AI or your coach.</p></div></div></div>
 
@@ -1189,6 +1204,12 @@ window.addEventListener('scroll', function() {
 }, { passive: true });
 
 /* === Accordion === */
+document.querySelectorAll('.inside').forEach(function(d) {
+  d.addEventListener('toggle', function() {
+    var body = d.closest('.acc-body');
+    if (body && body.style.maxHeight) body.style.maxHeight = body.scrollHeight + 'px';
+  });
+});
 function toggleAcc(head) {
   var card = head.parentElement;
   var body = card.querySelector('.acc-body');
