@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.3.1.0 | 2026-11-18 | Aligned to 10+21 program: protocol A-17/E-08/V-01, why-diets-fail section, coach-led, included list, story update -->
+<!-- v.3.2.0 | 2026-11-18 | Program-centred restructure: results before story, new story, The program section, commit merged into day 32 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -260,13 +260,20 @@ p { color: var(--ink-soft); }
 .why__item:last-child { border-bottom: 0; padding-bottom: 0; }
 .why__n { font-family: var(--font-heading); color: var(--gold-light); font-size: 1rem; padding-top: 2px; }
 .why__item p { font-size: 1.05rem; line-height: 1.7; }
-/* ── PROTOCOL CARDS ── */
-.proto { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 700px; margin: 0 0 32px; }
-@media (min-width: 720px) { .proto { grid-template-columns: repeat(3, 1fr); } }
-.proto__card { padding: 24px; border-radius: 14px; background: var(--ink); }
-.proto__code { font-family: var(--font-heading); font-size: 1.4rem; color: var(--gold-light); letter-spacing: .08em; }
-.proto__role { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 4px 0 12px; }
-.program .proto__card p { font-size: .9rem; line-height: 1.6; color: var(--ink-soft); }
+/* ── THE PROGRAM (SYSTEM) ── */
+.sys { background: var(--ink-3); }
+.sys__title { font-family: var(--font-heading); font-size: clamp(1.4rem, 3.5vw, 2rem); color: #fff; margin-bottom: 12px; }
+.sys__sub { font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+.sys__list { border-top: 1px solid var(--line-gold); }
+.sys__item { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.sys__k { font-family: var(--font-heading); font-size: .85rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+.sys__item > p { font-size: 1.05rem; line-height: 1.7; }
+@media (min-width: 720px) { .sys__item { display: grid; grid-template-columns: 180px 1fr; gap: 20px; } .sys__k { margin: 4px 0 0; } .sys__item .inside { grid-column: 2; } }
+.inside { margin-top: 8px; }
+.inside summary { display: inline-block; cursor: pointer; list-style: none; font-size: 12px; color: var(--muted-dk); text-decoration: underline dotted; text-underline-offset: 3px; padding: 4px 0; }
+.inside summary::-webkit-details-marker { display: none; }
+.inside p { font-size: 12.5px; line-height: 1.6; color: var(--muted-dk); margin: 8px 0 0; }
+.inside em { font-style: normal; color: var(--muted); }
 .price__amount { font-family: var(--font-heading); font-size: clamp(3rem, 8vw, 5rem); color: var(--gold); line-height: 1; text-shadow: 0 0 40px rgba(176,141,46,.25); }
 .price__desc { font-size: 1rem; color: var(--muted); margin-top: 16px; margin-bottom: 80px; }
 .price__early-label { font-family: var(--font-heading); font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 400; margin-bottom: 24px; color: #fff; }
@@ -387,34 +394,6 @@ p { color: var(--ink-soft); }
     <img src="../Images/landing/two-futures.jpg" alt="Two women the same age in a park. One walks confidently in athletic wear. The other sits on a bench, leaning on a cane." class="futures__hero">
     <div class="futures__vignette"></div>
     <p class="futures__caption">Same age. Different choices.</p>
-  </div>
-</section>
-
-<!-- ═══ MARCO'S STORY ═══ -->
-<section class="sec story">
-  <div class="sec-bg">
-    <img src="../Images/landing/handstand.png" alt="">
-    <div class="tint"></div>
-    <div class="glow"></div>
-  </div>
-  <div class="w">
-    <div class="grid">
-      <div class="prose">
-        <span class="ey rv">The story</span>
-        <p class="rv">I've tried most of what's out there. Keto, fasting, calorie counting. They all worked. They all came with the same condition: change your lifestyle. Live this way from now on.</p>
-        <p class="rv">Then I came across a method a biochemist had refined privately for almost two decades. Developed and improved one person at a time.</p>
-        <p class="rv">It changed how I understood my own body. Not a diet to follow forever. A reset that teaches your metabolism to hold its own balance.</p>
-        <p class="rv">I took it further. Rebuilt it around real food, my own formulas, and a coach-led system. That became AEVUM.</p>
-        <div class="sig rv">
-          Marco Iannitto
-          <span>Founder, Niramaya</span>
-        </div>
-      </div>
-      <div class="photo-frame tall rv">
-        <img src="../Images/landing/selfie.jpg" alt="Marco Iannitto">
-        <div class="cap">Marco · Niramaya</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -593,12 +572,59 @@ p { color: var(--ink-soft); }
   </div>
 </section>
 
+<!-- ═══ MARCO'S STORY ═══ -->
+<section class="sec story">
+  <div class="sec-bg">
+    <img src="../Images/landing/handstand.png" alt="">
+    <div class="tint"></div>
+    <div class="glow"></div>
+  </div>
+  <div class="w">
+    <div class="grid">
+      <div class="prose">
+        <span class="ey rv">The story</span>
+        <p class="rv">I've tried most of what's out there. Keto, fasting, calorie counting. They all worked. They all came with the same condition: change your lifestyle, forever.</p>
+        <p class="rv">Then I came across a method a biochemist had refined privately for almost two decades. It changed how I understood my own body. Not a diet to follow forever. A reset that teaches your metabolism to hold its own balance.</p>
+        <p class="rv">But the method alone was not enough. What made it work was everything around it. The right food, every day. Someone watching the numbers. Support at every step.</p>
+        <p class="rv">So I built that. One program, bespoke to each person, from the first day to the last. That became AEVUM.</p>
+        <div class="sig rv">
+          Marco Iannitto
+          <span>Founder, Niramaya</span>
+        </div>
+      </div>
+      <div class="photo-frame tall rv">
+        <img src="../Images/landing/selfie.jpg" alt="Marco Iannitto">
+        <div class="cap">Marco · Niramaya</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE PROGRAM (SYSTEM) ═══ -->
+<section class="sec sys">
+  <div class="w" style="max-width:680px;">
+    <span class="ey rv">The program</span>
+    <h2 class="sys__title rv rv-d1">Every detail, handled.</h2>
+    <p class="sys__sub rv rv-d1">A bespoke program. We walk with you from the first day to the last.</p>
+    <div class="sys__list">
+      <div class="sys__item rv rv-d1"><div class="sys__k">The method</div><p>Thirty-one days, sequenced phase by phase.</p></div>
+      <div class="sys__item rv rv-d2"><div class="sys__k">Your food</div><p>Chosen by you in the app. Portioned to your body. Delivered to your door.</p></div>
+      <div class="sys__item rv rv-d2"><div class="sys__k">The formulas</div><p>A-17, E-08, V-01. Prepared exclusively for AEVUM, timed to the Reset.</p>
+        <details class="inside"><summary>Ingredients</summary>
+          <p><em>A-17.</em> L-Leucine, L-Isoleucine, L-Valine, L-Lysine HCl, L-Threonine, L-Phenylalanine, L-Histidine, L-Tryptophan, L-Methionine, Partially Hydrolyzed Guar Gum. Other: Malic Acid, Citric Acid, Natural and Artificial Flavors, Sucralose, Acesulfame Potassium, Silica, Blue Spirulina (colour).</p>
+          <p><em>E-08.</em> Potassium Citrate, Magnesium Citrate, Sodium Bicarbonate, Calcium Citrate, Zinc Gluconate. Other: Citric Acid, Lemon Powder, Sucralose.</p>
+          <p><em>V-01.</em> Vitamin A, C, D3, E, K, B1, B2, B3, B5, B6, B12, Folate, Biotin, Calcium, Phosphorus, Iodine, Magnesium, Zinc, Selenium, Copper, Manganese, Chromium, Molybdenum, Chloride, Potassium, Lutein, Lycopene.</p>
+        </details></div>
+      <div class="sys__item rv rv-d3"><div class="sys__k">Your coach</div><p>With you every day. Watching, adjusting, answering.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ THE PROGRAM ═══ -->
 <section class="sec program">
   <div class="w">
-    <span class="ey rv">Your program</span>
+    <span class="ey rv">How it runs</span>
     <h2 class="program__title rv rv-d1">31 days. Two phases. Nothing left to chance.</h2>
-    <p class="program__sub rv rv-d2">Three formulas, prepared exclusively for AEVUM, taken during Reset. No drugs. No stimulants.</p>
     <p class="program__sub rv rv-d2">Thirty-one days. Not because it's fast. Because the method is that precise.</p>
 
     <div class="daybar rv" id="daybar">
@@ -622,12 +648,6 @@ p { color: var(--ink-soft); }
         <h3 class="program__phase-name">Stabilization (21 days)</h3>
         <p class="program__phase-desc">Food returns gradually. Your body learns to hold its new composition. No rebound.</p>
       </div>
-    </div>
-
-    <div class="proto">
-      <div class="proto__card rv rv-d1"><div class="proto__code">A-17</div><div class="proto__role">The Core</div><p>The heart of the Reset. Works alongside your meals to guide your body into drawing on its own fat, while your muscle stays where it is.</p></div>
-      <div class="proto__card rv rv-d2"><div class="proto__code">E-08</div><div class="proto__role">The Balance</div><p>Keeps your system in balance while your metabolism shifts gear. Steady energy, clear head, no crash.</p></div>
-      <div class="proto__card rv rv-d3"><div class="proto__code">V-01</div><div class="proto__role">The Foundation</div><p>Covers every base, so nothing holds the process back.</p></div>
     </div>
 
     <p class="program__footer rv rv-d3">The first 48 hours are the hardest. After that, most people say they feel better than before.</p>
@@ -661,20 +681,9 @@ p { color: var(--ink-soft); }
       <div class="coached__text">
         <span class="ey rv">Personally guided</span>
         <p class="rv rv-d1">Your coach checks in with you every day. Nothing is left for you to figure out alone.</p>
-        <p class="rv rv-d2">The AEVUM app tracks your meals, your progress, and your transformation. After day 31, the app, the recipes, and the knowledge stay with you.</p>
+        <p class="rv rv-d2">Order your meals, track your progress, speak to your coach. One app. After day 31, it stays with you.</p>
       </div>
       <img src="../Images/landing/app-screenshot-400.png" alt="AEVUM app showing meal tracking and daily check-in" class="coached__phone rv rv-d2">
-    </div>
-  </div>
-</section>
-
-<!-- ═══ COMMITMENT ═══ -->
-<section class="sec commit">
-  <div class="w">
-    <div class="commit__text">
-      <p class="big rv">Just 31 days.</p>
-      <p class="sub rv rv-d1">Not the destination. The starting point of a body you recognize again.</p>
-      <p class="sub rv rv-d2">Your commitment is the only thing we ask for. Everything else, we handle.</p>
     </div>
   </div>
 </section>
@@ -685,6 +694,7 @@ p { color: var(--ink-soft); }
     <span class="ey rv" style="color:var(--gold-deep);">After day 31</span>
     <h2 class="rv rv-d1" style="color:var(--paper-ink); font-family:var(--font-heading); font-size:clamp(1.4rem,3.5vw,2rem); font-weight:400; margin-bottom:24px;">The program ends. The results don't.</h2>
     <p class="rv rv-d2" style="color:#5b544a; max-width:500px; margin:0 auto; font-size:1.05rem; line-height:1.7;">By day 31, your metabolism has learned a new baseline. You return to eating normally. The composition holds.</p>
+    <p class="rv rv-d3" style="color:var(--paper-ink); max-width:500px; margin:24px auto 0; font-size:1.05rem; line-height:1.7;">Your commitment is the only thing we ask for. Everything else, we handle.</p>
   </div>
 </section>
 
