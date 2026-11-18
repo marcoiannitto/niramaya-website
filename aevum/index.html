@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v.3.1.0 | 2026-11-18 | Aligned to 10+21 program: protocol A-17/E-08/V-01, why-diets-fail section, coach-led, included list, story update -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -103,8 +104,8 @@ p { color: var(--ink-soft); }
 @media (prefers-reduced-motion: reduce) {
   .rv { opacity: 1; transform: none; transition: none; }
   .daybar-track .seg { transition: none; }
-  .daybar .seg.strict { width: 41.9%; }
-  .daybar .seg.open { width: 58.1%; }
+  .daybar .seg.strict { width: 32.3%; }
+  .daybar .seg.open { width: 67.7%; }
 }
 
 /* ── NAV ── */
@@ -206,13 +207,13 @@ p { color: var(--ink-soft); }
 .daybar-track .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #fff; overflow: hidden; white-space: nowrap; width: 0; transition: width 1.2s var(--ease); }
 .daybar-track .seg.strict { background: linear-gradient(90deg, var(--gold-deep), var(--gold)); }
 .daybar-track .seg.open { background: #d8cbae; color: var(--gold-deep); }
-.daybar.in .seg.strict { width: 41.9%; }
-.daybar.in .seg.open { width: 58.1%; }
+.daybar.in .seg.strict { width: 32.3%; }
+.daybar.in .seg.open { width: 67.7%; }
 .daybar-scale { position: relative; margin-top: 14px; height: 34px; font-size: 11px; letter-spacing: .03em; color: #8a8272; }
 .daybar-scale span { position: absolute; transform: translateX(-50%); white-space: nowrap; display: flex; flex-direction: column; gap: 3px; }
 .daybar-scale b { font-family: var(--font-heading); font-weight: 600; color: var(--paper-ink); font-size: 14px; }
 .daybar-scale .d1 { left: 0; transform: none; align-items: flex-start; }
-.daybar-scale .d11 { left: 41.9%; text-align: center; align-items: center; }
+.daybar-scale .d11 { left: 32.3%; text-align: center; align-items: center; }
 .daybar-scale .d31 { left: auto; right: 0; transform: none; text-align: right; align-items: flex-end; }
 
 .program__phases { max-width: 700px; margin: 48px 0 40px; display: grid; grid-template-columns: 1fr; gap: 16px; }
@@ -249,6 +250,23 @@ p { color: var(--ink-soft); }
 
 /* ── PRICE ── */
 .price { text-align: center; }
+.incl { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 520px; margin: -48px auto 72px; padding: 0; }
+.incl li { font-size: .82rem; letter-spacing: .04em; color: var(--ink-soft); padding: 7px 14px; border: 1px solid var(--line-gold); border-radius: 100px; }
+/* ── WHY DIETS FAIL ── */
+.why { background: var(--ink-3); }
+.why__title { font-family: var(--font-heading); font-size: clamp(1.4rem, 3.5vw, 2rem); color: #fff; margin-bottom: 36px; }
+.why__list { display: grid; gap: 22px; }
+.why__item { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.why__item:last-child { border-bottom: 0; padding-bottom: 0; }
+.why__n { font-family: var(--font-heading); color: var(--gold-light); font-size: 1rem; padding-top: 2px; }
+.why__item p { font-size: 1.05rem; line-height: 1.7; }
+/* ── PROTOCOL CARDS ── */
+.proto { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 700px; margin: 0 0 32px; }
+@media (min-width: 720px) { .proto { grid-template-columns: repeat(3, 1fr); } }
+.proto__card { padding: 24px; border-radius: 14px; background: var(--ink); }
+.proto__code { font-family: var(--font-heading); font-size: 1.4rem; color: var(--gold-light); letter-spacing: .08em; }
+.proto__role { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 4px 0 12px; }
+.program .proto__card p { font-size: .9rem; line-height: 1.6; color: var(--ink-soft); }
 .price__amount { font-family: var(--font-heading); font-size: clamp(3rem, 8vw, 5rem); color: var(--gold); line-height: 1; text-shadow: 0 0 40px rgba(176,141,46,.25); }
 .price__desc { font-size: 1rem; color: var(--muted); margin-top: 16px; margin-bottom: 80px; }
 .price__early-label { font-family: var(--font-heading); font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 400; margin-bottom: 24px; color: #fff; }
@@ -384,9 +402,9 @@ p { color: var(--ink-soft); }
       <div class="prose">
         <span class="ey rv">The story</span>
         <p class="rv">I've tried most of what's out there. Keto, fasting, calorie counting. They all worked. They all came with the same condition: change your lifestyle. Live this way from now on.</p>
-        <p class="rv">Then a friend, a biochemist, offered to put me through something he'd been refining privately for almost two decades. A nutrition method he'd developed and kept improving, one person at a time.</p>
+        <p class="rv">Then I came across a method a biochemist had refined privately for almost two decades. Developed and improved one person at a time.</p>
         <p class="rv">It changed how I understood my own body. Not a diet to follow forever. A reset that teaches your metabolism to hold its own balance.</p>
-        <p class="rv">We partnered to bring it to Singapore. That became AEVUM.</p>
+        <p class="rv">I took it further. Rebuilt it around real food, my own formulas, and a coach-led system. That became AEVUM.</p>
         <div class="sig rv">
           Marco Iannitto
           <span>Founder, Niramaya</span>
@@ -414,6 +432,19 @@ p { color: var(--ink-soft); }
     <div class="distinction__body">
       <p class="rv rv-d2">This is not a diet. It's a metabolic reset. Your body learns to burn fat while keeping everything you've built.</p>
       <p class="rv rv-d3">Diets take from you. <strong>AEVUM gives you back what time took away.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY DIETS FAIL ═══ -->
+<section class="sec why">
+  <div class="w" style="max-width:680px;">
+    <span class="ey rv">How it works</span>
+    <h2 class="why__title rv rv-d1">Why most diets fail.</h2>
+    <div class="why__list">
+      <div class="why__item rv rv-d1"><span class="why__n">01</span><p>Eat less and your body thinks food is running out. It protects its fat and burns muscle instead.</p></div>
+      <div class="why__item rv rv-d2"><span class="why__n">02</span><p>AEVUM keeps your body calm and fed. So it lets go of fat and keeps the muscle.</p></div>
+      <div class="why__item rv rv-d3"><span class="why__n">03</span><p>The fat that matters most is the deep fat around your organs. It is one of the clearest markers of long-term health.</p></div>
     </div>
   </div>
 </section>
@@ -566,35 +597,41 @@ p { color: var(--ink-soft); }
 <section class="sec program">
   <div class="w">
     <span class="ey rv">Your program</span>
-    <h2 class="program__title rv rv-d1">31 days. Two phases. Nothing artificial.</h2>
-    <p class="program__sub rv rv-d2">A natural supplement, taken twice daily during Reset. No drugs. No stimulants. Nothing synthetic.</p>
+    <h2 class="program__title rv rv-d1">31 days. Two phases. Nothing left to chance.</h2>
+    <p class="program__sub rv rv-d2">Three formulas, prepared exclusively for AEVUM, taken during Reset. No drugs. No stimulants.</p>
     <p class="program__sub rv rv-d2">Thirty-one days. Not because it's fast. Because the method is that precise.</p>
 
     <div class="daybar rv" id="daybar">
       <div class="daybar-track">
-        <div class="seg strict">13 reset</div>
-        <div class="seg open">18 stabilization</div>
+        <div class="seg strict">10 reset</div>
+        <div class="seg open">21 stabilization</div>
       </div>
       <div class="daybar-scale">
         <span class="d1"><b>Day 1</b>Start</span>
-        <span class="d11"><b>Day 13</b>Reset ends</span>
+        <span class="d11"><b>Day 10</b>Reset ends</span>
         <span class="d31"><b>Day 31</b>Done</span>
       </div>
     </div>
 
     <div class="program__phases">
       <div class="program__phase rv rv-d1">
-        <h3 class="program__phase-name">Reset (13 days)</h3>
+        <h3 class="program__phase-name">Reset (10 days)</h3>
         <p class="program__phase-desc">Your meals during Reset are prepared daily from whole, natural ingredients. No processed food. Delivered to your door so the only thing you manage is your commitment.</p>
       </div>
       <div class="program__phase rv rv-d2">
-        <h3 class="program__phase-name">Stabilization (18 days)</h3>
-        <p class="program__phase-desc">Your body learns to hold its new composition. No restrictions. No rebound.</p>
+        <h3 class="program__phase-name">Stabilization (21 days)</h3>
+        <p class="program__phase-desc">Food returns gradually. Your body learns to hold its new composition. No rebound.</p>
       </div>
     </div>
 
+    <div class="proto">
+      <div class="proto__card rv rv-d1"><div class="proto__code">A-17</div><div class="proto__role">The Core</div><p>The heart of the Reset. Works alongside your meals to guide your body into drawing on its own fat, while your muscle stays where it is.</p></div>
+      <div class="proto__card rv rv-d2"><div class="proto__code">E-08</div><div class="proto__role">The Balance</div><p>Keeps your system in balance while your metabolism shifts gear. Steady energy, clear head, no crash.</p></div>
+      <div class="proto__card rv rv-d3"><div class="proto__code">V-01</div><div class="proto__role">The Foundation</div><p>Covers every base, so nothing holds the process back.</p></div>
+    </div>
+
     <p class="program__footer rv rv-d3">The first 48 hours are the hardest. After that, most people say they feel better than before.</p>
-    <p class="program__footer rv rv-d3">Every element of the program, from the supplement to the meals, is sourced and prepared to the standard we'd hold for ourselves.</p>
+    <p class="program__footer rv rv-d3">Every element of the program, from the formulas to the meals, is sourced and prepared to the standard we'd hold for ourselves.</p>
   </div>
 </section>
 
@@ -623,7 +660,7 @@ p { color: var(--ink-soft); }
     <div class="coached__layout">
       <div class="coached__text">
         <span class="ey rv">Personally guided</span>
-        <p class="rv rv-d1">We guide you through every day of it. Nothing is left for you to figure out alone.</p>
+        <p class="rv rv-d1">Your coach checks in with you every day. Nothing is left for you to figure out alone.</p>
         <p class="rv rv-d2">The AEVUM app tracks your meals, your progress, and your transformation. After day 31, the app, the recipes, and the knowledge stay with you.</p>
       </div>
       <img src="../Images/landing/app-screenshot-400.png" alt="AEVUM app showing meal tracking and daily check-in" class="coached__phone rv rv-d2">
@@ -658,6 +695,10 @@ p { color: var(--ink-soft); }
       <div class="price__amount">S$3,980</div>
     </div>
     <p class="price__desc rv rv-d1">Meals. Coaching. Science. 31 days. Nothing left for you to arrange.</p>
+
+    <ul class="incl rv rv-d1">
+      <li>Meals during Reset</li><li>A-17, E-08, V-01</li><li>Scale</li><li>Daily coach check-ins</li><li>The app, for life</li>
+    </ul>
 
     <div style="max-width:500px; margin:0 auto;">
       <h3 class="price__early-label rv rv-d2">Founding cohort. S$2,980 until December.</h3>
@@ -701,7 +742,7 @@ p { color: var(--ink-soft); }
     <img src="../Images/landing/logo-stacked-white.png" alt="Niramaya" class="foot-logo">
     <p class="foot-sub">AEVUM · Metabolic Reset · Singapore</p>
     <p class="foot-tag">The science of balance.</p>
-    <p class="foot-fine">&copy; 2026 Niramaya Pte. Ltd. All rights reserved. Not medical advice.</p>
+    <p class="foot-fine">&copy; 2026 Niramaya. All rights reserved. Not medical advice.</p>
   </div>
 </footer>
 
